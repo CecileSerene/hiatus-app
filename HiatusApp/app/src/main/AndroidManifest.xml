@@ -21,7 +21,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<<<<<<< HEAD
         <activity android:name=".ContributionActivity"></activity>
+=======
+        <activity android:name=".HomeActivity"></activity>
+>>>>>>> c68e6069788a3d41811b37db2b51bc7d0f127f39
     </application>
 
 </manifest>
