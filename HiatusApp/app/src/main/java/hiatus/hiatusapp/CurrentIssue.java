@@ -34,22 +34,22 @@ public class CurrentIssue {
 
     public static class Participative {
 
-        private String type;
+        private Type type;
         private double time;
         private String theme;
         private String instructions;
 
-        public Participative(String type, double time, String theme) {
+        public Participative(Type type, double time, String theme) {
             this.type = type;
             this.time = time;
             this.theme = theme;
         }
 
-        public String getType() {
+        public Type getType() {
             return type;
         }
 
-        public void setType(String type) {
+        public void setType(Type type) {
             this.type = type;
         }
 
