@@ -19,7 +19,7 @@ public class PreviewActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String contribution = intent.getExtras().getString("contribution");
         preview.setText(contribution);
-        
+
 
     }
 }
