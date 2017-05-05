@@ -25,7 +25,8 @@
             android:id="@+id/preview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Preview"/>
+            android:text="Preview"
+            android:onClick="preview"/>
     </LinearLayout>
 
     

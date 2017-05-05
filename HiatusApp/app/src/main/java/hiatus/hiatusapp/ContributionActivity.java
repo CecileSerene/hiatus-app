@@ -43,13 +43,8 @@ public class ContributionActivity extends Activity {
 
     }
 
-    public void onCLick(View view){
-        switch (view.getId()){
-            case R.id.contribuer :
-                Intent i = new Intent(this, TextActivity.class);
-                startActivity(i);
-                break;
-
-        }
+    public void contribuer(View view){
+        Intent i = new Intent(this, TextActivity.class);
+        startActivity(i);
     }
 }

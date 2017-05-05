@@ -25,14 +25,11 @@ public class TextActivity extends Activity {
 
     }
 
-    public void onCLick(View view){
-        switch (view.getId()){
-            case R.id.preview :
-                Intent i = new Intent(this, PreviewActivity.class);
-                startActivity(i);
-                break;
+    public void preview(View view){
+        Intent i = new Intent(this, PreviewActivity.class);
+        startActivity(i);
 
-        }
+
     }
 
 
