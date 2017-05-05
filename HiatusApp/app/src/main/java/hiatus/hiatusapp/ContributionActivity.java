@@ -1,13 +1,17 @@
 package hiatus.hiatusapp;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class ContributionActivity extends Activity {
 
     private CurrentIssue issue;
+    private Button button;
 
 
     @Override
@@ -34,5 +38,18 @@ public class ContributionActivity extends Activity {
                 "Tu as un temps limité de " + time + "secondes.\n"
                 + "Laisse ton imagination déborder !");
 
+        Button button = (Button) findViewById(R.id.contribuer);
+
+
+    }
+
+    public void onCLick(View view){
+        switch (view.getId()){
+            case R.id.contribuer :
+                Intent i = new Intent(this, TextActivity.class);
+                startActivity(i);
+                break;
+
+        }
     }
 }
