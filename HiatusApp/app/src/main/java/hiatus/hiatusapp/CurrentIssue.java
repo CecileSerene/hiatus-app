@@ -1,5 +1,7 @@
 package hiatus.hiatusapp;
 
+import hiatus.hiatusapp.ContributionContext.Type;
+
 /**
  * Created by Cecile on 28/04/2017.
  */
