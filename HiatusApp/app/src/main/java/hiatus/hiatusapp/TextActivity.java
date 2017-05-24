@@ -26,7 +26,9 @@ public class TextActivity extends Activity {
     }
 
     public void preview(View view){
+        String contribution = mEdittext.getText().toString();
         Intent i = new Intent(this, PreviewActivity.class);
+        i.putExtra("contribution",contribution);
         startActivity(i);
 
 

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ContributionActivity extends Activity {
 
@@ -44,7 +45,20 @@ public class ContributionActivity extends Activity {
     }
 
     public void contribuer(View view){
-        Intent i = new Intent(this, TextActivity.class);
-        startActivity(i);
+
+        switch(issue.getParticipative().getType()){
+            case TEXTE :
+                Intent i = new Intent(this, TextActivity.class);
+                startActivity(i);
+                break;
+            case DESSIN:
+                Toast.makeText(getApplicationContext(), "Drawing not implemented yet", Toast.LENGTH_SHORT);
+                break;
+            case PHOTO:
+                Toast.makeText(getApplicationContext(), "Photo not implemented yet", Toast.LENGTH_SHORT);
+                break;
+
+        }
+
     }
 }
