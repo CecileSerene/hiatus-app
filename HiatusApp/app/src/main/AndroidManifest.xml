@@ -24,7 +24,8 @@
         <activity android:name=".HomeActivity" />
         <activity android:name=".ContributionActivity" />
         <activity android:name=".TextActivity" />
-        <activity android:name=".PreviewActivity"></activity>
+        <activity android:name=".PreviewActivity" />
+        <activity android:name=".LoginActivity"></activity>
     </application>
 
 </manifest>
