@@ -9,7 +9,7 @@
         android:id="@+id/login_form"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorSecondaryDark">
+        android:background="@color/colorPrimary">
 
         <!-- Login progress -->
         <ProgressBar
@@ -28,14 +28,14 @@
             android:paddingTop="30dp"
             android:paddingBottom="30dp"
             android:gravity="center"
-            android:background="@color/colorPrimary" >
+            android:background="@color/colorAccent" >
             <ImageView
                 android:id="@+id/header_logo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="50dp"
-                android:src="@drawable/logo_hiatus_noir_header" />
+                android:src="@drawable/logo_hiatus_blanc_header" />
         </LinearLayout>
 
         <!-- Login form -->
@@ -59,7 +59,9 @@
                 android:layout_marginBottom="20dp"
                 android:hint="@string/prompt_email"
                 android:inputType="textEmailAddress"
-                android:textColor="@color/white"
+                android:textColor="@color/colorPrimaryDark"
+                android:textColorHint="@color/colorPrimaryDark"
+                android:backgroundTint="@color/colorPrimaryDark"
                 android:maxLines="1"/>
 
             <!-- Password -->
@@ -73,7 +75,9 @@
                 android:imeActionLabel="@string/action_sign_in_short"
                 android:imeOptions="actionUnspecified"
                 android:inputType="textPassword"
-                android:textColor="@color/white"
+                android:textColorHint="@color/colorPrimaryDark"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:textColor="@color/colorPrimaryDark"
                 android:maxLines="1"/>
 
             <!-- Sign in button -->
@@ -94,6 +98,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
                 android:layout_marginBottom="40dp"
+                android:textStyle="bold"
                 android:textColor="@color/colorAccent"
                 android:text="@string/register_link"/>
 
