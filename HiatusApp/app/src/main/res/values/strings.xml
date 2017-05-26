@@ -9,6 +9,8 @@
     <string name="prompt_password">Mot de passe</string>
     <string name="action_sign_in">Se connecter</string>
     <string name="action_sign_in_short">Se connecter</string>
+    <string name="register_link_prefix">Vous n\'êtes pas encore enregistré ?</string>
+    <string name="register_link">Créer un compte</string>
     <string name="error_invalid_email">Cette adresse email n\'est pas valide</string>
     <string name="error_invalid_password">Ce mot de passe est trop court</string>
     <string name="error_incorrect_password">Mot de passe incorrect</string>

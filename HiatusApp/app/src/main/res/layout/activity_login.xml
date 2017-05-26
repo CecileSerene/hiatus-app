@@ -37,8 +37,8 @@
             android:id="@+id/email_login_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="50dp"
-            android:paddingBottom="50dp"
+            android:paddingTop="30dp"
+            android:paddingBottom="30dp"
             android:orientation="vertical">
 
             <AutoCompleteTextView
@@ -74,26 +74,30 @@
 
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/register_link"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:orientation="horizontal">
+            android:gravity="center"
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/registerText"
+                android:id="@+id/register_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:textColor="@color/colorPrimary"
-                android:text="Don't have an account yet?" />
+                android:text="@string/register_link_prefix"/>
 
             <Button
-                android:id="@+id/registerButton"
+                android:id="@+id/register_button"
                 style="?android:textAppearanceSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
+                android:layout_gravity="center"
                 android:onClick="goRegister"
-                android:text="Register"
+                android:text="@string/register_link"
                 android:textColor="@color/colorAccent" />
         </LinearLayout>
     </LinearLayout>
