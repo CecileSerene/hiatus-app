@@ -3,13 +3,13 @@
 
     <string name="contribuer"> C\'est parti !</string>
 
-    <!-- Strings related to login -->
+    <!-- Strings related to login and register -->
     <string name="title_activity_register">Se connecter</string>
     <string name="prompt_email">Adresse email</string>
     <string name="prompt_password">Mot de passe</string>
     <string name="action_sign_in">Se connecter</string>
     <string name="action_sign_in_short">Se connecter</string>
-    <string name="register_link">Créer un compte</string>
+    <string name="login_link">J\'ai déjà un compte</string>
     <string name="error_invalid_email">Cette adresse email n\'est pas valide</string>
     <string name="error_invalid_password">Ce mot de passe est trop court</string>
     <string name="error_incorrect_password">Mot de passe incorrect</string>
