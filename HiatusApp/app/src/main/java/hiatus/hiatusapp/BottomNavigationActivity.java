@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import hiatus.hiatusapp.dummy.DummyContent;
 
-public class BottomNavigationActivity extends FragmentActivity implements HistoryFragment.onHistoryContributionSelectedListener{
+public class BottomNavigationActivity extends FragmentActivity {
 
     private static final String SELECTED_ITEM = "arg_selected_item";
     private BottomNavigationView mBottomNav;
@@ -90,10 +90,5 @@ public class BottomNavigationActivity extends FragmentActivity implements Histor
         } else {
             super.onBackPressed();
         }
-    }
-
-    @Override
-    public void onHistoryContributionSelected(DummyContent.DummyItem item) {
-        Log.i("DEBUG", "In onHistoryContributionSelected!");
     }
 }
