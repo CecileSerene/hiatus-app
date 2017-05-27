@@ -18,6 +18,7 @@ public class BottomNavigationActivity extends Activity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
+                // TODO set the change of view here
                 case R.id.navigation_home:
                     mTextMessage.setText(R.string.title_home);
                     return true;
