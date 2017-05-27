@@ -29,6 +29,13 @@ public class TextActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_text);
 
+        //____ Exemple _____
+        String instructions_ex = "Ecrivez les premiers mots qui vous viennent sur le thème du jeu";
+        ContributionText text = new ContributionText(instructions_ex,"Ecriture automatique","Jeu",50);
+        context = text;
+
+        //___ fin exemple ____
+
         mPreviewButton = (Button) findViewById(R.id.preview);
         mTitleButton = (Button) findViewById(R.id.ajouter_titre);
         mEdittext = (EditText) findViewById(R.id.mytext);
@@ -43,7 +50,9 @@ public class TextActivity extends Activity {
         Intent i = new Intent(this, PreviewActivity.class);
         content = new TextContent(contribution,context);
         //TODO here I want to pass the content object and not just the string
-        i.putExtra("contribution",contribution);
+        //EDIT I fixed it ?
+        //i.putExtra("contribution",content);
+        i.putExtra("contribution", contribution);
         startActivity(i);
 
 

@@ -28,6 +28,7 @@ public class ContributionActivity extends Activity {
         //____ Exemple _____
         String instructions_ex = "Ecrivez les premiers mots qui vous viennent sur le thème du jeu";
         ContributionText text = new ContributionText(instructions_ex,"Ecriture automatique","Jeu",50);
+        context = text;
 
         //___ fin exemple ____
 
