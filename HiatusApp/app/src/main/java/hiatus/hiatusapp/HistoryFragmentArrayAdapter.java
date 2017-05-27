@@ -16,9 +16,9 @@ import hiatus.hiatusapp.ContributionContext.ContributionContext;
  * Defines the array adapter for contribution contexts. Used to display contribution contexts in a ListView.
  */
 
-public class ContributionContextAdapter extends ArrayAdapter<ContributionContext> {
+public class HistoryFragmentArrayAdapter extends ArrayAdapter<ContributionContext> {
 
-    public ContributionContextAdapter(Context context, ArrayList<ContributionContext> contexts) {
+    public HistoryFragmentArrayAdapter(Context context, ArrayList<ContributionContext> contexts) {
         super(context, 0, contexts);
     }
 
@@ -28,7 +28,7 @@ public class ContributionContextAdapter extends ArrayAdapter<ContributionContext
         ContributionContext context = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_contribution, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_history_item, parent, false);
         }
         // Lookup view for data population
         TextView tvTheme = (TextView) convertView.findViewById(R.id.contribution_theme);
