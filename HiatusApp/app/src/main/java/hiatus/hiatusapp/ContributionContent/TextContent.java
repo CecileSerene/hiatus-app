@@ -12,7 +12,7 @@ import hiatus.hiatusapp.ContributionContext.ContributionContext;
  * Created by Cecile on 24/05/2017.
  */
 
-public class TextContent implements ContributionContent, Parcelable {
+public class TextContent implements ContributionContent {
 
     private String text;
     private String title;
@@ -20,6 +20,13 @@ public class TextContent implements ContributionContent, Parcelable {
 
     public TextContent(String text, ContributionContext context) {
         this.text = text;
+        this.context = context;
+        this.title = ""; //by default, there is no title
+    }
+
+    public TextContent(String title, String text, ContributionContext context) {
+        this.text = text;
+        this.title = title;
         this.context = context;
     }
 
@@ -47,8 +54,9 @@ public class TextContent implements ContributionContent, Parcelable {
         this.context = context;
     }
 
-    public void display(View view){
-        ((TextView) view).setText(this.text);
+    public void display(View titleView, View textView){
+        ((TextView) textView).setText(this.text);
+        ((TextView) titleView).setText(this.title);
 
     }
 
@@ -59,12 +67,10 @@ public class TextContent implements ContributionContent, Parcelable {
 
 
     @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-//TODO I probably need to put something in here
+    public String toString() {
+        return "TextContent{" +
+                "text='" + text + '\'' +
+                ", title='" + title + '\'' +
+                '}';
     }
 }

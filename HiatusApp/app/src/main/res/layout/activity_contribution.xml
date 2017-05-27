@@ -24,17 +24,7 @@
         android:text="we should not see that"
          />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation = "horizontal">
 
-     <Button
-         android:id="@+id/ajouter_titre"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:text="Mettre un titre"
-         android:onClick="setTitle"/>
     <Button
         android:id="@+id/contribuer"
         android:layout_width="wrap_content"
@@ -42,7 +32,7 @@
         android:text="@string/contribuer"
         tools:text="partir"
         android:onClick="contribuer"/>
-    </LinearLayout>
+
 
 
 

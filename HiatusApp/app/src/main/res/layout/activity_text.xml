@@ -17,7 +17,8 @@
             android:text="Mettre un titre"
             android:onClick="setTitle"
             android:layout_alignParentLeft="true"
-            android:background="@color/colorAccent"/>
+            android:background="@color/colorAccent"
+            android:maxLines="1"/>
         <Button
             android:id="@+id/preview"
             android:layout_width="wrap_content"

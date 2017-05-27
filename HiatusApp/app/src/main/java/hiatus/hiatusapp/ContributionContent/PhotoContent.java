@@ -17,7 +17,7 @@ public class PhotoContent implements ContributionContent {
 
 
     @Override
-    public void display(View view) {
+    public void display(View titleView, View photoView) {
         //TODO
     }
 

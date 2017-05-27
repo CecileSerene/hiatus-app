@@ -24,7 +24,7 @@ public class DrawingContent implements ContributionContent {
     }
 
     @Override
-    public void display(View view) {
+    public void display(View titleView, View drawingView) {
         //TODO
 
     }
