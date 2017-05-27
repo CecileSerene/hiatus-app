@@ -1,19 +1,17 @@
 package hiatus.hiatusapp;
 
-import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 
 import hiatus.hiatusapp.dummy.DummyContent;
 
-public class BottomNavigationActivity extends FragmentActivity implements ContributionFragment.onContributionSelectedListener, HistoryFragment.onHistoryContributionSelectedListener{
+public class BottomNavigationActivity extends FragmentActivity implements HistoryFragment.onHistoryContributionSelectedListener{
 
     private static final String SELECTED_ITEM = "arg_selected_item";
     private BottomNavigationView mBottomNav;
@@ -92,11 +90,6 @@ public class BottomNavigationActivity extends FragmentActivity implements Contri
         } else {
             super.onBackPressed();
         }
-    }
-
-    @Override
-    public void onContributionSelected(DummyContent.DummyItem item) {
-        Log.i("DEBUG", "In onContributionSelected!");
     }
 
     @Override
