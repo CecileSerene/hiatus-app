@@ -43,7 +43,8 @@ public class TextActivity extends Activity {
         Intent i = new Intent(this, PreviewActivity.class);
         content = new TextContent(contribution,context);
         //TODO here I want to pass the content object and not just the string
-        i.putExtra("contribution",contribution);
+        //EDIT I fixed it ?
+        i.putExtra("contribution",content);
         startActivity(i);
 
 
