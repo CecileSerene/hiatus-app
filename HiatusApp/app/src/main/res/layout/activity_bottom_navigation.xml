@@ -36,15 +36,11 @@
         </LinearLayout>
 
 
-        <GridView
-            android:id="@+id/contribution_grid"
+        <FrameLayout
+            android:id="@+id/fragment_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:columnWidth="90dp"
-            android:numColumns="auto_fit"
-            android:verticalSpacing="10dp"
-            android:horizontalSpacing="10dp"
-            android:stretchMode="columnWidth" />
+            android:layout_height="match_parent" />
+
     </LinearLayout>
 
     <android.support.design.widget.BottomNavigationView
