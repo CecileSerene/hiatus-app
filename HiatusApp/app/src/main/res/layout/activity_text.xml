@@ -4,30 +4,42 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="hiatus.hiatusapp.TextActivity">
+    tools:context="hiatus.hiatusapp.TextActivity"
+    >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ecrivez votre contribution :"
-        android:textSize="20dp"/>
 
-    <Button
-        android:id="@+id/preview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="preview"
-        android:text="Preview"
-        android:layout_alignParentRight="true"/>
+
+
+        <Button
+            android:id="@+id/ajouter_titre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mettre un titre"
+            android:onClick="setTitle"
+            android:layout_alignParentLeft="true"
+            android:background="@color/colorAccent"/>
+        <Button
+            android:id="@+id/preview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="preview"
+            android:text="Preview"
+            android:layout_alignParentRight="true"
+            android:background="@color/colorAccent"/>
+
+
 
     <EditText
         android:id="@+id/mytext"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:hint="Votre contribution ici"
+        android:textColor="@color/colorPrimaryDark"
+        android:textColorHint="@color/colorPrimaryDark"
         android:layout_alignParentBottom="true"
         android:layout_below="@+id/preview"
         android:textSize="20dp"
-        android:gravity="top"/>
+        android:gravity="top"
+        android:background="@color/colorPrimary"/>
 
 </RelativeLayout>
