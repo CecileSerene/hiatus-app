@@ -1,7 +1,7 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory android:title="User profile">
+    <PreferenceCategory android:title="@string/prefs_user_profile">
         <EditTextPreference
             android:title="Nom et prénom"
             android:inputType="textPersonName"

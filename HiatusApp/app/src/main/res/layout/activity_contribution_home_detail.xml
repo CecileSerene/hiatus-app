@@ -55,14 +55,14 @@
                 android:text="Description et instructions"/>
 
             <TextView
-                android:id="@+id/instructions"
+                android:id="@+id/contribution_instructions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Voici les instructions. Vous devez écrire un texte qui parlera d'un chevalier à l'épée d'argent."/>
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/block_specs"
+            android:id="@+id/block_options"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -98,7 +98,7 @@
             android:layout_centerHorizontal="true"
             android:background="@drawable/accent_button"
             android:text="Contribuer !"
-            android:layout_below="@id/block_specs"/>
+            android:layout_below="@id/block_options"/>
 
     </RelativeLayout>
 

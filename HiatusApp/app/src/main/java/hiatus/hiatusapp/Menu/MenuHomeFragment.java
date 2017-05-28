@@ -1,5 +1,7 @@
 package hiatus.hiatusapp.Menu;
 
+import android.app.LauncherActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
@@ -13,6 +15,7 @@ import java.util.ArrayList;
 import hiatus.hiatusapp.ContributionContext.ContributionContext;
 import hiatus.hiatusapp.ContributionContext.ContributionPhoto;
 import hiatus.hiatusapp.ContributionContext.ContributionText;
+import hiatus.hiatusapp.ContributionHomeDetail;
 import hiatus.hiatusapp.R;
 
 /**
@@ -20,6 +23,7 @@ import hiatus.hiatusapp.R;
  */
 public class MenuHomeFragment extends ListFragment {
 
+    private ArrayList<ContributionContext> contexts;
     // TODO: Customize parameter initialization
     public static Fragment newInstance() {
         return new MenuHomeFragment();
@@ -30,12 +34,12 @@ public class MenuHomeFragment extends ListFragment {
         View view = inflater.inflate(R.layout.fragment_menu_home, container, false);
 
         // v TODO replace with a call to the database to get most recent contributions
-        ArrayList<ContributionContext> exampleContexts = new ArrayList<>();
-        exampleContexts.add(new ContributionText("instructions", "Dessine-moi un smiley!", "Obsession", 50));
-        exampleContexts.add(new ContributionPhoto("instructions", "Photographie ludique", "Jeu", 50));
+        contexts = new ArrayList<>();
+        contexts.add(new ContributionText("instructions", "Dessine-moi un smiley!", "Obsession", 50));
+        contexts.add(new ContributionPhoto("instructions", "Photographie ludique", "Jeu", 50));
         // ^
 
-        setListAdapter(new ContributionContextArrayAdapter(getActivity(), exampleContexts));
+        setListAdapter(new ContributionContextArrayAdapter(getActivity(), contexts));
 
         return view;
     }
@@ -43,14 +47,17 @@ public class MenuHomeFragment extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-        /*
-        TODO implement some logic to go to detail view of the contribution, showing:
-        - the contribution title
-        - the contribution theme
-        - the contribution specs in a separate box (fragment?)
-        - the contribution description and instructions
-        - a floating button saying "Contribute!"
-        - whether or not the user has already contributed to this contribution?
-         */
+
+        ContributionContext context = contexts.get(position);
+
+        // populate an intent with the contribution context
+        Intent i = new Intent(getActivity(), ContributionHomeDetail.class);
+        i.putExtra("title", context.getTitle());
+        i.putExtra("theme", context.getTheme());
+        i.putExtra("instructions", context.getInstructions());
+
+        startActivity(i);
+
+        // TODO change when we can send contexts through intents (after making ContributionContext parcelable)
     }
 }
