@@ -26,24 +26,24 @@ public class ContributionContextArrayAdapter extends ArrayAdapter<ContributionCo
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
-        ContributionContext context = getItem(position);
+        ContributionContext contributionContext = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_contribution_item, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_menu_item, parent, false);
         }
-        setContent(context, convertView);
+        setContent(contributionContext, convertView);
         return convertView;
     }
 
     // Override in subclasses to define your own contents... ?
     // (not sure as it depends on the underlying layout)
-    protected void setContent(ContributionContext context, View view) {
+    protected void setContent(ContributionContext contributionContext, View view) {
         // Lookup view for data population
         TextView tvTheme = (TextView) view.findViewById(R.id.contribution_theme);
         TextView tvTitle = (TextView) view.findViewById(R.id.contribution_title);
         // Populate the data into the template view using the data object
-        tvTheme.setText(context.getTheme());
-        tvTitle.setText(context.getTitle());
+        tvTheme.setText(contributionContext.getTheme());
+        tvTitle.setText(contributionContext.getTitle());
 
     }
 }

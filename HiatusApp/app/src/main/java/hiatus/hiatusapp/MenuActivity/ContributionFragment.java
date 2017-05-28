@@ -23,16 +23,12 @@ public class ContributionFragment extends ListFragment {
 
     // TODO: Customize parameter initialization
     public static Fragment newInstance() {
-        Fragment fragment = new ContributionFragment();
-        return fragment;
+        return new ContributionFragment();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_contribution_list, container, false);
-
-        TextView tv = (TextView) view.findViewById(R.id.list_title);
-        tv.setText("Appels à contribution en cours"); // TODO make @strings
+        View view = inflater.inflate(R.layout.fragment_menu_home, container, false);
 
         // v TODO replace with a call to the database to get most recent contributions
         ArrayList<ContributionContext> exampleContexts = new ArrayList<>();

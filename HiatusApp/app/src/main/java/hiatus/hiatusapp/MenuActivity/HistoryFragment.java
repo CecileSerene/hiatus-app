@@ -23,16 +23,12 @@ public class HistoryFragment extends ListFragment {
 
     // TODO: Customize parameter initialization
     public static Fragment newInstance() {
-        Fragment fragment = new HistoryFragment();
-        return fragment;
+        return new HistoryFragment();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_contribution_list, container, false);
-
-        TextView tv = (TextView) view.findViewById(R.id.list_title);
-        tv.setText("Les contributions auxquelles vous avez participé:"); // TODO make @strings
+        View view = inflater.inflate(R.layout.fragment_menu_history, container, false);
 
         // v TODO replace with a call to the database to the user's history contributions
         ArrayList<ContributionContext> exampleContexts = new ArrayList<>();

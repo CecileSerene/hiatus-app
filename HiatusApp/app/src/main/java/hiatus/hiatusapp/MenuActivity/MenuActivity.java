@@ -14,7 +14,6 @@ import hiatus.hiatusapp.R;
 public class MenuActivity extends FragmentActivity {
 
     private BottomNavigationView mBottomNav;
-    private TextView mTitle;
     private int mSelectedItem;
 
     @Override
@@ -22,7 +21,6 @@ public class MenuActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        mTitle = (TextView) findViewById(R.id.title);
         mBottomNav = (BottomNavigationView) findViewById(R.id.navigation);
 
         mBottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -61,12 +59,10 @@ public class MenuActivity extends FragmentActivity {
         mSelectedItem = item.getItemId();
 
         // uncheck the other items.
-        for (int i = 0; i< mBottomNav.getMenu().size(); i++) {
+        for (int i = 0; i < mBottomNav.getMenu().size(); i++) {
             MenuItem menuItem = mBottomNav.getMenu().getItem(i);
             menuItem.setChecked(menuItem.getItemId() == item.getItemId());
         }
-
-        mTitle.setText(item.getTitle());
 
         if (frag != null) {
             getSupportFragmentManager().beginTransaction()
