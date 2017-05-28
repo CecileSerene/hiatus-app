@@ -1,5 +1,6 @@
 package hiatus.hiatusapp.Menu;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
@@ -13,6 +14,8 @@ import java.util.ArrayList;
 import hiatus.hiatusapp.ContributionContext.ContributionContext;
 import hiatus.hiatusapp.ContributionContext.ContributionDrawing;
 import hiatus.hiatusapp.ContributionContext.ContributionText;
+import hiatus.hiatusapp.ContributionHistoryDetail;
+import hiatus.hiatusapp.ContributionHomeDetail;
 import hiatus.hiatusapp.R;
 
 /**
@@ -20,7 +23,8 @@ import hiatus.hiatusapp.R;
  */
 public class MenuHistoryFragment extends ListFragment {
 
-    // TODO: Customize parameter initialization
+    private ArrayList<ContributionContext> contexts;
+
     public static Fragment newInstance() {
         return new MenuHistoryFragment();
     }
@@ -30,12 +34,12 @@ public class MenuHistoryFragment extends ListFragment {
         View view = inflater.inflate(R.layout.fragment_menu_history, container, false);
 
         // v TODO replace with a call to the database to the user's history contributions
-        ArrayList<ContributionContext> exampleContexts = new ArrayList<>();
-        exampleContexts.add(new ContributionText("instructions", "L'Amour en cage", "Passion", 50));
-        exampleContexts.add(new ContributionDrawing("instructions", "Concours de dessin", 50, "Jeu"));
+        contexts = new ArrayList<>();
+        contexts.add(new ContributionText("instructions", "L'Amour en cage", "Passion", 50));
+        contexts.add(new ContributionDrawing("instructions", "Concours de dessin", 50, "Jeu"));
         // ^
 
-        setListAdapter(new ContributionContextArrayAdapter(getActivity(), exampleContexts));
+        setListAdapter(new ContributionContextArrayAdapter(getActivity(), contexts));
 
         return view;
     }
@@ -43,14 +47,17 @@ public class MenuHistoryFragment extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-        /*
-        TODO implement logic to go to detail view of the selected contribution, showing:
-        - the contribution title
-        - the contribution theme
-        - the contribution specificities in a separate box (consider making a fragment for it)
-        - the state of the user's contribution (approved/denied/waiting for approval)
-        - a preview of the user's contribution
-        - a link to the contribution detail page
-          */
+
+        ContributionContext context = contexts.get(position);
+
+        // populate an intent with the contribution context
+        Intent i = new Intent(getActivity(), ContributionHistoryDetail.class);
+        i.putExtra("title", context.getTitle());
+        i.putExtra("theme", context.getTheme());
+        // TODO replace these with the contribution-specific data
+        i.putExtra("date", "01/01/2001");
+        i.putExtra("state", "Accepté");
+
+        startActivity(i);
     }
 }

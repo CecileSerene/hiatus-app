@@ -30,7 +30,8 @@
         <activity
             android:name=".Menu.MenuActivity"
             android:label="@string/title_activity_bottom_navigation" />
-        <activity android:name=".ContributionHomeDetail"></activity>
+        <activity android:name=".ContributionHomeDetail" />
+        <activity android:name=".ContributionHistoryDetail"></activity>
     </application>
 
 </manifest>
