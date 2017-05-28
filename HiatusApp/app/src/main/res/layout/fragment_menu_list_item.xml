@@ -3,7 +3,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/fragment_menu_list_selector"
     android:orientation="vertical"
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
@@ -24,8 +23,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?attr/textAppearanceListItem"
             android:textColor="@color/white"
-            android:textStyle="bold"
-            android:text="Dessine-moi un smiley!"/>
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/contribution_theme"
@@ -33,8 +31,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?attr/textAppearanceListItem"
             android:textColor="@color/colorPrimary"
-            android:textStyle="italic"
-            android:text="Jeu"/>
+            android:textStyle="italic"/>
 
     </LinearLayout>
 

@@ -29,7 +29,7 @@ public class ContributionContextArrayAdapter extends ArrayAdapter<ContributionCo
         ContributionContext contributionContext = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_menu_item, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_menu_list_item, parent, false);
         }
         setContent(contributionContext, convertView);
         return convertView;

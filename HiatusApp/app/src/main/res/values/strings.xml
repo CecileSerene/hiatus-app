@@ -8,7 +8,7 @@
     <string name="prompt_email">Adresse email</string>
     <string name="prompt_password">Mot de passe</string>
     <string name="action_sign_in">Se connecter</string>
-    <string name="action_sign_in_short">Se connecter</string>
+    <string name="action_sign_in_short">Connexion</string>
     <string name="register_link">Créer un compte</string>
     <string name="error_invalid_email">Cette adresse email n\'est pas valide</string>
     <string name="error_invalid_password">Ce mot de passe est trop court</string>
@@ -18,13 +18,16 @@
         completions."
     </string>
 
+    <!-- Strings related to menu home section -->
+    <string name="menu_home_section_description">Toutes les contributions en cours</string>
+
+    <!-- Strings related to menu history section -->
+    <string name="menu_history_section_description">Les contributions auxquelles vous avez participé</string>
+
     <!-- Bottom navigation Menu items -->
     <string name="title_activity_bottom_navigation">Hiatus</string>
     <string name="title_home">Accueil</string>
     <string name="title_history">Historique</string>
     <string name="title_profile">Profil</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

@@ -26,41 +26,55 @@
             />
     </LinearLayout>
 
-    <!-- Show current information -->
     <LinearLayout
-        android:id="@+id/identity"
+        android:id="@+id/profile_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingTop="30dp"
-        android:paddingBottom="30dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
         android:layout_below="@id/section_title"
-        android:gravity="center">
-
-        <!-- Profile photo -->
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@mipmap/ic_launcher"/>
-
-        <!-- Full name text -->
-        <TextView
-            android:layout_width="wrap_content"
+        android:orientation="vertical">
+        <!-- Show current information -->
+        <LinearLayout
+            android:id="@+id/identity"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:text="John Doe"/>
+            android:orientation="vertical"
+            android:paddingTop="30dp"
+            android:paddingBottom="30dp"
+            android:gravity="center">
 
-        <!-- Email text -->
-        <TextView
-            android:layout_width="wrap_content"
+            <!-- Profile photo -->
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@mipmap/ic_launcher"/>
+
+            <!-- Full name text -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:text="John Doe"/>
+
+            <!-- Email text -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="john.doe@email.com"/>
+
+            <View style="@style/Divider"
+                android:layout_marginTop="20dp"/>
+        </LinearLayout>
+
+        <!-- Preferences go here -->
+        <LinearLayout
+            android:id="@+id/prefs"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="john.doe@email.com"/>
-
-        <View style="@style/Divider"
-            android:layout_margin="30dp"/>
+            android:orientation="vertical">
+        </LinearLayout>
 
     </LinearLayout>
-
-    <!-- Modification actions -->
 </RelativeLayout>

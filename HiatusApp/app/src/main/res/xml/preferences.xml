@@ -1,20 +1,24 @@
-<?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory android:title="User profile">
         <EditTextPreference
             android:title="Nom et prénom"
             android:summary="Modifier vos nom et prénom"
+            android:inputType="textPersonName"
             android:key="prefFullname"/>
 
         <EditTextPreference
             android:title="Email"
             android:summary="Modifier votre adresse email"
+            android:inputType="textEmailAddress"
             android:key="prefEmail"/>
 
         <EditTextPreference
             android:title="Mot de passe"
             android:summary="Modifier votre mot de passe"
+            android:inputType="textPassword"
             android:key="prefPassword"/>
     </PreferenceCategory>
+
 </PreferenceScreen>

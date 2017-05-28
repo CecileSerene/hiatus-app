@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.MenuItem;
 
 import hiatus.hiatusapp.R;
@@ -12,6 +13,7 @@ import hiatus.hiatusapp.R;
 
 public class MenuActivity extends FragmentActivity {
 
+    private final static String TAG = "MenuActivity";
     private BottomNavigationView mBottomNav;
     private int mSelectedItem;
 
@@ -32,8 +34,8 @@ public class MenuActivity extends FragmentActivity {
 
         // initialize with first fragment
         MenuItem homeItem = mBottomNav.getMenu().getItem(0);
-        selectFragment(homeItem);
         mSelectedItem = homeItem.getItemId();
+        selectFragment(homeItem);
     }
 
     // Replaces the fragment in the fragment container by a new one
@@ -59,7 +61,7 @@ public class MenuActivity extends FragmentActivity {
         // uncheck the other items.
         for (int i = 0; i < mBottomNav.getMenu().size(); i++) {
             MenuItem menuItem = mBottomNav.getMenu().getItem(i);
-            menuItem.setChecked(menuItem.getItemId() == item.getItemId());
+            menuItem.setChecked(true);
         }
 
         if (frag != null) {

@@ -8,7 +8,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -25,17 +24,17 @@
             android:id="@+id/login_form"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorPrimary">
+            android:background="@color/colorPrimaryDarker">
 
             <!-- header with Hiatus logo -->
             <LinearLayout
                 android:id="@+id/header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="30dp"
+                android:paddingTop="50dp"
                 android:paddingBottom="30dp"
-                android:gravity="center"
-                android:background="@color/colorAccent" >
+                android:gravity="center">
+
                 <ImageView
                     android:id="@+id/header_logo"
                     android:layout_width="wrap_content"
@@ -90,7 +89,9 @@
                     android:id="@+id/email_sign_in_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginRight="50dp"
+                    android:layout_marginTop="20dp"
                     android:text="@string/action_sign_in"
                     android:textColor="@color/white"
                     android:background="@drawable/accent_button"
@@ -104,7 +105,7 @@
                     android:layout_marginTop="40dp"
                     android:layout_marginBottom="40dp"
                     android:textStyle="bold"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/colorPrimary"
                     android:text="@string/register_link"/>
 
             </LinearLayout>
