@@ -114,11 +114,11 @@
                 android:textStyle="bold"
                 android:text="Aperçu de ma contribution"/>
 
-            <!-- Exact form of the preview will depend on the contribution type -->
+            <!-- Put the contribution here thanks the ContributionContent's display(view) method -->
             <FrameLayout
-                android:id="@+id/preview_fragment_container"
+                android:id="@+id/contribution_content"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="wrap_content"
                 android:background="@color/black"/>
 
         </LinearLayout>
