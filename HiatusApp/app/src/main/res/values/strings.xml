@@ -24,6 +24,11 @@
     <!-- Strings related to menu history section -->
     <string name="menu_history_section_description">Les contributions auxquelles vous avez participé</string>
 
+    <!-- Strings related to the profile section -->
+    <string name="menu_profile_section_fullname_summary">Modifier vos nom et prénom</string>
+    <string name="menu_profile_section_email_summary">Modifier votre addresse email</string>
+    <string name="menu_profile_section_password_summary">Modifier votre mot de passe</string>
+
     <!-- Bottom navigation Menu items -->
     <string name="title_activity_bottom_navigation">Hiatus</string>
     <string name="title_home">Accueil</string>

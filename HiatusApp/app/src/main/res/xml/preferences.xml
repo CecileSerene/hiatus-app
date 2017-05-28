@@ -4,21 +4,19 @@
     <PreferenceCategory android:title="User profile">
         <EditTextPreference
             android:title="Nom et prénom"
-            android:summary="Modifier vos nom et prénom"
             android:inputType="textPersonName"
-            android:key="prefFullname"/>
+            android:key="pref_fullname"/>
 
         <EditTextPreference
             android:title="Email"
-            android:summary="Modifier votre adresse email"
             android:inputType="textEmailAddress"
-            android:key="prefEmail"/>
+            android:key="pref_email"/>
 
         <EditTextPreference
             android:title="Mot de passe"
-            android:summary="Modifier votre mot de passe"
+            android:summary="@string/menu_profile_section_password_summary"
             android:inputType="textPassword"
-            android:key="prefPassword"/>
+            android:key="pref_password"/>
     </PreferenceCategory>
 
 </PreferenceScreen>
