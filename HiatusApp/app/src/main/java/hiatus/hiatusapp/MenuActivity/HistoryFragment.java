@@ -1,44 +1,48 @@
-package hiatus.hiatusapp;
+package hiatus.hiatusapp.MenuActivity;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import hiatus.hiatusapp.ContributionContext.ContributionContext;
 import hiatus.hiatusapp.ContributionContext.ContributionDrawing;
 import hiatus.hiatusapp.ContributionContext.ContributionText;
-import hiatus.hiatusapp.dummy.DummyContent.DummyItem;
+import hiatus.hiatusapp.R;
 
 /**
- * A fragment representing a list of history contributions.
+ * A fragment representing the list of contributions on the history page.
  */
 public class HistoryFragment extends ListFragment {
 
     // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
     public static Fragment newInstance() {
         Fragment fragment = new HistoryFragment();
         return fragment;
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_contribution_list, container, false);
 
-        // TODO replace with a call to the database to the user's history contributions
+        TextView tv = (TextView) view.findViewById(R.id.list_title);
+        tv.setText("Les contributions auxquelles vous avez participé:"); // TODO make @strings
+
+        // v TODO replace with a call to the database to the user's history contributions
         ArrayList<ContributionContext> exampleContexts = new ArrayList<>();
         exampleContexts.add(new ContributionText("instructions", "L'Amour en cage", "Passion", 50));
         exampleContexts.add(new ContributionDrawing("instructions", "Concours de dessin", 50, "Jeu"));
+        // ^
 
-        setListAdapter(new HistoryFragmentArrayAdapter(getActivity(), exampleContexts));
+        setListAdapter(new ContributionContextArrayAdapter(getActivity(), exampleContexts));
+
+        return view;
     }
 
     @Override

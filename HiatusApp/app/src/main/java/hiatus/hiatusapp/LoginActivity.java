@@ -32,6 +32,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import hiatus.hiatusapp.MenuActivity.MenuActivity;
+
 import static android.Manifest.permission.READ_CONTACTS;
 
 /**
@@ -337,7 +339,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
             if (success) {
                 // TODO change next activity here
-                startActivity(new Intent(LoginActivity.this, BottomNavigationActivity.class));
+                startActivity(new Intent(LoginActivity.this, MenuActivity.class));
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();

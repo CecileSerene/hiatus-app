@@ -1,4 +1,4 @@
-package hiatus.hiatusapp;
+package hiatus.hiatusapp.MenuActivity;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,15 +10,16 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import hiatus.hiatusapp.ContributionContext.ContributionContext;
+import hiatus.hiatusapp.R;
 
 /**
  * Created by Florimond on 27/05/2017.
  * Defines the array adapter for contribution contexts. Used to display contribution contexts in a ListView.
  */
 
-public class HistoryFragmentArrayAdapter extends ArrayAdapter<ContributionContext> {
+public class ContributionContextArrayAdapter extends ArrayAdapter<ContributionContext> {
 
-    public HistoryFragmentArrayAdapter(Context context, ArrayList<ContributionContext> contexts) {
+    public ContributionContextArrayAdapter(Context context, ArrayList<ContributionContext> contexts) {
         super(context, 0, contexts);
     }
 
@@ -28,15 +29,21 @@ public class HistoryFragmentArrayAdapter extends ArrayAdapter<ContributionContex
         ContributionContext context = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_history_item, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_contribution_item, parent, false);
         }
+        setContent(context, convertView);
+        return convertView;
+    }
+
+    // Override in subclasses to define your own contents... ?
+    // (not sure as it depends on the underlying layout)
+    protected void setContent(ContributionContext context, View view) {
         // Lookup view for data population
-        TextView tvTheme = (TextView) convertView.findViewById(R.id.contribution_theme);
-        TextView tvTitle = (TextView) convertView.findViewById(R.id.contribution_title);
+        TextView tvTheme = (TextView) view.findViewById(R.id.contribution_theme);
+        TextView tvTitle = (TextView) view.findViewById(R.id.contribution_title);
         // Populate the data into the template view using the data object
         tvTheme.setText(context.getTheme());
         tvTitle.setText(context.getTitle());
-        // Return the completed view to render on screen
-        return convertView;
+
     }
 }

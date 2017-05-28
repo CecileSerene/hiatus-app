@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/colorSecondaryDark"
-    tools:context="hiatus.hiatusapp.BottomNavigationActivity">
+    tools:context="hiatus.hiatusapp.MenuActivity.MenuActivity">
 
     <LinearLayout
         android:id="@+id/content"
