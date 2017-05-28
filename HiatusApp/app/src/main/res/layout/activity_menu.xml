@@ -12,7 +12,7 @@ Fill the fragment container with fragment layouts!
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/colorSecondaryDark"
-    tools:context="hiatus.hiatusapp.MenuActivity.MenuActivity">
+    tools:context="hiatus.hiatusapp.Menu.MenuActivity">
 
     <!-- Content of the fragment -->
     <FrameLayout

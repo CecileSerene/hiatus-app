@@ -1,4 +1,4 @@
-package hiatus.hiatusapp.MenuActivity;
+package hiatus.hiatusapp.Menu;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -48,8 +48,7 @@ public class MenuActivity extends FragmentActivity {
                 frag = MenuHistoryFragment.newInstance();
                 break;
             case R.id.navigation_profile:
-                // TODO uncomment when ProfileFragment is implemented
-                // frag = ProfileFragment.newInstance();
+                frag = MenuProfileFragment.newInstance();
                 break;
             default:
                 break;

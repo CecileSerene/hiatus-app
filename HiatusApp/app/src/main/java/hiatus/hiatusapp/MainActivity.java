@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import hiatus.hiatusapp.MenuActivity.MenuActivity;
+import hiatus.hiatusapp.Menu.MenuActivity;
 
 public class MainActivity extends Activity {
 

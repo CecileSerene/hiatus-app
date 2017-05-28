@@ -1,4 +1,4 @@
-package hiatus.hiatusapp.MenuActivity;
+package hiatus.hiatusapp.Menu;
 
 import android.content.Context;
 import android.view.LayoutInflater;

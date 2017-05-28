@@ -32,7 +32,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import hiatus.hiatusapp.MenuActivity.MenuActivity;
+import hiatus.hiatusapp.Menu.MenuActivity;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
