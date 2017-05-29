@@ -89,7 +89,6 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         setContentView(R.layout.activity_login);
 
         // Setup firebase authentication
-
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -163,11 +162,9 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     private void updateUI(FirebaseUser user) {
         showProgress(false);
 
-        if (user != null) {
-            // authentication succeeded, intent to menu activity
-            Intent i = new Intent(this, MenuActivity.class);
-            // TODO add user info to intent ?
-            startActivity(i);
+        if (user != null && user.isEmailVerified()) {
+            // authentication succeeded, email is verified -> go to menu activity
+            startActivity(new Intent(this, MenuActivity.class));
             finish();
         }
     }
@@ -189,8 +186,8 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                     if (task.isSuccessful()) {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d(TAG, "createUserWithEmail:success");
-                        Toast.makeText(LoginActivity.this, "Successfully created user " + email, Toast.LENGTH_SHORT).show();
                         FirebaseUser user = mAuth.getCurrentUser();
+                        sendEmailVerification(user);
                         updateUI(user);
                     } else {
                         // If sign in fails, display a message to the user.
@@ -206,7 +203,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             });
     }
 
-    private void signIn(String email, String password) {
+    private void signIn(final String email, final String password) {
         Log.d(TAG, "signIn:" + email);
         if (!validateForm()) {
             return;
@@ -233,14 +230,11 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             });
     }
 
-    // in case we want to add email verification
-    // TODO (update the updateUI() if so)
-    private void sendEmailVerification() {
-        // Disable button
+    private void sendEmailVerification(final FirebaseUser user) {
+        // Disable send verification button
         //findViewById(R.id.verify_email_button).setEnabled(false);
 
         // Send verification email
-        final FirebaseUser user = mAuth.getCurrentUser();
         user.sendEmailVerification()
                 .addOnCompleteListener(this, new OnCompleteListener<Void>() {
                     @Override
@@ -255,7 +249,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                         } else {
                             Log.e(TAG, "sendEmailVerification", task.getException());
                             Toast.makeText(LoginActivity.this,
-                                    "Failed to send verification email.",
+                                    "Failed to send verification email to " + user.getEmail(),
                                     Toast.LENGTH_SHORT).show();
                         }
                     }
