@@ -9,6 +9,7 @@
 
     <!-- Strings related to login and register -->
     <string name="title_activity_register">Se connecter</string>
+    <string name="prompt_fullname">Nom</string>
     <string name="prompt_email">Adresse email</string>
     <string name="prompt_password">Mot de passe</string>
     <string name="action_sign_in">Se connecter</string>

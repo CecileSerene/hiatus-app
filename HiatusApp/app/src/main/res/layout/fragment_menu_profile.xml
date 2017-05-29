@@ -103,14 +103,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
-                    android:textColor="@color/colorPrimaryDarker"
+                    android:textColor="@color/colorPrimary"
                     android:text="Modifier le mot de passe"/>
 
                 <TextView
                     android:id="@+id/logout_link"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimaryDarker"
+                    android:textColor="@color/colorPrimary"
                     android:text="Se déconnecter"/>
 
             </LinearLayout>
