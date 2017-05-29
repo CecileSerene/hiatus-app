@@ -24,13 +24,14 @@
             android:id="@+id/login_form"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorPrimaryDarker">
+            android:background="@color/colorPrimary">
 
             <!-- header with Hiatus logo -->
             <LinearLayout
                 android:id="@+id/header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/colorAccent"
                 android:paddingTop="50dp"
                 android:paddingBottom="30dp"
                 android:gravity="center">
