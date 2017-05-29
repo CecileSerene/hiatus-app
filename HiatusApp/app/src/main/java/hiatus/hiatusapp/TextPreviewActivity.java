@@ -26,23 +26,15 @@ public class TextPreviewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preview);
 
-        //____ Exemple _____
-        String instructions_ex = "Ecrivez les premiers mots qui vous viennent sur le thème du jeu";
-        ContributionText text = new ContributionText(instructions_ex,"Ecriture automatique","Jeu",50);
-        context = text;
-
-
-        //___ fin exemple ____
+        Intent i = getIntent();
+        content = (TextContent) i.getParcelableExtra("content");
 
 
         text_preview = (TextView) findViewById(R.id.text_preview);
         title_preview = (TextView) findViewById(R.id.title_preview);
         modify = (Button) findViewById(R.id.modify);
 
-        Intent intent = getIntent();
-        String contribution = intent.getExtras().getString("contribution");
-        String title = intent.getExtras().getString("title");
-        content = new TextContent(title, contribution, context);
+
         content.display(title_preview, text_preview);
 
 
@@ -56,13 +48,13 @@ public class TextPreviewActivity extends AppCompatActivity {
 
     public void modify(View view){
         Intent i = new Intent(this, TextActivity.class);
-        i.putExtra("title",content.getTitle());
-        i.putExtra("contribution", content.getText());
+        i.putExtra("content",content);
         startActivity(i);
     }
 
     public  void send(View view){
         Intent i = new Intent(this, SendActivity.class);
+        i.putExtra("content",content);
         startActivity(i);
     }
 }

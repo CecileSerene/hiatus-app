@@ -1,3 +1,4 @@
+/*
 package hiatus.hiatusapp;
 
 import android.app.Activity;
@@ -25,11 +26,13 @@ public class ContributionActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contribution);
 
+*/
 /*        //____ Exemple text context _____
         String instructions_ex = "Ecrivez les premiers mots qui vous viennent sur le thème du jeu";
         ContributionText text = new ContributionText(instructions_ex,"Ecriture automatique","Jeu",50);
         context = text;
-        //___ fin exemple ____*/
+        //___ fin exemple ____*//*
+
 
         //____ Exemple Photo context_____
         String instructions_ex = "Prenez une photo sur le vif";
@@ -77,3 +80,4 @@ public class ContributionActivity extends Activity {
 
     }
 }
+*/
