@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="@color/colorPrimaryDark"
+    tools:context="hiatus.hiatusapp.ContributionHomeDetail">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp" >
+
+        <!-- Begin Header -->
+        <RelativeLayout
+            android:id="@+id/header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Close button -->
+            <ImageButton
+                android:id="@+id/close_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:background="@android:color/transparent"
+                android:onClick="quitDetail"
+                android:src="@drawable/ic_close"/>
+
+            <!-- Main information about the contribution -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toStartOf="@id/close_button"
+                android:layout_toLeftOf="@id/close_button"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/contribution_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimary"
+                    android:text="Dessine-moi un smiley !"/>
+
+                <TextView
+                    android:id="@+id/contribution_theme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:textStyle="italic"
+                    android:text="Vertige"/>
+            </LinearLayout>
+
+        </RelativeLayout>
+        <!-- End header -->
+
+        <View style="@style/Divider"
+            android:id="@+id/div1"
+            android:layout_marginTop="15dp" />
+
+        <LinearLayout
+            android:id="@+id/block_instructions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="20dp"
+            android:paddingBottom="10dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:paddingBottom="10dp"
+                android:textStyle="bold"
+                android:text="Description et instructions"/>
+
+            <TextView
+                android:id="@+id/contribution_instructions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Voici les instructions. Vous devez écrire un texte qui parlera d'un chevalier à l'épée d'argent."/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/block_options"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:paddingBottom="10dp"
+                android:textStyle="bold"
+                android:text="Options"/>
+
+            <!-- GridView showing the options (is it a text, is there a limited
+            number of characters, is it time-limited, etc.) -->
+            <GridView
+                android:id="@+id/options_grid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnWidth="80dp"
+                android:numColumns="auto_fit"
+                android:verticalSpacing="10dp"
+                android:horizontalSpacing="10dp"
+                android:stretchMode="columnWidth"
+                android:listSelector="@android:color/transparent"
+                />
+        </LinearLayout>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/accent_button"
+            android:text="Contribuer !"/>
+
+    </LinearLayout>
+
+</ScrollView>

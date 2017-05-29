@@ -1,0 +1,22 @@
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/prefs_user_profile">
+        <EditTextPreference
+            android:title="Nom et prénom"
+            android:inputType="textPersonName"
+            android:key="pref_fullname"/>
+
+        <EditTextPreference
+            android:title="Email"
+            android:inputType="textEmailAddress"
+            android:key="pref_email"/>
+
+        <EditTextPreference
+            android:title="Mot de passe"
+            android:summary="@string/menu_profile_section_password_summary"
+            android:inputType="textPassword"
+            android:key="pref_password"/>
+    </PreferenceCategory>
+
+</PreferenceScreen>

@@ -8,7 +8,7 @@
     <string name="prompt_email">Adresse email</string>
     <string name="prompt_password">Mot de passe</string>
     <string name="action_sign_in">Se connecter</string>
-    <string name="action_sign_in_short">Se connecter</string>
+    <string name="action_sign_in_short">Connexion</string>
     <string name="register_link">Créer un compte</string>
     <string name="error_invalid_email">Cette adresse email n\'est pas valide</string>
     <string name="error_invalid_password">Ce mot de passe est trop court</string>
@@ -17,6 +17,18 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+
+    <!-- Strings related to menu home section -->
+    <string name="menu_home_section_description">Toutes les contributions en cours</string>
+
+    <!-- Strings related to menu history section -->
+    <string name="menu_history_section_description">Les contributions auxquelles vous avez participé</string>
+
+    <!-- Strings related to the profile section -->
+    <string name="prefs_user_profile">Mon profil</string>
+    <string name="menu_profile_section_fullname_summary">Modifier vos nom et prénom</string>
+    <string name="menu_profile_section_email_summary">Modifier votre addresse email</string>
+    <string name="menu_profile_section_password_summary">Modifier votre mot de passe</string>
 
     <!-- Bottom navigation Menu items -->
     <string name="title_activity_bottom_navigation">Hiatus</string>

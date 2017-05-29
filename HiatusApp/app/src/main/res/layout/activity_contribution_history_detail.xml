@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="@color/colorPrimaryDark"
+    tools:context="hiatus.hiatusapp.ContributionHistoryDetail">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp" >
+
+        <!-- Begin Header -->
+        <RelativeLayout
+            android:id="@+id/header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Close button -->
+            <ImageButton
+                android:id="@+id/close_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:background="@android:color/transparent"
+                android:onClick="quitDetail"
+                android:src="@drawable/ic_close"/>
+
+            <!-- Main information about the contribution -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toStartOf="@id/close_button"
+                android:layout_toLeftOf="@id/close_button"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/contribution_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimary"
+                    android:text="Dessine-moi un smiley !"/>
+
+                <TextView
+                    android:id="@+id/contribution_theme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:textStyle="italic"
+                    android:text="Vertige"/>
+            </LinearLayout>
+
+        </RelativeLayout>
+        <!-- End header -->
+
+        <View style="@style/Divider"
+            android:id="@+id/div1"
+            android:layout_marginTop="15dp" />
+
+        <!-- Begin contribution state info -->
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp"
+            android:paddingBottom="10dp"
+            android:stretchColumns="1">
+
+            <TableRow>
+                <TextView
+                    android:layout_column="1"
+                    android:text="Envoyée le" />
+                <TextView
+                    android:id="@+id/contribution_date"
+                    android:layout_column="2"
+                    android:text="02/04/2017"
+                    android:gravity="right"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:layout_column="1"
+                    android:text="Etat"/>
+                <TextView
+                    android:id="@+id/contribution_state"
+                    android:layout_column="2"
+                    android:gravity="right"
+                    android:text="Acceptée"/>
+            </TableRow>
+
+        </TableLayout>
+
+        <!-- Begin contribution preview -->
+        <LinearLayout
+            android:id="@+id/block_preview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:paddingBottom="10dp"
+                android:textStyle="bold"
+                android:text="Aperçu de ma contribution"/>
+
+            <!-- Put the contribution here thanks the ContributionContent's display(view) method -->
+            <FrameLayout
+                android:id="@+id/contribution_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/black"/>
+
+        </LinearLayout>
+        <!-- End contribution preview -->
+
+    </LinearLayout>
+
+</ScrollView>
