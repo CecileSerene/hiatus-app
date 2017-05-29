@@ -3,12 +3,11 @@ package hiatus.hiatusapp;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.app.Activity;
-
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -27,24 +26,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
-import hiatus.hiatusapp.Menu.MenuActivity;
-
 
 /**
- * A login screen that offers login via email/password.
+ * A register screen that offers register via fullname/email/password.
  * Useful example: https://github.com/firebase/quickstart-android/blob/master/auth/app/src/main/java/com/google/firebase/quickstart/auth/EmailPasswordActivity.java
  */
-public class LoginActivity extends Activity {
+public class RegisterActivity extends Activity {
 
-    private static final String TAG = "Login";
-    private static final int REGISTER_REQUEST = 1;
-
-    /**
-     * Dummy credentials
-     * TODO remove when in production
-     */
-    private static final String dummyEmail = "dummy.user@foo.bar";
-    private static final String dummyPassword = "imdummy";
+    private static final String TAG = "RegisterActivity";
 
     /**
      * Firebase references.
@@ -55,15 +44,16 @@ public class LoginActivity extends Activity {
     /**
      * UI references.
      */
+    private EditText mNameView;
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
     private View mProgressView;
-    private View mLoginFormView;
+    private View mRegisterFormView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_register);
 
         // Setup firebase authentication
         mAuth = FirebaseAuth.getInstance();
@@ -72,14 +62,11 @@ public class LoginActivity extends Activity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    if (user.isEmailVerified()) {
-                        Log.d(TAG, "onAuthStateChanged:sign_in:" + user.getUid());
-                        // authentication just happened and suceeded, go to menu activity
-                        Intent i = new Intent(LoginActivity.this, MenuActivity.class);
-                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(i);
-                        finish();
-                    }
+                    Log.d(TAG, "onAuthStateChanged:sign_in:" + user.getUid());
+                    // authentication just happened and suceeded, go to menu activity
+                    UserProfileChangeRequest request = new UserProfileChangeRequest.Builder()
+                            .setDisplayName(mNameView.getText().toString()).build();
+                    user.updateProfile(request);
                 } else {
                     Log.d(TAG, "onAuthStateChanged:signed_out");
                 }
@@ -87,20 +74,21 @@ public class LoginActivity extends Activity {
         };
 
         // Get UI references
+        mNameView = (EditText) findViewById(R.id.fullname);
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         mPasswordView = (EditText) findViewById(R.id.password);
-        mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+        mRegisterFormView = findViewById(R.id.register_form);
 
         // Set up actions
 
-        // Action on the editor to login directly through the keyboard's login button
+        // Action on the editor to register directly through the keyboard's register button
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
                 if (id == R.id.login || id == EditorInfo.IME_NULL) {
                     if (validateForm()) {
-                        signIn(mEmailView.getText().toString(), mPasswordView.getText().toString());
+                        createAccount(mEmailView.getText().toString(), mPasswordView.getText().toString());
                         return true;
                     } else {
                         return false;
@@ -110,25 +98,27 @@ public class LoginActivity extends Activity {
             }
         });
 
-        // Attach signIn() to sign-in button
-        findViewById(R.id.email_sign_in_button).setOnClickListener(new OnClickListener() {
+        // Attach createAccount() to register button
+        findViewById(R.id.register_button).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                signIn(mEmailView.getText().toString(), mPasswordView.getText().toString());
+                createAccount(mEmailView.getText().toString(), mPasswordView.getText().toString());
             }
         });
 
-        // Go to register form with register link
-        findViewById(R.id.register_link).setOnClickListener(new OnClickListener() {
+        // Go to login form with login link
+        findViewById(R.id.login_link).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToRegister();
+                goToLogin();
             }
         });
     }
 
-    private void goToRegister() {
-        startActivity(new Intent(this, RegisterActivity.class));
+    private void goToLogin() {
+        Intent i = new Intent(this, LoginActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(i);
         finish();
     }
 
@@ -150,21 +140,25 @@ public class LoginActivity extends Activity {
     Firebase login-register functions
      */
 
-    private void signIn(final String email, final String password) {
-        Log.d(TAG, "signIn:" + email);
+    private void createAccount(final String email, final String password) {
+        Log.d(TAG, "createAccount:" + email);
 
         showProgress(true);
 
-        mAuth.signInWithEmailAndPassword(email, password)
+        mAuth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        Log.d(TAG, "signInWithEmail:success");
+                        // Register success
+                        Log.d(TAG, "createUserWithEmail:success");
                         FirebaseUser user = mAuth.getCurrentUser();
+                        sendEmailVerification(user);
                     } else {
-                        Log.w(TAG, "signInWithEmail:failure", task.getException());
-                        Toast.makeText(LoginActivity.this, "Authentication failed", Toast.LENGTH_SHORT).show();
+                        // If sign in fails, display a message to the user.
+                        Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                        Toast.makeText(RegisterActivity.this, "Account creation failed.",
+                                Toast.LENGTH_SHORT).show();
                     }
 
                     showProgress(false);
@@ -172,8 +166,35 @@ public class LoginActivity extends Activity {
             });
     }
 
+    private void sendEmailVerification(final FirebaseUser user) {
+        // Disable send verification button
+        //findViewById(R.id.verify_email_button).setEnabled(false);
+
+        // Send verification email
+        user.sendEmailVerification()
+                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        // Re-enable button
+                        //findViewById(R.id.verify_email_button).setEnabled(true);
+
+                        if (task.isSuccessful()) {
+                            Toast.makeText(RegisterActivity.this,
+                                    "Verification email sent to " + user.getEmail(),
+                                    Toast.LENGTH_SHORT).show();
+                        } else {
+                            Log.e(TAG, "sendEmailVerification", task.getException());
+                            Toast.makeText(RegisterActivity.this,
+                                    "Failed to send verification email to " + user.getEmail(),
+                                    Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                });
+    }
+
     /*
-    Login form validation
+    Form validation
      */
 
     private boolean isEmailValid(String email) {
@@ -186,11 +207,20 @@ public class LoginActivity extends Activity {
 
     private boolean validateForm() {
         // Reset errors.
+        mNameView.setError(null);
         mEmailView.setError(null);
         mPasswordView.setError(null);
 
         boolean valid = true;
         View focusView = null;
+
+        // verify fullname
+        String name = mNameView.getText().toString();
+        if (TextUtils.isEmpty(name)) {
+            mNameView.setError(getString(R.string.error_field_required));
+            focusView = mNameView;
+            valid = false;
+        }
 
         // verify email
         String email = mEmailView.getText().toString();
@@ -230,12 +260,12 @@ public class LoginActivity extends Activity {
         // for very easy animations.
         int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
-        mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-        mLoginFormView.animate().setDuration(shortAnimTime).alpha(
+        mRegisterFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+        mRegisterFormView.animate().setDuration(shortAnimTime).alpha(
                 show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
-                mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+                mRegisterFormView.setVisibility(show ? View.GONE : View.VISIBLE);
             }
         });
 
