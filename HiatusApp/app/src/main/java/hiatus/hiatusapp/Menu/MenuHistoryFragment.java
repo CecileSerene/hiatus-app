@@ -36,7 +36,7 @@ public class MenuHistoryFragment extends ListFragment {
         // v TODO replace with a call to the database to the user's history contributions
         contexts = new ArrayList<>();
         contexts.add(new ContributionText("instructions", "L'Amour en cage", "Passion", 50));
-        contexts.add(new ContributionPhoto("instructions", "Concours de dessin","Jeu", 50));
+        contexts.add(new ContributionPhoto("instructions", "Concours de dessin","Jeu"));
         // ^
 
         setListAdapter(new ContributionContextArrayAdapter(getActivity(), contexts));

@@ -37,7 +37,7 @@ public class MenuHomeFragment extends ListFragment {
         // v TODO replace with a call to the database to get most recent contributions
         contexts = new ArrayList<>();
         contexts.add(new ContributionText("Dessine un smiley le plus rapidement possible !", "Dessine-moi un smiley!", "Obsession", 50));
-        contexts.add(new ContributionPhoto("instructions", "Photographie ludique", "Jeu", 50));
+        contexts.add(new ContributionPhoto("instructions", "Photographie ludique", "Jeu"));
         // ^
 
         setListAdapter(new ContributionContextArrayAdapter(getActivity(), contexts));

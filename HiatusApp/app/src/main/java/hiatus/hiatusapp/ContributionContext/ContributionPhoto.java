@@ -9,7 +9,7 @@ import android.os.Parcelable;
 
 public class ContributionPhoto extends ContributionContext{
 
-    public ContributionPhoto(String instructions,String title,String theme, int nb_of_characters) {
+    public ContributionPhoto(String instructions,String title,String theme) {
         super();
         this.title = title;
         this.instructions = instructions;
