@@ -13,7 +13,10 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = new Intent(this, MenuActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
+        // v TODO remove when in production
+        intent.putExtra("mode", "bypass");
+        // ^
         startActivity(intent);
         finish();
     }

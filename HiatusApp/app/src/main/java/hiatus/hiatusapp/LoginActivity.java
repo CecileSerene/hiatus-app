@@ -4,29 +4,18 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.app.Activity;
-import android.app.LoaderManager.LoaderCallbacks;
-
-import android.content.CursorLoader;
-import android.content.Loader;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.AsyncTask;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,6 +36,13 @@ import hiatus.hiatusapp.Menu.MenuActivity;
 public class LoginActivity extends Activity {
 
     private static final String TAG = "Login";
+
+    /**
+     * Dummy credentials
+     * TODO remove when in production
+     */
+    private static final String dummyEmail = "dummy.user@foo.bar";
+    private static final String dummyPassword = "imdummy";
 
     /**
      * Firebase references.
@@ -99,8 +95,12 @@ public class LoginActivity extends Activity {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
                 if (id == R.id.login || id == EditorInfo.IME_NULL) {
-                    signIn(mEmailView.getText().toString(), mPasswordView.getText().toString());
-                    return true;
+                    if (validateForm()) {
+                        signIn(mEmailView.getText().toString(), mPasswordView.getText().toString());
+                        return true;
+                    } else {
+                        return false;
+                    }
                 }
                 return false;
             }
@@ -118,9 +118,17 @@ public class LoginActivity extends Activity {
         findViewById(R.id.register_link).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                createAccount(mEmailView.getText().toString(), mPasswordView.getText().toString());
+                if (validateForm()) {
+                    createAccount(mEmailView.getText().toString(), mPasswordView.getText().toString());
+                }
             }
         });
+
+        // v TODO remove when in production
+        if (getIntent().getStringExtra("mode").equals("bypass")) {
+            signIn(dummyEmail, dummyPassword);
+        }
+        // ^
 
     }
 
@@ -144,9 +152,6 @@ public class LoginActivity extends Activity {
 
     private void createAccount(final String email, final String password) {
         Log.d(TAG, "createAccount:" + email);
-        if(!validateForm()) {
-            return;
-        }
 
         mAuth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -172,9 +177,6 @@ public class LoginActivity extends Activity {
 
     private void signIn(final String email, final String password) {
         Log.d(TAG, "signIn:" + email);
-        if (!validateForm()) {
-            return;
-        }
 
         showProgress(true);
 
