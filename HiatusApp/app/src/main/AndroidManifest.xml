@@ -35,9 +35,9 @@
             android:name=".Menu.MenuActivity"
             android:label="@string/title_activity_bottom_navigation" />
         <activity android:name=".SendActivity" />
-        <activity android:name=".PhotoActivity"/>
+        <activity android:name=".PhotoActivity" />
         <activity android:name=".ContributionHomeDetail" />
-        <activity android:name=".ContributionHistoryDetail"/>
+        <activity android:name=".ContributionHistoryDetail" />
     </application>
 
 </manifest>
