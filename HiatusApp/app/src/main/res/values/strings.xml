@@ -3,6 +3,10 @@
 
     <string name="contribuer"> C\'est parti !</string>
 
+    <!-- General usage strings -->
+    <string name="yes">Oui</string>
+    <string name="no">Non</string>
+
     <!-- Strings related to login and register -->
     <string name="title_activity_register">Se connecter</string>
     <string name="prompt_email">Adresse email</string>
@@ -29,6 +33,8 @@
     <string name="menu_profile_section_fullname_summary">Modifier vos nom et prénom</string>
     <string name="menu_profile_section_email_summary">Modifier votre addresse email</string>
     <string name="menu_profile_section_password_summary">Modifier votre mot de passe</string>
+    <string name="confirm_signout_title">Déconnexion</string>
+    <string name="confirm_signout_message">Êtes-vous sûrs de vouloir vous déconnecter ?</string>
 
     <!-- Bottom navigation Menu items -->
     <string name="title_activity_bottom_navigation">Hiatus</string>

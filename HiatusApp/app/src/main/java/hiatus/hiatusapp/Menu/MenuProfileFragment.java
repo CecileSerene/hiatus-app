@@ -1,10 +1,13 @@
 package hiatus.hiatusapp.Menu;
 
+import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
 import android.view.LayoutInflater;
@@ -45,9 +48,23 @@ public class MenuProfileFragment extends Fragment {
         view.findViewById(R.id.logout_link).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseAuth mAuth = FirebaseAuth.getInstance();
-                mAuth.signOut();
-                startActivity(new Intent(getActivity(), LoginActivity.class));
+                final Activity currentActivity = getActivity();
+
+                // confirm sign off through alert dialog
+                new AlertDialog.Builder(currentActivity)
+                        .setTitle(R.string.confirm_signout_title)
+                        .setMessage(R.string.confirm_signout_message)
+                        .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                                mAuth.signOut();
+                                startActivity(new Intent(getActivity(), LoginActivity.class));
+                                currentActivity.finish();
+                            }
+                        })
+                        .setNegativeButton(R.string.no, null)
+                        .show();
             }
         });
 
