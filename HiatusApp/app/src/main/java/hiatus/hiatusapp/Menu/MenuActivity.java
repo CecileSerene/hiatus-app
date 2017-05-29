@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.MenuItem;
 
@@ -27,7 +28,7 @@ public class MenuActivity extends FragmentActivity {
         mBottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                selectFragment(item);
+                selectFragment(item, true);
                 return true;
             }
         });
@@ -35,11 +36,11 @@ public class MenuActivity extends FragmentActivity {
         // initialize with first fragment
         MenuItem homeItem = mBottomNav.getMenu().getItem(0);
         mSelectedItem = homeItem.getItemId();
-        selectFragment(homeItem);
+        selectFragment(homeItem, false);
     }
 
     // Replaces the fragment in the fragment container by a new one
-    private void selectFragment(MenuItem item) {
+    private void selectFragment(MenuItem item, boolean addToBackStack) {
         Fragment frag = null;
 
         switch (item.getItemId()) {
@@ -65,10 +66,13 @@ public class MenuActivity extends FragmentActivity {
         }
 
         if (frag != null) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container, frag)
-                    .addToBackStack(null)  // allows going back without changing activity (see onBackPressed() below)
-                    .commit();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragment_container, frag);
+            if (addToBackStack) {
+                // allows to access the precedent fragment through a back press
+                transaction.addToBackStack(null);
+            }
+            transaction.commit();
         }
     }
 
@@ -78,7 +82,7 @@ public class MenuActivity extends FragmentActivity {
         MenuItem homeItem = mBottomNav.getMenu().getItem(0);
         if (mSelectedItem != homeItem.getItemId()) {
             // select home item
-            selectFragment(homeItem);
+            selectFragment(homeItem, true);
         }
         // or go to previous activity otherwise
         else {

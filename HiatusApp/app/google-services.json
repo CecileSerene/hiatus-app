@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1056835211704",
+    "firebase_url": "https://hiatusapp-7b98d.firebaseio.com",
+    "project_id": "hiatusapp-7b98d",
+    "storage_bucket": "hiatusapp-7b98d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1056835211704:android:6f14ae741c6c06aa",
+        "android_client_info": {
+          "package_name": "hiatus.hiatusapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1056835211704-pgjphu24d76fus2gcpv2kmgbq8v5nj5i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "hiatus.hiatusapp",
+            "certificate_hash": "84edd54f2e743bc61aeeb3a0a475fe45a27120c8"
+          }
+        },
+        {
+          "client_id": "1056835211704-srlbp2mnugqtdjt4elca2hl9p3078t3r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDfPmeXFzjW4MLEg-DTIwKwQpbLyDytKI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1056835211704-srlbp2mnugqtdjt4elca2hl9p3078t3r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
