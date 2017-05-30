@@ -14,14 +14,14 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import hiatus.hiatusapp.ContributionContent.TextContent;
-import hiatus.hiatusapp.ContributionContext.ContributionText;
+import hiatus.hiatusapp.ContributionContext.TextContext;
 
 
 public class TextActivity extends Activity {
 
     Button mPreviewButton;
     EditText mEdittext;
-    ContributionText context;
+    TextContext context;
     Button mTitleButton;
     TextContent content;
 
@@ -37,10 +37,10 @@ public class TextActivity extends Activity {
 
         try { //here it is the content that is sent via the intent, whene we come from the preview to modify
             content = (TextContent) i.getParcelableExtra("content");
-            context = (ContributionText) content.getContext();
+            context = (TextContext) content.getContext();
             mEdittext.setText(content.getText());
         } catch (Exception e) { // here it is the context that is sent
-            context = (ContributionText) i.getParcelableExtra("context");
+            context = (TextContext) i.getParcelableExtra("context");
             content = new TextContent("",context);
 
         }

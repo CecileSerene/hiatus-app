@@ -9,8 +9,8 @@ import android.widget.TextView;
 
 import hiatus.hiatusapp.ContributionContext.ContributionContext;
 
-import hiatus.hiatusapp.ContributionContext.ContributionPhoto;
-import hiatus.hiatusapp.ContributionContext.ContributionText;
+import hiatus.hiatusapp.ContributionContext.PhotoContext;
+import hiatus.hiatusapp.ContributionContext.TextContext;
 
 public class ContributionHomeDetail extends Activity {
 
@@ -37,11 +37,11 @@ public class ContributionHomeDetail extends Activity {
 
     public void contribuer(View view) {
 
-        if (context instanceof ContributionText) {
+        if (context instanceof TextContext) {
             Intent i = new Intent(this, TextActivity.class);
             i.putExtra("context",context);
             startActivity(i);
-        } else if (context instanceof ContributionPhoto) {
+        } else if (context instanceof PhotoContext) {
             Intent i = new Intent(this, PhotoActivity.class);
             i.putExtra("context",context);
             startActivity(i);

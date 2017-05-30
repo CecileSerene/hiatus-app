@@ -7,10 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import hiatus.hiatusapp.ContributionContent.ContributionContent;
 import hiatus.hiatusapp.ContributionContent.TextContent;
-import hiatus.hiatusapp.ContributionContext.ContributionContext;
-import hiatus.hiatusapp.ContributionContext.ContributionText;
+import hiatus.hiatusapp.ContributionContext.TextContext;
 
 public class TextPreviewActivity extends AppCompatActivity {
 
@@ -18,7 +16,7 @@ public class TextPreviewActivity extends AppCompatActivity {
     TextView title_preview;
     Button modify;
     Button send;
-    ContributionText context;
+    TextContext context;
     TextContent content;
 
     @Override

@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import hiatus.hiatusapp.ContributionContext.ContributionContext;
-import hiatus.hiatusapp.ContributionContext.ContributionPhoto;
+import hiatus.hiatusapp.ContributionContext.PhotoContext;
 
 /**
  * Created by Cecile on 24/05/2017.
@@ -22,13 +22,13 @@ public class PhotoContent extends ContributionContent {
     private ContributionContext context;
 
 
-    public PhotoContent(Bitmap photo, ContributionPhoto context) {
+    public PhotoContent(Bitmap photo, PhotoContext context) {
         this.photo = photo;
         this.title = "";
         this.context = context;
     }
 
-    public PhotoContent(Bitmap photo, String title, ContributionPhoto context) {
+    public PhotoContent(Bitmap photo, String title, PhotoContext context) {
         this.photo = photo;
         this.title = title;
         this.context = context;
@@ -54,7 +54,7 @@ public class PhotoContent extends ContributionContent {
         return context;
     }
 
-    public void setContext(ContributionPhoto context) {
+    public void setContext(PhotoContext context) {
         this.context = context;
     }
 

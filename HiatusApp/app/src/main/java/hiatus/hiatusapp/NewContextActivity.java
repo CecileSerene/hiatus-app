@@ -10,8 +10,8 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import hiatus.hiatusapp.ContributionContext.ContributionContext;
-import hiatus.hiatusapp.ContributionContext.ContributionPhoto;
-import hiatus.hiatusapp.ContributionContext.ContributionText;
+import hiatus.hiatusapp.ContributionContext.PhotoContext;
+import hiatus.hiatusapp.ContributionContext.TextContext;
 import hiatus.hiatusapp.Menu.MenuActivity;
 
 public class NewContextActivity extends AppCompatActivity {
@@ -73,7 +73,7 @@ public class NewContextActivity extends AppCompatActivity {
         if (rd_text.isChecked()){
             try {
                 nb_of_character = Integer.parseInt(et_number.getText().toString());
-                context = new ContributionText(instructions, title, theme, nb_of_character);
+                context = new TextContext(instructions, title, theme, nb_of_character);
                 //TODO here we need to send the new context to the database
                 startActivity(i);
             } catch ( Exception e){
@@ -82,7 +82,7 @@ public class NewContextActivity extends AppCompatActivity {
 
         }
         else if (rd_photo.isChecked()){
-            context = new ContributionPhoto(instructions, title, theme);
+            context = new PhotoContext(instructions, title, theme);
             //TODO here we need to send the new context to the database
             startActivity(i);
         }

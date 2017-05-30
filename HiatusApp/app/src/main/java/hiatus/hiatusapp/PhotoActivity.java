@@ -14,13 +14,12 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import hiatus.hiatusapp.ContributionContent.PhotoContent;
-import hiatus.hiatusapp.ContributionContext.ContributionPhoto;
-import hiatus.hiatusapp.ContributionContext.ContributionText;
+import hiatus.hiatusapp.ContributionContext.PhotoContext;
 
 public class PhotoActivity extends AppCompatActivity {
 
     ImageView mImageView;
-    ContributionPhoto context;
+    PhotoContext context;
     PhotoContent content;
 
     @Override
@@ -29,7 +28,7 @@ public class PhotoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_photo);
 
         Intent i = getIntent();
-        context = (ContributionPhoto) i.getParcelableExtra("context");
+        context = (PhotoContext) i.getParcelableExtra("context");
 
         mImageView = (ImageView) findViewById(R.id.myphoto);
 

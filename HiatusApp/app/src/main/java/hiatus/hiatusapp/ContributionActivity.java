@@ -29,14 +29,14 @@ public class ContributionActivity extends Activity {
 */
 /*        //____ Exemple text context _____
         String instructions_ex = "Ecrivez les premiers mots qui vous viennent sur le thème du jeu";
-        ContributionText text = new ContributionText(instructions_ex,"Ecriture automatique","Jeu",50);
+        TextContext text = new TextContext(instructions_ex,"Ecriture automatique","Jeu",50);
         context = text;
         //___ fin exemple ____*//*
 
 
         //____ Exemple Photo context_____
         String instructions_ex = "Prenez une photo sur le vif";
-        ContributionPhoto photo = new ContributionPhoto(instructions_ex,"Photo sur le vif","Sur le vif",50);
+        PhotoContext photo = new PhotoContext(instructions_ex,"Photo sur le vif","Sur le vif",50);
         context = photo;
 
         //___ fin exemple ____
@@ -52,8 +52,8 @@ public class ContributionActivity extends Activity {
         if (context.getLimited_time() < Double.POSITIVE_INFINITY){
             displayText += "\nTu as un temps limité de " + context.getLimited_time() + " secondes.";
         }
-        if (context instanceof ContributionText){
-            displayText += "\nTu es limité à " + ((ContributionText) context).getNb_of_characters() + " caractères";
+        if (context instanceof TextContext){
+            displayText += "\nTu es limité à " + ((TextContext) context).getNb_of_characters() + " caractères";
         }
         explanation.setText(displayText);
 
@@ -64,14 +64,14 @@ public class ContributionActivity extends Activity {
 
     public void contribuer(View view){
 
-        if (context instanceof ContributionText) {
+        if (context instanceof TextContext) {
             Intent i = new Intent(this, TextActivity.class);
             startActivity(i);
         }
         else if(context instanceof ContributionDrawing) {
             Toast.makeText(getApplicationContext(), "Drawing not implemented yet", Toast.LENGTH_SHORT);
         }
-        else if(context instanceof ContributionPhoto) {
+        else if(context instanceof PhotoContext) {
             Intent i = new Intent(this, PhotoActivity.class);
             startActivity(i);
         }

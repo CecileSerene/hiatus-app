@@ -9,11 +9,11 @@ import android.os.Parcelable;
  * For a text contribution
  */
 
-public class ContributionText extends ContributionContext {
+public class TextContext extends ContributionContext {
 
     private int nb_of_characters;
 
-    public ContributionText(String instructions,String title,String theme, int nb_of_characters) {
+    public TextContext(String instructions, String title, String theme, int nb_of_characters) {
         super();
         this.title = title;
         this.instructions = instructions;
@@ -48,7 +48,7 @@ public class ContributionText extends ContributionContext {
 
     }
 
-    private ContributionText(Parcel in){
+    private TextContext(Parcel in){
         instructions = in.readString();
         title = in.readString();
         modifications_allowed = (in.readInt() == 0) ? false : true;
@@ -57,21 +57,21 @@ public class ContributionText extends ContributionContext {
         nb_of_characters = in.readInt();
     }
 
-    public static final Parcelable.Creator<ContributionText> CREATOR
-            = new Parcelable.Creator<ContributionText>() {
+    public static final Parcelable.Creator<TextContext> CREATOR
+            = new Parcelable.Creator<TextContext>() {
 
         // This simply calls our new constructor (typically private) and
         // passes along the unmarshalled `Parcel`, and then returns the new object!
         @Override
-        public ContributionText createFromParcel(Parcel in) {
-            return new ContributionText(in) {
+        public TextContext createFromParcel(Parcel in) {
+            return new TextContext(in) {
             };
         }
 
         // We just need to copy this and change the type to match our class.
         @Override
-        public ContributionText[] newArray(int size) {
-            return new ContributionText[size];
+        public TextContext[] newArray(int size) {
+            return new TextContext[size];
         }
     };
 }

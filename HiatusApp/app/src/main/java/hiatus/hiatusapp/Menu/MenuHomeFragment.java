@@ -1,11 +1,9 @@
 package hiatus.hiatusapp.Menu;
 
-import android.app.LauncherActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +12,8 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import hiatus.hiatusapp.ContributionContext.ContributionContext;
-import hiatus.hiatusapp.ContributionContext.ContributionPhoto;
-import hiatus.hiatusapp.ContributionContext.ContributionText;
+import hiatus.hiatusapp.ContributionContext.PhotoContext;
+import hiatus.hiatusapp.ContributionContext.TextContext;
 import hiatus.hiatusapp.ContributionHomeDetail;
 import hiatus.hiatusapp.R;
 
@@ -36,8 +34,8 @@ public class MenuHomeFragment extends ListFragment {
 
         // v TODO replace with a call to the database to get most recent contributions
         contexts = new ArrayList<>();
-        contexts.add(new ContributionText("Dessine un smiley le plus rapidement possible !", "Dessine-moi un smiley!", "Obsession", 50));
-        contexts.add(new ContributionPhoto("instructions", "Photographie ludique", "Jeu"));
+        contexts.add(new TextContext("Dessine un smiley le plus rapidement possible !", "Dessine-moi un smiley!", "Obsession", 50));
+        contexts.add(new PhotoContext("instructions", "Photographie ludique", "Jeu"));
         // ^
 
         setListAdapter(new ContributionContextArrayAdapter(getActivity(), contexts));

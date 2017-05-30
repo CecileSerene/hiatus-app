@@ -7,9 +7,9 @@ import android.os.Parcelable;
  * Created by Cecile on 24/05/2017.
  */
 
-public class ContributionPhoto extends ContributionContext{
+public class PhotoContext extends ContributionContext{
 
-    public ContributionPhoto(String instructions,String title,String theme) {
+    public PhotoContext(String instructions, String title, String theme) {
         super();
         this.title = title;
         this.instructions = instructions;
@@ -35,7 +35,7 @@ public class ContributionPhoto extends ContributionContext{
 
     }
 
-    private ContributionPhoto(Parcel in){
+    private PhotoContext(Parcel in){
         instructions = in.readString();
         title = in.readString();
         modifications_allowed = (in.readInt() == 0) ? false : true;
@@ -43,21 +43,21 @@ public class ContributionPhoto extends ContributionContext{
         theme = in.readString();
     }
 
-    public static final Parcelable.Creator<ContributionPhoto> CREATOR
-            = new Parcelable.Creator<ContributionPhoto>() {
+    public static final Parcelable.Creator<PhotoContext> CREATOR
+            = new Parcelable.Creator<PhotoContext>() {
 
         // This simply calls our new constructor (typically private) and
         // passes along the unmarshalled `Parcel`, and then returns the new object!
         @Override
-        public ContributionPhoto createFromParcel(Parcel in) {
-            return new ContributionPhoto(in) {
+        public PhotoContext createFromParcel(Parcel in) {
+            return new PhotoContext(in) {
             };
         }
 
         // We just need to copy this and change the type to match our class.
         @Override
-        public ContributionPhoto[] newArray(int size) {
-            return new ContributionPhoto[size];
+        public PhotoContext[] newArray(int size) {
+            return new PhotoContext[size];
         }
     };
 
