@@ -66,8 +66,8 @@ public class NewContextActivity extends AppCompatActivity {
         theme = et_theme.getText().toString();
         instructions = et_instructions.getText().toString();
         Intent i = new Intent(this, MenuActivity.class);
-        if (title.length() == 0 | theme.length() == 0 | instructions.length() == 0){
-            Toast.makeText(this, "Tu n'as pas rempli tous les champs", Toast.LENGTH_SHORT);
+        if (title.length()==0 | theme.length() == 0 | instructions.length() == 0){
+            Toast.makeText(this, "Tu n'as pas rempli tous les champs", Toast.LENGTH_SHORT).show();
             //ici certains champs sont encore vides
         }
         if (rd_text.isChecked()){
@@ -77,7 +77,7 @@ public class NewContextActivity extends AppCompatActivity {
                 //TODO here we need to send the new context to the database
                 startActivity(i);
             } catch ( Exception e){
-                Toast.makeText(this, "Tu n'as pas mis de limite de caractères", Toast.LENGTH_SHORT);
+                Toast.makeText(this, "Tu n'as pas mis de limite de caractères", Toast.LENGTH_SHORT).show();
             }
 
         }
@@ -87,7 +87,7 @@ public class NewContextActivity extends AppCompatActivity {
             startActivity(i);
         }
         else {
-            Toast.makeText(this, "Tu n'as pas choisi le type", Toast.LENGTH_SHORT);
+            Toast.makeText(this, "Tu n'as pas choisi le type", Toast.LENGTH_SHORT).show();
         }
 
 
