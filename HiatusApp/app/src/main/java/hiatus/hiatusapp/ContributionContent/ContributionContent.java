@@ -23,6 +23,7 @@ public abstract class ContributionContent implements Parcelable {
         this.title = ""; // empty title by default
     }
 
+    // necessary empty constructor
     public ContributionContent() {}
 
     /*
@@ -37,6 +38,7 @@ public abstract class ContributionContent implements Parcelable {
         this.title = title;
     }
 
+    // TODO @Cecile add a doc? what should this function do in subclasses?
     public abstract void display(View titleView, View contentView);
 
     /*

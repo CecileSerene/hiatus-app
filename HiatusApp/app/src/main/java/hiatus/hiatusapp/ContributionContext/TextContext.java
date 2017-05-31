@@ -21,8 +21,6 @@ public class TextContext extends ContributionContext {
         this.numberOfCharacters = numberOfCharacters;
     }
 
-    public TextContext() {}
-
     public int getNumberOfCharacters() {
         return numberOfCharacters;
     }
@@ -41,7 +39,7 @@ public class TextContext extends ContributionContext {
 
     private TextContext(Parcel in){
         super(in);
-        modificationsAllowed = (in.readInt() == 0) ? false : true;
+        modificationsAllowed = (in.readInt() != 0);
         limitedTime = in.readDouble();
         numberOfCharacters = in.readInt();
     }

@@ -17,13 +17,9 @@ public class TextContent extends ContributionContent {
 
     private String text;
 
-    public TextContent(String contextId, String text) {
-        super(contextId);
-        this.text = text;
-    }
-
     public TextContent(String contextId) {
         super(contextId);
+        this.text = "";
     }
 
     public String getText() {
