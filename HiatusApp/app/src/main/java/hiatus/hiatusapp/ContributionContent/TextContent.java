@@ -9,25 +9,17 @@ import android.widget.TextView;
 import hiatus.hiatusapp.ContributionContext.ContributionContext;
 
 /**
+ * Content for text contributions
  * Created by Cecile on 24/05/2017.
  */
 
 public class TextContent extends ContributionContent {
 
     private String text;
-    private String title;
-    private ContributionContext context;
 
     public TextContent(String text, ContributionContext context) {
+        super(context);
         this.text = text;
-        this.context = context;
-        this.title = ""; //by default, there is no title
-    }
-
-    public TextContent(String title, String text, ContributionContext context) {
-        this.text = text;
-        this.title = title;
-        this.context = context;
     }
 
     public String getText() {
@@ -38,39 +30,16 @@ public class TextContent extends ContributionContent {
         this.text = text;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public ContributionContext getContext() {
-        return context;
-    }
-
-    public void setContext(ContributionContext context) {
-        this.context = context;
-    }
-
     public void display(View titleView, View textView){
         ((TextView) textView).setText(this.text);
-        ((TextView) titleView).setText(this.title);
-
+        ((TextView) titleView).setText(getTitle());
     }
-
-    @Override
-    public void sendToDatabase() {
-        //TODO :maybe someday
-    }
-
 
     @Override
     public String toString() {
         return "TextContent{" +
                 "text='" + text + '\'' +
-                ", title='" + title + '\'' +
+                ", title='" + getTitle() + '\'' +
                 '}';
     }
 
@@ -80,19 +49,13 @@ public class TextContent extends ContributionContent {
 
     @Override
     public void writeToParcel(Parcel out, int flags) {
+        super.writeToParcel(out, flags);
         out.writeString(text);
-        out.writeString(title);
-        out.writeParcelable(context, flags);
     }
 
     private TextContent(Parcel in) {
+        super(in);
         text = in.readString();
-        title = in.readString();
-        context = in.readParcelable(ContributionContext.class.getClassLoader());
-    }
-
-    public TextContent() {
-        // Normal actions performed by class, since this is still a normal object!
     }
 
     public static final Parcelable.Creator<TextContent> CREATOR
