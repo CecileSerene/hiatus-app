@@ -47,5 +47,6 @@
     <string name="title_home">Accueil</string>
     <string name="title_history">Historique</string>
     <string name="title_profile">Profil</string>
+    <string name="title_activity_db_contribution_context_test">DbContributionContextTest</string>
 
 </resources>
