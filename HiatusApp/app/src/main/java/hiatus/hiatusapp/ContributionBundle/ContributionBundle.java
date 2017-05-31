@@ -1,13 +1,9 @@
 package hiatus.hiatusapp.ContributionBundle;
 
 
-import com.google.firebase.database.DatabaseReference;
-
 import java.util.Date;
 
 import hiatus.hiatusapp.ContributionContent.ContributionContent;
-import hiatus.hiatusapp.ContributionContext.ContributionContext;
-import hiatus.hiatusapp.DatabaseHelper;
 
 /**
  * A contribution bundle packs together the contribution context, content and user information.
@@ -45,19 +41,6 @@ public class ContributionBundle {
     public ContributionBundle() {}
 
     /*
-    State getter
-     */
-    public boolean isWaiting() {
-        return state == WAITING;
-    }
-    public boolean isDenied() {
-        return state == DENIED;
-    }
-    public boolean isAccepted() {
-        return state == ACCEPTED;
-    }
-
-    /*
     Getters
      */
 
@@ -77,4 +60,7 @@ public class ContributionBundle {
         return contextId;
     }
 
+    public int getState() {
+        return state;
+    }
 }
