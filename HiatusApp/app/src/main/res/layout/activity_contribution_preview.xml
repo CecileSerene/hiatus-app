@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="hiatus.hiatusapp.TextPreviewActivity">
+
+    <TextView
+        android:id="@+id/preview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Preview de la contribution"
+        android:textSize="12pt"/>
+
+    <TextView
+        android:id="@+id/title_preview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Titre"
+        android:maxLines="1"
+        android:textSize="12pt"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_below="@id/preview"/>
+
+    <TextView
+        android:id="@+id/text_preview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ce preview n'a rien pour le moment, dommage !"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_below="@id/title_preview"/>
+
+
+
+
+    <Button
+        android:id="@+id/accept"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Accepter"
+        android:background="@color/colorAccent"
+        android:enabled="true"
+        android:layout_below="@+id/text_preview"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <Button
+        android:id="@+id/reject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Refuser"
+        android:background="@color/colorAccent"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+
+
+
+
+</RelativeLayout>

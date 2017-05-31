@@ -46,7 +46,8 @@
             android:name=".DbSaveTest.DbContributionContextTest"
             android:label="@string/title_activity_db_contribution_context_test" />
         <activity android:name=".Admin.AdminActivity" />
-        <activity android:name=".Admin.UserContributionActivity"></activity>
+        <activity android:name=".Admin.UserContributionActivity" />
+        <activity android:name=".Admin.ContributionPreviewActivity"></activity>
     </application>
 
 </manifest>
