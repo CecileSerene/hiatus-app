@@ -31,6 +31,7 @@ public class TextPreviewActivity extends AppCompatActivity {
         text_preview = (TextView) findViewById(R.id.text_preview);
         title_preview = (TextView) findViewById(R.id.title_preview);
         modifyButton = (Button) findViewById(R.id.modify);
+        sendButton = (Button) findViewById(R.id.send);
 
 
         content.display(title_preview, text_preview);
