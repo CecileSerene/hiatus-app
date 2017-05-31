@@ -6,7 +6,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import hiatus.hiatusapp.ContributionContext.ContributionContext;
+
 public class ContributionHistoryDetail extends Activity {
+
+    ContributionContext context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,10 +19,11 @@ public class ContributionHistoryDetail extends Activity {
 
         // Receive the intent
         Intent i = getIntent();
+        context = i.getParcelableExtra("context");
 
         // Populate the view with contribution context
-        ((TextView) findViewById(R.id.contribution_title)).setText(i.getStringExtra("title"));
-        ((TextView) findViewById(R.id.contribution_theme)).setText(i.getStringExtra("theme"));
+        ((TextView) findViewById(R.id.contribution_title)).setText(context.getTitle());
+        ((TextView) findViewById(R.id.contribution_theme)).setText(context.getTheme());
         ((TextView) findViewById(R.id.contribution_date)).setText(i.getStringExtra("date"));
         ((TextView) findViewById(R.id.contribution_state)).setText(i.getStringExtra("state"));
     }

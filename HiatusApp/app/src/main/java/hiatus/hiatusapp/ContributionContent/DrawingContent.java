@@ -1,3 +1,4 @@
+/*
 package hiatus.hiatusapp.ContributionContent;
 
 
@@ -7,9 +8,11 @@ import android.view.View;
 import hiatus.hiatusapp.ContributionContext.ContributionContext;
 import hiatus.hiatusapp.ContributionContext.ContributionDrawing;
 
+*/
 /**
  * Created by Cecile on 24/05/2017.
- */
+ *//*
+
 
 public class DrawingContent implements ContributionContent {
 
@@ -35,3 +38,4 @@ public class DrawingContent implements ContributionContent {
 
     }
 }
+*/

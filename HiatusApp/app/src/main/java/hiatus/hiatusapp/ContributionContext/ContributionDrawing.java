@@ -1,8 +1,11 @@
+/*
 package hiatus.hiatusapp.ContributionContext;
 
+*/
 /**
  * Created by Cecile on 24/05/2017.
- */
+ *//*
+
 
 public class ContributionDrawing extends ContributionContext {
 
@@ -23,3 +26,4 @@ public class ContributionDrawing extends ContributionContext {
 
     }
 }
+*/

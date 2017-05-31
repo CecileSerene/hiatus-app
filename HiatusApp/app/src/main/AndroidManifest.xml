@@ -41,6 +41,10 @@
         <activity android:name=".PhotoActivity" />
         <activity android:name=".ContributionHomeDetail" />
         <activity android:name=".ContributionHistoryDetail" />
+<<<<<<< HEAD
+=======
+        <activity android:name=".NewContextActivity"></activity>
+>>>>>>> master
     </application>
 
 </manifest>

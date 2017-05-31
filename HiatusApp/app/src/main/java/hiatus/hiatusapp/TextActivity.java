@@ -14,14 +14,14 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import hiatus.hiatusapp.ContributionContent.TextContent;
-import hiatus.hiatusapp.ContributionContext.ContributionText;
+import hiatus.hiatusapp.ContributionContext.TextContext;
 
 
 public class TextActivity extends Activity {
 
     Button mPreviewButton;
     EditText mEdittext;
-    ContributionText context;
+    TextContext context;
     Button mTitleButton;
     TextContent content;
 
@@ -29,32 +29,27 @@ public class TextActivity extends Activity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_text);
-
-        //____ Exemple _____
-        String instructions_ex = "Ecrivez les premiers mots qui vous viennent sur le thème du jeu";
-        ContributionText text = new ContributionText(instructions_ex,"Ecriture automatique","Jeu",50);
-        context = text;
-
-
-        //___ fin exemple ____
-
-
-
         mPreviewButton = (Button) findViewById(R.id.preview);
         mTitleButton = (Button) findViewById(R.id.ajouter_titre);
         mEdittext = (EditText) findViewById(R.id.mytext);
-        mEdittext.setFilters(new InputFilter[] {new InputFilter.LengthFilter(context.getNb_of_characters())});
-        content = new TextContent("",context);
 
-        Intent intent = getIntent();
-        try {
-            String contribution = intent.getExtras().getString("contribution");
-            String title = intent.getExtras().getString("title");
-            mEdittext.setText(contribution);
-            content.setTitle(title);
-        } catch (Exception e) {
+        Intent i = getIntent();
+
+        try { //here it is the content that is sent via the intent, whene we come from the preview to modify
+            content = (TextContent) i.getParcelableExtra("content");
+            context = (TextContext) content.getContext();
+            mEdittext.setText(content.getText());
+        } catch (Exception e) { // here it is the context that is sent
+            context = (TextContext) i.getParcelableExtra("context");
+            content = new TextContent("",context);
 
         }
+        Log.i("heeeeer", "nombre" + context.getNb_of_characters());
+
+        mEdittext.setFilters(new InputFilter[] {new InputFilter.LengthFilter(context.getNb_of_characters())});
+
+
+
 
 
 
@@ -64,13 +59,8 @@ public class TextActivity extends Activity {
         String contribution = mEdittext.getText().toString();
         Intent i = new Intent(this, TextPreviewActivity.class);
         content.setText(contribution);
-        Log.i("the content : ",content.toString());
-        //TODO here I want to pass the content object and not just the string,
-        // but I cant resolve how to do it, so I just send the title and the text,
-        // and suppose we canc get the context in another way
 
-        i.putExtra("title",content.getTitle());
-        i.putExtra("contribution", content.getText());
+        i.putExtra("content",content);
         startActivity(i);
 
 

@@ -1,6 +1,5 @@
 package hiatus.hiatusapp.Menu;
 
-import android.app.LauncherActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,8 +12,8 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import hiatus.hiatusapp.ContributionContext.ContributionContext;
-import hiatus.hiatusapp.ContributionContext.ContributionPhoto;
-import hiatus.hiatusapp.ContributionContext.ContributionText;
+import hiatus.hiatusapp.ContributionContext.PhotoContext;
+import hiatus.hiatusapp.ContributionContext.TextContext;
 import hiatus.hiatusapp.ContributionHomeDetail;
 import hiatus.hiatusapp.R;
 
@@ -35,8 +34,8 @@ public class MenuHomeFragment extends ListFragment {
 
         // v TODO replace with a call to the database to get most recent contributions
         contexts = new ArrayList<>();
-        contexts.add(new ContributionText("instructions", "Dessine-moi un smiley!", "Obsession", 50));
-        contexts.add(new ContributionPhoto("instructions", "Photographie ludique", "Jeu", 50));
+        contexts.add(new TextContext("Dessine un smiley le plus rapidement possible !", "Dessine-moi un smiley!", "Obsession", 50));
+        contexts.add(new PhotoContext("instructions", "Photographie ludique", "Jeu"));
         // ^
 
         setListAdapter(new ContributionContextArrayAdapter(getActivity(), contexts));
@@ -52,12 +51,8 @@ public class MenuHomeFragment extends ListFragment {
 
         // populate an intent with the contribution context
         Intent i = new Intent(getActivity(), ContributionHomeDetail.class);
-        i.putExtra("title", context.getTitle());
-        i.putExtra("theme", context.getTheme());
-        i.putExtra("instructions", context.getInstructions());
-
+        i.putExtra("context",context);
         startActivity(i);
 
-        // TODO change when we can send contexts through intents (after making ContributionContext parcelable)
     }
 }

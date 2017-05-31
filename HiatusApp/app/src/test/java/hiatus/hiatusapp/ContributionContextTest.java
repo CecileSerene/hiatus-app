@@ -2,8 +2,7 @@ package hiatus.hiatusapp;
 
 import org.junit.Test;
 
-import hiatus.hiatusapp.ContributionContext.ContributionContext;
-import hiatus.hiatusapp.ContributionContext.ContributionText;
+import hiatus.hiatusapp.ContributionContext.TextContext;
 
 import static org.junit.Assert.*;
 
@@ -16,7 +15,7 @@ public class ContributionContextTest {
     @Test
     public void textConstructor(){
         String instructions = "Ecrivez les premiers mots qui vous viennent sur le thème du jeu";
-        ContributionText text = new ContributionText(instructions,"Jeu",50);
+        TextContext text = new TextContext(instructions,"Jeu",50);
 
         assertEquals(text.getInstructions(),instructions);
         assertEquals(text.getNb_of_characters(),50);

@@ -12,10 +12,9 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import hiatus.hiatusapp.ContributionContext.ContributionContext;
-import hiatus.hiatusapp.ContributionContext.ContributionDrawing;
-import hiatus.hiatusapp.ContributionContext.ContributionText;
+import hiatus.hiatusapp.ContributionContext.PhotoContext;
+import hiatus.hiatusapp.ContributionContext.TextContext;
 import hiatus.hiatusapp.ContributionHistoryDetail;
-import hiatus.hiatusapp.ContributionHomeDetail;
 import hiatus.hiatusapp.R;
 
 /**
@@ -35,8 +34,8 @@ public class MenuHistoryFragment extends ListFragment {
 
         // v TODO replace with a call to the database to the user's history contributions
         contexts = new ArrayList<>();
-        contexts.add(new ContributionText("instructions", "L'Amour en cage", "Passion", 50));
-        contexts.add(new ContributionDrawing("instructions", "Concours de dessin", 50, "Jeu"));
+        contexts.add(new TextContext("instructions", "L'Amour en cage", "Passion", 50));
+        contexts.add(new PhotoContext("instructions", "Concours de dessin","Jeu"));
         // ^
 
         setListAdapter(new ContributionContextArrayAdapter(getActivity(), contexts));
@@ -52,8 +51,8 @@ public class MenuHistoryFragment extends ListFragment {
 
         // populate an intent with the contribution context
         Intent i = new Intent(getActivity(), ContributionHistoryDetail.class);
-        i.putExtra("title", context.getTitle());
-        i.putExtra("theme", context.getTheme());
+        i.putExtra("context",context);
+        startActivity(i);
         // TODO replace these with the contribution-specific data
         i.putExtra("date", "01/01/2001");
         i.putExtra("state", "Accepté");

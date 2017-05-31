@@ -12,7 +12,7 @@ import hiatus.hiatusapp.ContributionContext.ContributionContext;
  * Created by Cecile on 24/05/2017.
  */
 
-public class TextContent implements ContributionContent {
+public class TextContent extends ContributionContent {
 
     private String text;
     private String title;
@@ -73,4 +73,42 @@ public class TextContent implements ContributionContent {
                 ", title='" + title + '\'' +
                 '}';
     }
+
+    /*
+    Functions needed for a parcelable
+     */
+
+    @Override
+    public void writeToParcel(Parcel out, int flags) {
+        out.writeString(text);
+        out.writeString(title);
+        out.writeParcelable(context, flags);
+    }
+
+    private TextContent(Parcel in) {
+        text = in.readString();
+        title = in.readString();
+        context = in.readParcelable(ContributionContext.class.getClassLoader());
+    }
+
+    public TextContent() {
+        // Normal actions performed by class, since this is still a normal object!
+    }
+
+    public static final Parcelable.Creator<TextContent> CREATOR
+            = new Parcelable.Creator<TextContent>() {
+
+        // This simply calls our new constructor (typically private) and
+        // passes along the unmarshalled `Parcel`, and then returns the new object!
+        @Override
+        public TextContent createFromParcel(Parcel in) {
+            return new TextContent(in);
+        }
+
+        // We just need to copy this and change the type to match our class.
+        @Override
+        public TextContent[] newArray(int size) {
+            return new TextContent[size];
+        }
+    };
 }

@@ -123,7 +123,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="@drawable/accent_button"
-            android:text="Contribuer !"/>
+            android:text="Contribuer !"
+            android:onClick="contribuer"/>
 
     </LinearLayout>
 
