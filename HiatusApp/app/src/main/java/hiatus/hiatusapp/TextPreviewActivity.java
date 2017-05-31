@@ -14,8 +14,8 @@ public class TextPreviewActivity extends AppCompatActivity {
 
     TextView text_preview;
     TextView title_preview;
-    Button modify;
-    Button send;
+    Button modifyButton;
+    Button sendButton;
     TextContext context;
     TextContent content;
 
@@ -30,7 +30,7 @@ public class TextPreviewActivity extends AppCompatActivity {
 
         text_preview = (TextView) findViewById(R.id.text_preview);
         title_preview = (TextView) findViewById(R.id.title_preview);
-        modify = (Button) findViewById(R.id.modify);
+        modifyButton = (Button) findViewById(R.id.modify);
 
 
         content.display(title_preview, text_preview);
@@ -38,21 +38,31 @@ public class TextPreviewActivity extends AppCompatActivity {
 
         //if modifications of the contributions are allowed, then the button is enabled
         if (content.getContext().isModifications_allowed()){
-            modify.setEnabled(true);
+            modifyButton.setEnabled(true);
         }
 
+        modifyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // build a bundle
 
-    }
+                /*
+                Intent i = new Intent(TextPreviewActivity.this, TextActivity.class);
+                i.putExtra("content", content);
+                startActivity(i);
+                */
+            }
+        });
 
-    public void modify(View view){
-        Intent i = new Intent(this, TextActivity.class);
-        i.putExtra("content",content);
-        startActivity(i);
-    }
+        sendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(TextPreviewActivity.this, SendActivity.class);
+                i.putExtra("content", content);
+                startActivity(i);
+            }
+        });
 
-    public  void send(View view){
-        Intent i = new Intent(this, SendActivity.class);
-        i.putExtra("content",content);
-        startActivity(i);
+
     }
 }

@@ -29,7 +29,6 @@ public class NewContextActivity extends AppCompatActivity {
     String title;
     int nb_of_character;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

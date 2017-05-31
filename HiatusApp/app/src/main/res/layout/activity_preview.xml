@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     tools:context="hiatus.hiatusapp.TextPreviewActivity">
 
- >
-
         <TextView
             android:id="@+id/preview"
             android:layout_width="match_parent"
@@ -43,7 +41,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Modifier"
-                android:onClick="modify"
                 android:background="@color/colorAccent"
                 android:enabled="false"
                 android:layout_below="@+id/text_preview"
@@ -53,7 +50,6 @@
                 android:id="@+id/send"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="send"
                 android:text="Envoyer"
                 android:background="@color/colorAccent"
                 android:layout_below="@+id/text_preview"
