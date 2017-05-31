@@ -48,11 +48,6 @@ public class TextActivity extends Activity {
 
         mEdittext.setFilters(new InputFilter[] {new InputFilter.LengthFilter(context.getNb_of_characters())});
 
-
-
-
-
-
     }
 
     public void preview(View view){
@@ -62,7 +57,6 @@ public class TextActivity extends Activity {
 
         i.putExtra("content",content);
         startActivity(i);
-
 
     }
 
