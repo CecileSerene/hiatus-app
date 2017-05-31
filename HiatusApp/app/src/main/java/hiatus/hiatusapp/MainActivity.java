@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import hiatus.hiatusapp.Menu.MenuActivity;
+import hiatus.hiatusapp.DbSaveTest.DbContributionContextTest;
 
 public class MainActivity extends Activity {
 
@@ -13,7 +13,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = new Intent(this, LoginActivity.class);
+        Intent intent = new Intent(this, DbContributionContextTest.class);
         startActivity(intent);
         finish();
     }
