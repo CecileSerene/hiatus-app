@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.provider.MediaStore;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,10 +16,11 @@ import android.widget.Toast;
 
 import hiatus.hiatusapp.ContributionContent.PhotoContent;
 import hiatus.hiatusapp.ContributionContext.PhotoContext;
+import hiatus.hiatusapp.PreviewFragments.PreviewPhotoFragment;
 
-public class PhotoActivity extends AppCompatActivity {
+public class PhotoActivity extends FragmentActivity {
 
-    ImageView mImageView;
+    PreviewPhotoFragment mImageFrag;
     PhotoContext context;
     PhotoContent content;
 
@@ -30,9 +32,13 @@ public class PhotoActivity extends AppCompatActivity {
         Intent i = getIntent();
         context = (PhotoContext) i.getParcelableExtra("context");
 
-        mImageView = (ImageView) findViewById(R.id.myphoto);
-
         content = new PhotoContent(context.getId());
+
+        // add image preview fragment
+        mImageFrag = PreviewPhotoFragment.newInstance(content);
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.fragment_container, mImageFrag)
+                .commit();
 
     }
 
@@ -50,7 +56,8 @@ public class PhotoActivity extends AppCompatActivity {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
-            mImageView.setImageBitmap(imageBitmap);
+
+            mImageFrag.updateImage(imageBitmap);
             content.setPhoto(imageBitmap);
         }
     }
