@@ -47,7 +47,9 @@ public class ContributionBundleArrayAdapter extends ArrayAdapter<ContributionBun
     private void setState(ContributionBundle bundle, View convertView) {
         ImageView ivState = (ImageView) convertView.findViewById(R.id.state);
 
+
         if (bundle.getState()==ContributionBundle.ACCEPTED){
+
             ivState.setImageResource(R.drawable.ic_action_name);
             ivState.setColorFilter(Color.GREEN);
         }
@@ -71,7 +73,9 @@ public class ContributionBundleArrayAdapter extends ArrayAdapter<ContributionBun
         else {
             tvTitle.setText("(Sans titre)");
         }
+
         //tvAuthor.setText(bundle.getUser());
+
 
     }
 }
