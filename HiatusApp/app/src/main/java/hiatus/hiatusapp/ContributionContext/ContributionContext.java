@@ -11,19 +11,27 @@ import android.os.Parcelable;
 
 public abstract class ContributionContext implements Parcelable {
 
-    protected String instructions;
-    //protected Type type; It seems as it is not needed
-    protected String title;
+    private String title;
+    private String instructions;
+    private Type type;
     protected boolean modifications_allowed;
     protected double limited_time;
-    protected String theme;
+    private String theme;
 
-    public ContributionContext(){
-        super();
+    // Empty constructor
+    public ContributionContext() {}
+
+    public ContributionContext(String title, String theme, String instructions) {
+        this.title = title;
+        this.theme = theme;
+        this.instructions = instructions;
     }
 
+    /**
+     * Getters and setters
+     */
 
-
+    // Instructions
     public String getInstructions() {
         return instructions;
     }
@@ -32,7 +40,7 @@ public abstract class ContributionContext implements Parcelable {
         this.instructions = instructions;
     }
 
-
+    // Title
     public String getTitle() {
         return title;
     }
@@ -40,6 +48,27 @@ public abstract class ContributionContext implements Parcelable {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    // Theme
+    public String getTheme() {
+        return theme;
+    }
+
+    public void setTheme(String theme) {
+        this.theme = theme;
+    }
+
+    // Type
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
+
+    // ??
 
     public boolean isModifications_allowed() {
         return modifications_allowed;
@@ -57,40 +86,34 @@ public abstract class ContributionContext implements Parcelable {
         this.limited_time = limited_time;
     }
 
-    public String getTheme() {
-        return theme;
-    }
-
-    public void setTheme(String theme) {
-        this.theme = theme;
-    }
 
 
     /*
     Functions needed because it implements Parcelable
      */
 
-    /*@Override
+    @Override
     public int describeContents() {
         return 0;
     }
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(instructions);
         parcel.writeString(title);
+        parcel.writeString(theme);
+        parcel.writeString(instructions);
+        parcel.writeString(type.getType());
         parcel.writeInt(modifications_allowed ? 1:0); //Because there is no writeBoolean method
         parcel.writeDouble(limited_time);
-        parcel.writeString(theme);
-
     }
 
-    private ContributionContext(Parcel in){
-        instructions = in.readString();
+    protected ContributionContext(Parcel in){
         title = in.readString();
+        theme = in.readString();
+        instructions = in.readString();
+        type = Type.valueOf(in.readString());
         modifications_allowed = (in.readInt() == 0) ? false : true;
         limited_time = in.readDouble();
-        theme = in.readString();
     }
 
     public static final Parcelable.Creator<ContributionContext> CREATOR
@@ -109,5 +132,5 @@ public abstract class ContributionContext implements Parcelable {
         public ContributionContext[] newArray(int size) {
             return new ContributionContext[size];
         }
-    };*/
+    };
 }
