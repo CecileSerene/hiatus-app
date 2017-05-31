@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import hiatus.hiatusapp.ContributionBundle;
+import hiatus.hiatusapp.ContributionBundle.ContributionBundle;
 import hiatus.hiatusapp.R;
 
 /**
@@ -47,7 +47,7 @@ public class ContributionBundleArrayAdapter extends ArrayAdapter<ContributionBun
     private void setState(ContributionBundle bundle, View convertView) {
         ImageView ivState = (ImageView) convertView.findViewById(R.id.state);
 
-        if (bundle.isAccepted()){
+        if (bundle.getState() == ContributionBundle.ACCEPTED){
             ivState.setImageResource(R.drawable.ic_action_name);
             ivState.setColorFilter(Color.GREEN);
         }
@@ -68,7 +68,7 @@ public class ContributionBundleArrayAdapter extends ArrayAdapter<ContributionBun
         else {
             tvTitle.setText("(Sans titre)");
         }
-        tvAuthor.setText(bundle.getUser());
+        // tvAuthor.setText(bundle.getUser());
 
     }
 }

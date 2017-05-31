@@ -39,8 +39,8 @@ public class AdminActivity extends Activity {
 
         // v TODO replace with a call to the database to the user's history contributions
         contexts = new ArrayList<>();
-        contexts.add(new TextContext("L'Amour en cage", "Passion","instructions", 50));
-        contexts.add(new PhotoContext( "Concours de dessin","voici les instructiions","Jeu"));
+        contexts.add(new TextContext("0", "L'Amour en cage", "Passion","instructions", 50));
+        contexts.add(new PhotoContext("0", "Concours de dessin","voici les instructiions","Jeu"));
         // ^
 
         lvAdmin.setAdapter(new ContributionContextArrayAdapter(this, contexts));

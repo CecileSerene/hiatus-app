@@ -35,7 +35,10 @@ public class TextActivity extends Activity {
 
         Intent i = getIntent();
         context = i.getParcelableExtra("context");
-        content = new TextContent(context.getId());
+        content = i.getParcelableExtra("content");
+        if (content == null) {
+            content = new TextContent(context.getId());
+        }
 
         mEdittext.setFilters(new InputFilter[] {new InputFilter.LengthFilter(context.getNumberOfCharacters())});
     }
