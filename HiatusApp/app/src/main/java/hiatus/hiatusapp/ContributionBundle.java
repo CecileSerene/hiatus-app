@@ -1,16 +1,20 @@
 package hiatus.hiatusapp;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.Date;
 
 import hiatus.hiatusapp.ContributionContent.ContributionContent;
+import hiatus.hiatusapp.ContributionContext.ContributionContext;
 
 /**
  * A contribution bundle packs together the contribution context, content and user information.
  */
 public class ContributionBundle {
 
-    private int userId;
-    private int contextId;
+    private String userId;
+    private String contextId;
     private Date date;
     private ContributionContent content;
 
@@ -21,14 +25,14 @@ public class ContributionBundle {
      * @param content the content of the contribution
      * @param date the date of the bundle creation
      */
-    public ContributionBundle(int userId, int contextId, ContributionContent content, Date date) {
+    public ContributionBundle(String userId, String contextId, ContributionContent content, Date date) {
         this.userId = userId;
         this.contextId = contextId;
         this.content = content;
         this.date = date;
     }
 
-    public ContributionBundle(int userId, int contextId, ContributionContent content) {
+    public ContributionBundle(String userId, String contextId, ContributionContent content) {
         this.userId = userId;
         this.contextId = contextId;
         this.content = content;

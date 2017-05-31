@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseUser;
+
 import hiatus.hiatusapp.ContributionContent.TextContent;
 import hiatus.hiatusapp.ContributionContext.TextContext;
 
@@ -45,6 +47,7 @@ public class TextPreviewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // build a bundle
+                ContributionBundle bundle = new ContributionBundle(
 
                 /*
                 Intent i = new Intent(TextPreviewActivity.this, TextActivity.class);
