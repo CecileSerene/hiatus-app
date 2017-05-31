@@ -52,6 +52,7 @@
         android:layout_height="wrap_content"
         android:text="Refuser"
         android:background="@color/colorAccent"
+        android:layout_below="@+id/text_preview"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 

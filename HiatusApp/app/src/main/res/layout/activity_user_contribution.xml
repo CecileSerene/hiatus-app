@@ -11,39 +11,13 @@
     android:paddingTop="10dp"
     android:paddingBottom="10dp">
 
-    <LinearLayout
-        android:id="@+id/contribution_info"
+
+
+    <!-- The list of contributions -->
+    <ListView
+        android:id="@+id/bundle_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true">
-
-        <TextView
-            android:id="@+id/content_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?attr/textAppearanceListItem"
-            android:textColor="@color/white"
-            android:textStyle="bold"/>
-
-        <TextView
-            android:id="@+id/contribution_author"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?attr/textAppearanceListItem"
-            android:textColor="@color/colorPrimary"
-            android:textStyle="italic"/>
-
-    </LinearLayout>
-
-    <!-- Chevron to indicate more info on click -->
-    <ImageView
-        android:id="@+id/button_validated"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/ic_chevron_right" />
+        android:layout_height="match_parent"
+        tools:listitem="@layout/bundle_list_item" />
 
 </RelativeLayout>
