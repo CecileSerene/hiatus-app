@@ -9,24 +9,25 @@ import android.os.Parcelable;
 
 public class PhotoContext extends ContributionContext{
 
-    public PhotoContext(String title, String theme, String instructions) {
-        super(title, theme, instructions);
-        setType(Type.PHOTO);
-        this.modifications_allowed = false;
-        this.limited_time = Double.POSITIVE_INFINITY;
+    public PhotoContext(String id, String title, String theme, String instructions) {
+        super(id, title, theme, instructions);
+        setType(ContributionContext.TYPE_PHOTO);
+        setModificationsAllowed(true);
+        setLimitedTime(Double.POSITIVE_INFINITY);
     }
+
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         super.writeToParcel(parcel, i);
         parcel.writeString(getInstructions());
-        parcel.writeInt(modifications_allowed ? 1:0); //Because there is no writeBoolean method
-        parcel.writeDouble(limited_time);
+        parcel.writeInt(modificationsAllowed ? 1:0); //Because there is no writeBoolean method
+        parcel.writeDouble(limitedTime);
     }
 
     private PhotoContext(Parcel in){
         super(in);
-        modifications_allowed = (in.readInt() == 0) ? false : true;
-        limited_time = in.readDouble();
+        modificationsAllowed = (in.readInt() == 0) ? false : true;
+        limitedTime = in.readDouble();
     }
 
     public static final Parcelable.Creator<PhotoContext> CREATOR

@@ -72,7 +72,7 @@ public class NewContextActivity extends AppCompatActivity {
         if (rd_text.isChecked()){
             try {
                 nb_of_character = Integer.parseInt(et_number.getText().toString());
-                context = new TextContext(instructions, title, theme, nb_of_character);
+                context = new TextContext("0", instructions, title, theme, nb_of_character);
                 //TODO here we need to send the new context to the database
                 startActivity(i);
             } catch ( Exception e){
@@ -81,7 +81,7 @@ public class NewContextActivity extends AppCompatActivity {
 
         }
         else if (rd_photo.isChecked()){
-            context = new PhotoContext(instructions, title, theme);
+            context = new PhotoContext("0", instructions, title, theme);
             //TODO here we need to send the new context to the database
             startActivity(i);
         }

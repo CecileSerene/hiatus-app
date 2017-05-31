@@ -18,7 +18,7 @@ public class ContributionContextTest {
         TextContext text = new TextContext("Un titre", "Jeu", instructions, 50);
 
         assertEquals(text.getInstructions(),instructions);
-        assertEquals(text.getNb_of_characters(),50);
-        assertEquals(text.isModifications_allowed(),true);
+        assertEquals(text.getNumberOfCharacters(),50);
+        assertEquals(text.isModificationsAllowed(),true);
     }
 }

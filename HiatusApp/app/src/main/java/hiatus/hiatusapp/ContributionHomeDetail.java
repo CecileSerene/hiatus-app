@@ -11,7 +11,6 @@ import hiatus.hiatusapp.ContributionContext.ContributionContext;
 
 import hiatus.hiatusapp.ContributionContext.PhotoContext;
 import hiatus.hiatusapp.ContributionContext.TextContext;
-import hiatus.hiatusapp.ContributionContext.Type;
 
 public class ContributionHomeDetail extends Activity {
 
@@ -39,11 +38,11 @@ public class ContributionHomeDetail extends Activity {
 
     public void contribuer(View view) {
 
-        if (context.getType().equals(Type.TEXT)) {
+        if (context.getType() == ContributionContext.TYPE_TEXT) {
             Intent i = new Intent(this, TextActivity.class);
             i.putExtra("context", context);
             startActivity(i);
-        } else if (context.getType().equals(Type.PHOTO)) {
+        } else if (context.getType() == ContributionContext.TYPE_PHOTO) {
             Intent i = new Intent(this, PhotoActivity.class);
             i.putExtra("context",context);
             startActivity(i);

@@ -11,17 +11,22 @@ import android.os.Parcelable;
 
 public abstract class ContributionContext implements Parcelable {
 
+    public static int TYPE_TEXT = 0;
+    public static int TYPE_PHOTO = 1;
+
+    private String id;
     private String title;
-    private String instructions;
-    private Type type;
-    protected boolean modifications_allowed;
-    protected double limited_time;
     private String theme;
+    private String instructions;
+    private int type;
+    protected boolean modificationsAllowed;
+    protected double limitedTime;
 
     // Empty constructor
     public ContributionContext() {}
 
-    public ContributionContext(String title, String theme, String instructions) {
+    public ContributionContext(String id, String title, String theme, String instructions) {
+        this.id = id;
         this.title = title;
         this.theme = theme;
         this.instructions = instructions;
@@ -31,15 +36,7 @@ public abstract class ContributionContext implements Parcelable {
      * Getters and setters
      */
 
-    // Instructions
-    public String getInstructions() {
-        return instructions;
-    }
-
-    public void setInstructions(String instructions) {
-        this.instructions = instructions;
-    }
-
+    public String getId() {return id;}
     // Title
     public String getTitle() {
         return title;
@@ -58,32 +55,41 @@ public abstract class ContributionContext implements Parcelable {
         this.theme = theme;
     }
 
+    // Instructions
+    public String getInstructions() {
+        return instructions;
+    }
+
+    public void setInstructions(String instructions) {
+        this.instructions = instructions;
+    }
+
     // Type
-    public Type getType() {
+    public int getType() {
         return type;
     }
 
-    public void setType(Type type) {
+    public void setType(int type) {
         this.type = type;
     }
 
 
-    // ??
+    // misc
 
-    public boolean isModifications_allowed() {
-        return modifications_allowed;
+    public boolean isModificationsAllowed() {
+        return modificationsAllowed;
     }
 
-    public void setModifications_allowed(boolean modifications_allowed) {
-        this.modifications_allowed = modifications_allowed;
+    public void setModificationsAllowed(boolean modificationsAllowed) {
+        this.modificationsAllowed = modificationsAllowed;
     }
 
-    public double getLimited_time() {
-        return limited_time;
+    public double getLimitedTime() {
+        return limitedTime;
     }
 
-    public void setLimited_time(double limited_time) {
-        this.limited_time = limited_time;
+    public void setLimitedTime(double limitedTime) {
+        this.limitedTime = limitedTime;
     }
 
 
@@ -99,21 +105,23 @@ public abstract class ContributionContext implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(id);
         parcel.writeString(title);
         parcel.writeString(theme);
         parcel.writeString(instructions);
-        parcel.writeString(type.toString());
-        parcel.writeInt(modifications_allowed ? 1:0); //Because there is no writeBoolean method
-        parcel.writeDouble(limited_time);
+        parcel.writeInt(type);
+        parcel.writeInt(modificationsAllowed ? 1:0); //Because there is no writeBoolean method
+        parcel.writeDouble(limitedTime);
     }
 
     protected ContributionContext(Parcel in){
+        id = in.readString();
         title = in.readString();
         theme = in.readString();
         instructions = in.readString();
-        type = Type.valueOf(in.readString());
-        modifications_allowed = (in.readInt() == 0) ? false : true;
-        limited_time = in.readDouble();
+        type = in.readInt();
+        modificationsAllowed = (in.readInt() != 0);
+        limitedTime = in.readDouble();
     }
 
     public static final Parcelable.Creator<ContributionContext> CREATOR

@@ -15,17 +15,12 @@ import hiatus.hiatusapp.ContributionContext.ContributionContext;
 
 public abstract class ContributionContent implements Parcelable {
 
-    private ContributionContext context;
+    private String contextId;
     private String title;
 
-    public ContributionContent(ContributionContext context) {
-        this.context = context;
+    public ContributionContent(String contextId) {
+        this.contextId = contextId;
         this.title = ""; // empty title by default
-    }
-
-    public ContributionContent(String title, ContributionContext context) {
-        this.context = context;
-        this.title = title;
     }
 
     public ContributionContent() {}
@@ -33,10 +28,6 @@ public abstract class ContributionContent implements Parcelable {
     /*
     Getters and setters
      */
-
-    public ContributionContext getContext() {
-        return context;
-    }
 
     public String getTitle() {
         return title;
@@ -59,12 +50,12 @@ public abstract class ContributionContent implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel out, int flags) {
-        out.writeParcelable(context, flags);
+        out.writeString(contextId);
         out.writeString(title);
     }
 
     protected ContributionContent(Parcel in) {
-        context = in.readParcelable(ContributionContext.class.getClassLoader());
+        contextId = in.readString();
         title = in.readString();
     }
 

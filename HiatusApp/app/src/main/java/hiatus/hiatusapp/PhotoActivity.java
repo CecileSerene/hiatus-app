@@ -32,7 +32,7 @@ public class PhotoActivity extends AppCompatActivity {
 
         mImageView = (ImageView) findViewById(R.id.myphoto);
 
-        content = new PhotoContent(null, context);
+        content = new PhotoContent(context.getId());
 
     }
 
