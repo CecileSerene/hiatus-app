@@ -6,11 +6,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import hiatus.hiatusapp.ContributionBundle.ContributionBundle;
 import hiatus.hiatusapp.ContributionContent.TextContent;
 import hiatus.hiatusapp.ContributionContext.TextContext;
 
 public class TextPreviewActivity extends AppCompatActivity {
+
+    private static final String TAG = "TextPreviewActivity";
 
     TextView text_preview;
     TextView title_preview;
@@ -25,7 +29,8 @@ public class TextPreviewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_preview);
 
         Intent i = getIntent();
-        content = (TextContent) i.getParcelableExtra("content");
+        content = i.getParcelableExtra("content");
+        context = i.getParcelableExtra("context");
 
 
         text_preview = (TextView) findViewById(R.id.text_preview);
@@ -33,34 +38,37 @@ public class TextPreviewActivity extends AppCompatActivity {
         modifyButton = (Button) findViewById(R.id.modify);
         sendButton = (Button) findViewById(R.id.send);
 
-
         content.display(title_preview, text_preview);
 
-
         //if modifications of the contributions are allowed, then the button is enabled
-        if (content.getContext().isModifications_allowed()){
+        if (context.isModificationsAllowed()){
             modifyButton.setEnabled(true);
         }
 
         modifyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // build a bundle
-
-                /*
                 Intent i = new Intent(TextPreviewActivity.this, TextActivity.class);
                 i.putExtra("content", content);
                 startActivity(i);
-                */
             }
         });
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(TextPreviewActivity.this, SendActivity.class);
+                // create a bundle
+                String id = DatabaseHelper.newContributionBundleId(context.getId());
+                ContributionBundle bundle = new ContributionBundle(id, context.getId(), content);
+
+                // save the bundle to db
+                DatabaseHelper.saveContributionBundle(bundle);
+
+                Toast.makeText(TextPreviewActivity.this, "Contribution successfully sent.", Toast.LENGTH_SHORT).show();
+
+                /*Intent i = new Intent(TextPreviewActivity.this, SendActivity.class);
                 i.putExtra("content", content);
-                startActivity(i);
+                startActivity(i);*/
             }
         });
 

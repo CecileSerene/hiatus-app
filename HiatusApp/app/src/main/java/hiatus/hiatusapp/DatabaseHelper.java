@@ -6,6 +6,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import hiatus.hiatusapp.ContributionBundle.ContributionBundle;
 import hiatus.hiatusapp.ContributionContext.ContributionContext;
 
 /**
@@ -23,35 +24,50 @@ public class DatabaseHelper {
     // ^
 
     private static DatabaseReference db = FirebaseDatabase.getInstance().getReference();
-    private static DatabaseReference usersRef = db.child(USER_REF_NAME);
-    private static DatabaseReference contextsRef = db.child(CONTEXT_REF_NAME);
-    private static DatabaseReference bundlesRef = db.child(BUNDLE_REF_NAME);
 
-    public static void addContextToDabase(ContributionContext contributionContext) {
-        String id = contextsRef.push().getKey();
-        contextsRef.child(id).setValue(contributionContext);
-        Log.i(TAG, "add_context_to_database:" + contributionContext);
-    }
-
-    public static void addBundleToDatabase(FirebaseUser user, ContributionBundle contributionBundle) {
-        // add bundle to BUNDLE_REF_NAME node
-        String id = bundlesRef.push().getKey();
-        bundlesRef.child(id).setValue(contributionBundle);
-
-        Log.i(TAG, "add_bundle_to_database:" + contributionBundle);
+    public static DatabaseReference getUsersReference() {
+        return db.child(USER_REF_NAME);
     }
 
     /**
      * @return a reference to the node of contribution contexts
      */
     public static DatabaseReference getContributionContextReference() {
-        return contextsRef;
+        return db.child(CONTEXT_REF_NAME);
+    }
+
+    public static String newContributionContextId() {
+        return db.child(CONTEXT_REF_NAME).push().getKey();
+    }
+
+    /*
+    Contribution bundle database interface
+     */
+
+    /**
+     * @return a reference to the node of contribution bundles.
+     */
+    public static DatabaseReference getContributionBundleReference() {
+        return db.child(BUNDLE_REF_NAME);
     }
 
     /**
-     * @return a reference to the node of contribution bundles
+     * Creates a node for a new contribution bundle in the database.
+     * @param contextId id of the contribution context associated with the contribution bundle.
+     * @return the node id. Use it to instantiate a new ContributionBundle.
      */
-    public static DatabaseReference getContributionBundleReference() {
-        return bundlesRef;
+    static String newContributionBundleId(String contextId) {
+        return db.child(BUNDLE_REF_NAME).child(contextId).push().getKey();
+    }
+
+    /**
+     * Saves a contribution bundle to the database.
+     * @param bundle contribution bundle to save to the database.
+     */
+    static void saveContributionBundle(ContributionBundle bundle) {
+        db.child(BUNDLE_REF_NAME)
+                .child(bundle.getContextId())
+                .child(bundle.getId())
+                .setValue(bundle);
     }
 }

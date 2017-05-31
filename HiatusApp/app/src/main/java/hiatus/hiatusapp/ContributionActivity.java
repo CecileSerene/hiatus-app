@@ -13,7 +13,6 @@ import hiatus.hiatusapp.ContributionContext.ContributionContext;
 import hiatus.hiatusapp.ContributionContext.ContributionDrawing;
 import hiatus.hiatusapp.ContributionContext.ContributionPhoto;
 import hiatus.hiatusapp.ContributionContext.ContributionText;
-import hiatus.hiatusapp.ContributionContext.Type;
 
 public class ContributionActivity extends Activity {
 
@@ -49,11 +48,11 @@ public class ContributionActivity extends Activity {
 
         TextView explanation = (TextView) findViewById(R.id.instructions);
         String displayText = "Le thème est " +  theme + " et les instructions sont "+instructions+".";
-        if (context.getLimited_time() < Double.POSITIVE_INFINITY){
-            displayText += "\nTu as un temps limité de " + context.getLimited_time() + " secondes.";
+        if (context.getLimitedTime() < Double.POSITIVE_INFINITY){
+            displayText += "\nTu as un temps limité de " + context.getLimitedTime() + " secondes.";
         }
         if (context instanceof TextContext){
-            displayText += "\nTu es limité à " + ((TextContext) context).getNb_of_characters() + " caractères";
+            displayText += "\nTu es limité à " + ((TextContext) context).getNumberOfCharacters() + " caractères";
         }
         explanation.setText(displayText);
 

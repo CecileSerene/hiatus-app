@@ -20,10 +20,16 @@ public class PhotoContent extends ContributionContent {
 
     private Bitmap photo;
 
-    public PhotoContent(Bitmap photo, PhotoContext context) {
-        super(context);
+    public PhotoContent(String contextId, Bitmap photo) {
+        super(contextId);
         this.photo = photo;
     }
+
+    public PhotoContent(String contextId) {
+        super(contextId);
+    }
+
+    public PhotoContent() {}
 
     public Bitmap getPhoto() {
         return photo;

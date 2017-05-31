@@ -11,38 +11,37 @@ import android.os.Parcelable;
 
 public class TextContext extends ContributionContext {
 
-    private int nb_of_characters;
+    private int numberOfCharacters;
 
-    public TextContext(String title, String theme, String instructions, int nb_of_characters) {
-        super(title, theme, instructions);
-        setType(Type.TEXT);
-        this.modifications_allowed = true;
-        this.limited_time = Double.POSITIVE_INFINITY;
-        this.nb_of_characters = nb_of_characters;
-
+    public TextContext(String id, String title, String theme, String instructions, int numberOfCharacters) {
+        super(id, title, theme, instructions);
+        setType(ContributionContext.TYPE_TEXT);
+        setModificationsAllowed(true);
+        setLimitedTime(Double.POSITIVE_INFINITY);
+        this.numberOfCharacters = numberOfCharacters;
     }
 
-    public int getNb_of_characters() {
-        return nb_of_characters;
+    public int getNumberOfCharacters() {
+        return numberOfCharacters;
     }
 
-    public void setNb_of_characters(int nb_of_characters) {
-        this.nb_of_characters = nb_of_characters;
+    public void setNumberOfCharacters(int numberOfCharacters) {
+        this.numberOfCharacters = numberOfCharacters;
     }
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         super.writeToParcel(parcel, i);
-        parcel.writeInt(modifications_allowed ? 1:0); //Because there is no writeBoolean method
-        parcel.writeDouble(limited_time);
-        parcel.writeInt(nb_of_characters);
+        parcel.writeInt(modificationsAllowed ? 1:0); //Because there is no writeBoolean method
+        parcel.writeDouble(limitedTime);
+        parcel.writeInt(numberOfCharacters);
     }
 
     private TextContext(Parcel in){
         super(in);
-        modifications_allowed = (in.readInt() == 0) ? false : true;
-        limited_time = in.readDouble();
-        nb_of_characters = in.readInt();
+        modificationsAllowed = (in.readInt() != 0);
+        limitedTime = in.readDouble();
+        numberOfCharacters = in.readInt();
     }
 
     public static final Parcelable.Creator<TextContext> CREATOR

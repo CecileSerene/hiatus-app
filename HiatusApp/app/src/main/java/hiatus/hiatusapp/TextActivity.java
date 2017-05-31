@@ -34,30 +34,22 @@ public class TextActivity extends Activity {
         mEdittext = (EditText) findViewById(R.id.mytext);
 
         Intent i = getIntent();
+        context = i.getParcelableExtra("context");
+        content = new TextContent(context.getId());
 
-        try { //here it is the content that is sent via the intent, whene we come from the preview to modify
-            content = (TextContent) i.getParcelableExtra("content");
-            context = (TextContext) content.getContext();
-            mEdittext.setText(content.getText());
-        } catch (Exception e) { // here it is the context that is sent
-            context = (TextContext) i.getParcelableExtra("context");
-            content = new TextContent("",context);
-
-        }
-        Log.i("heeeeer", "nombre" + context.getNb_of_characters());
-
-        mEdittext.setFilters(new InputFilter[] {new InputFilter.LengthFilter(context.getNb_of_characters())});
-
+        mEdittext.setFilters(new InputFilter[] {new InputFilter.LengthFilter(context.getNumberOfCharacters())});
     }
 
     public void preview(View view){
-        String contribution = mEdittext.getText().toString();
+        // set the content text
+        content.setText(mEdittext.getText().toString());
+
+        // build the intent
         Intent i = new Intent(this, TextPreviewActivity.class);
-        content.setText(contribution);
+        i.putExtra("context", context);
+        i.putExtra("content", content);
 
-        i.putExtra("content",content);
         startActivity(i);
-
     }
 
     public void setTitle(View view){

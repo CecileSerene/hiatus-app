@@ -9,18 +9,18 @@ package hiatus.hiatusapp.ContributionContext;
 
 public class ContributionDrawing extends ContributionContext {
 
-    public ContributionDrawing(String instructions,String title,double limited_time,String theme) {
+    public ContributionDrawing(String instructions,String title,double limitedTime,String theme) {
         this.title = title;
         this.instructions = instructions;
-        this.limited_time = limited_time;
+        this.limitedTime = limitedTime;
         this.theme = theme;
 
         //The modifications are allowed only if there is no limited time
-        if (limited_time < Double.POSITIVE_INFINITY){
-            this.modifications_allowed = false;
+        if (limitedTime < Double.POSITIVE_INFINITY){
+            this.modificationsAllowed = false;
         }
         else {
-            this.modifications_allowed = true;
+            this.modificationsAllowed = true;
         }
 
 
