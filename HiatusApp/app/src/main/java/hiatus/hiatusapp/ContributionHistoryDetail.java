@@ -18,6 +18,7 @@ public class ContributionHistoryDetail extends Activity {
         setContentView(R.layout.activity_contribution_history_detail);
 
         // Receive the intent
+
         Intent i = getIntent();
         context = i.getParcelableExtra("context");
 

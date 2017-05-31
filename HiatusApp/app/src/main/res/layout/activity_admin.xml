@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="hiatus.hiatusapp.Admin.AdminActivity"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/new_context"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ajouter une contribution"
+        android:background="@color/colorAccent" />
+
+    <LinearLayout
+        android:id="@+id/section_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="10dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Les contributions en cours"
+            android:textStyle="italic"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <!-- The list of contributions -->
+    <ListView
+        android:id="@+id/admin_context"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/fragment_menu_list_item" />
+
+</LinearLayout>
