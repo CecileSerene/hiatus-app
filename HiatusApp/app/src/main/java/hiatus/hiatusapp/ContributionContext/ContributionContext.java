@@ -102,7 +102,7 @@ public abstract class ContributionContext implements Parcelable {
         parcel.writeString(title);
         parcel.writeString(theme);
         parcel.writeString(instructions);
-        parcel.writeString(type.getType());
+        parcel.writeString(type.toString());
         parcel.writeInt(modifications_allowed ? 1:0); //Because there is no writeBoolean method
         parcel.writeDouble(limited_time);
     }

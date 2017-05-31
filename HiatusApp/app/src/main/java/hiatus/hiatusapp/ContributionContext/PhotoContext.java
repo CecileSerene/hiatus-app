@@ -30,4 +30,22 @@ public class PhotoContext extends ContributionContext{
         modifications_allowed = (in.readInt() == 0) ? false : true;
         limited_time = in.readDouble();
     }
+
+    public static final Parcelable.Creator<PhotoContext> CREATOR
+            = new Parcelable.Creator<PhotoContext>() {
+
+        // This simply calls our new constructor (typically private) and
+        // passes along the unmarshalled `Parcel`, and then returns the new object!
+        @Override
+        public PhotoContext createFromParcel(Parcel in) {
+            return new PhotoContext(in) {
+            };
+        }
+
+        // We just need to copy this and change the type to match our class.
+        @Override
+        public PhotoContext[] newArray(int size) {
+            return new PhotoContext[size];
+        }
+    };
 }

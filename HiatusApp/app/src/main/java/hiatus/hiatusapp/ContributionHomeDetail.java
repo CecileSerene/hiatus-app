@@ -11,9 +11,11 @@ import hiatus.hiatusapp.ContributionContext.ContributionContext;
 
 import hiatus.hiatusapp.ContributionContext.PhotoContext;
 import hiatus.hiatusapp.ContributionContext.TextContext;
+import hiatus.hiatusapp.ContributionContext.Type;
 
 public class ContributionHomeDetail extends Activity {
 
+    private static String TAG = "ContributionHomeDetail";
     ContributionContext context;
 
     @Override
@@ -37,18 +39,17 @@ public class ContributionHomeDetail extends Activity {
 
     public void contribuer(View view) {
 
-        if (context instanceof TextContext) {
+        if (context.getType().equals(Type.TEXT)) {
             Intent i = new Intent(this, TextActivity.class);
-            i.putExtra("context",context);
+            i.putExtra("context", context);
             startActivity(i);
-        } else if (context instanceof PhotoContext) {
+        } else if (context.getType().equals(Type.PHOTO)) {
             Intent i = new Intent(this, PhotoActivity.class);
             i.putExtra("context",context);
             startActivity(i);
         }
         else {
-            Log.i("here", "Not anything at all");
+            Log.e(TAG, "Not anything at all");
         }
     }
-
 }

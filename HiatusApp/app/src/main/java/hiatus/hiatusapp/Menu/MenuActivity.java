@@ -35,6 +35,7 @@ public class MenuActivity extends FragmentActivity {
 
         // initialize with first fragment
         MenuItem homeItem = mBottomNav.getMenu().getItem(0);
+        Log.d(TAG, homeItem.getTitle().toString());
         mSelectedItem = homeItem.getItemId();
         selectFragment(homeItem, false);
     }
@@ -62,7 +63,7 @@ public class MenuActivity extends FragmentActivity {
         // uncheck the other items.
         for (int i = 0; i < mBottomNav.getMenu().size(); i++) {
             MenuItem menuItem = mBottomNav.getMenu().getItem(i);
-            menuItem.setChecked(true);
+            menuItem.setChecked(menuItem.getItemId() == mSelectedItem);
         }
 
         if (frag != null) {

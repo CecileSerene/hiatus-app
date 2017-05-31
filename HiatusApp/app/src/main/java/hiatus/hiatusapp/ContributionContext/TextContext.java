@@ -44,4 +44,22 @@ public class TextContext extends ContributionContext {
         limited_time = in.readDouble();
         nb_of_characters = in.readInt();
     }
+
+    public static final Parcelable.Creator<TextContext> CREATOR
+            = new Parcelable.Creator<TextContext>() {
+
+        // This simply calls our new constructor (typically private) and
+        // passes along the unmarshalled `Parcel`, and then returns the new object!
+        @Override
+        public TextContext createFromParcel(Parcel in) {
+            return new TextContext(in) {
+            };
+        }
+
+        // We just need to copy this and change the type to match our class.
+        @Override
+        public TextContext[] newArray(int size) {
+            return new TextContext[size];
+        }
+    };
 }

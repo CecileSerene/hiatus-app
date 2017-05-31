@@ -6,19 +6,5 @@ package hiatus.hiatusapp.ContributionContext;
  */
 
 public enum Type {
-    DRAWING("Drawing"), TEXT("Text"), PHOTO("Photo");
-
-    private String type;
-
-    Type(String type) {
-        this.type = type;
-    }
-
-    String getType() {return type;}
-
-    @Override
-    public String toString() {
-        return type;
-    }
+    DRAWING, TEXT, PHOTO;
 }
-
