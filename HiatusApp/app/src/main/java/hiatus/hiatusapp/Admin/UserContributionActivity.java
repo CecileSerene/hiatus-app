@@ -23,8 +23,8 @@ public class UserContributionActivity extends Activity {
         
         //exemple
         bundles = new ArrayList<ContributionBundle>();
-        bundles.add(new ContributionBundle("0", "1", new TextContent("1")));
-        bundles.add(new ContributionBundle("1", "2", new TextContent("2")));
+        bundles.add(new ContributionBundle("0", "johndoeid", "John Doe", "1", new TextContent("1")));
+        bundles.add(new ContributionBundle("1", "johndoeid", "John Doe", "2", new TextContent("2")));
         //
 
         lvBundle = (ListView) findViewById(R.id.bundle_list);

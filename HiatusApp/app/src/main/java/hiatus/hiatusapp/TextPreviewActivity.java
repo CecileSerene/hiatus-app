@@ -8,6 +8,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import hiatus.hiatusapp.ContributionBundle.ContributionBundle;
 import hiatus.hiatusapp.ContributionContent.TextContent;
 import hiatus.hiatusapp.ContributionContext.TextContext;
@@ -56,7 +59,11 @@ public class TextPreviewActivity extends FragmentActivity {
             public void onClick(View v) {
                 // create a bundle
                 String id = DatabaseHelper.newContributionBundleId(context.getId());
-                ContributionBundle bundle = new ContributionBundle(id, context.getId(), content);
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                ContributionBundle bundle = new ContributionBundle(
+                        id, user.getUid(), user.getDisplayName(), context.getId(), content
+                );
 
                 // save the bundle to db
                 DatabaseHelper.saveContributionBundle(bundle);
