@@ -66,7 +66,7 @@ public class LoginActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        startActivity(new Intent(LoginActivity.this, UserContributionActivity.class));
+        startActivity(new Intent(LoginActivity.this, AdminActivity.class));
 
         // Setup firebase authentication
         mAuth = FirebaseAuth.getInstance();

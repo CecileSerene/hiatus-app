@@ -1,5 +1,6 @@
-package hiatus.hiatusapp;
+package hiatus.hiatusapp.Admin;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,8 +14,9 @@ import hiatus.hiatusapp.ContributionContext.ContributionContext;
 import hiatus.hiatusapp.ContributionContext.PhotoContext;
 import hiatus.hiatusapp.ContributionContext.TextContext;
 import hiatus.hiatusapp.Menu.MenuActivity;
+import hiatus.hiatusapp.R;
 
-public class NewContextActivity extends AppCompatActivity {
+public class NewContextActivity extends Activity {
 
     EditText et_title;
     EditText et_number;

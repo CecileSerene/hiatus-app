@@ -11,6 +11,12 @@
     android:paddingTop="10dp"
     android:paddingBottom="10dp">
 
+    <Button
+        android:id="@+id/stop_context"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/accent_button"/>
+
 
 
     <!-- The list of contributions -->

@@ -9,8 +9,8 @@ import android.widget.TextView;
 
 import hiatus.hiatusapp.ContributionContext.ContributionContext;
 
-import hiatus.hiatusapp.ContributionContext.PhotoContext;
-import hiatus.hiatusapp.ContributionContext.TextContext;
+import hiatus.hiatusapp.MakeAContribution.PhotoActivity;
+import hiatus.hiatusapp.MakeAContribution.TextActivity;
 
 public class ContributionHomeDetail extends Activity {
 

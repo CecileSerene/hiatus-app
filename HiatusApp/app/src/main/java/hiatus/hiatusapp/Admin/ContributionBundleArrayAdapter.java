@@ -74,7 +74,7 @@ public class ContributionBundleArrayAdapter extends ArrayAdapter<ContributionBun
             tvTitle.setText("(Sans titre)");
         }
 
-        //tvAuthor.setText(bundle.getUser());
+        tvAuthor.setText(bundle.getUsername());
 
 
     }

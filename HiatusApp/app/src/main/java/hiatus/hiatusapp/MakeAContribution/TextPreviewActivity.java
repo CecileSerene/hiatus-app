@@ -1,11 +1,10 @@
-package hiatus.hiatusapp;
+package hiatus.hiatusapp.MakeAContribution;
 
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -14,7 +13,9 @@ import com.google.firebase.auth.FirebaseUser;
 import hiatus.hiatusapp.ContributionBundle.ContributionBundle;
 import hiatus.hiatusapp.ContributionContent.TextContent;
 import hiatus.hiatusapp.ContributionContext.TextContext;
+import hiatus.hiatusapp.DatabaseHelper;
 import hiatus.hiatusapp.PreviewFragments.PreviewTextFragment;
+import hiatus.hiatusapp.R;
 
 public class TextPreviewActivity extends FragmentActivity {
 

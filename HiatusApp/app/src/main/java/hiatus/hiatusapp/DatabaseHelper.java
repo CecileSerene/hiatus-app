@@ -1,13 +1,9 @@
 package hiatus.hiatusapp;
 
-import android.util.Log;
-
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import hiatus.hiatusapp.ContributionBundle.ContributionBundle;
-import hiatus.hiatusapp.ContributionContext.ContributionContext;
 
 /**
  * Created by Florimond on 31/05/2017.
@@ -56,7 +52,7 @@ public class DatabaseHelper {
      * @param contextId id of the contribution context associated with the contribution bundle.
      * @return the node id. Use it to instantiate a new ContributionBundle.
      */
-    static String newContributionBundleId(String contextId) {
+    public static String newContributionBundleId(String contextId) {
         return db.child(BUNDLE_REF_NAME).child(contextId).push().getKey();
     }
 
@@ -64,7 +60,7 @@ public class DatabaseHelper {
      * Saves a contribution bundle to the database.
      * @param bundle contribution bundle to save to the database.
      */
-    static void saveContributionBundle(ContributionBundle bundle) {
+    public static void saveContributionBundle(ContributionBundle bundle) {
         db.child(BUNDLE_REF_NAME)
                 .child(bundle.getContextId())
                 .child(bundle.getId())
