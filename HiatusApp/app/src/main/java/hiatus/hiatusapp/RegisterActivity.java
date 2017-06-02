@@ -119,10 +119,7 @@ public class RegisterActivity extends Activity {
     }
 
     private void goToLogin() {
-        Intent i = new Intent(this, LoginActivity.class);
-        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(i);
-        finish();
+        startActivity(new Intent(this, LoginActivity.class));
     }
 
     @Override

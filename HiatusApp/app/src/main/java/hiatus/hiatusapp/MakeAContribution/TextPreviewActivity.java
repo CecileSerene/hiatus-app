@@ -68,12 +68,7 @@ public class TextPreviewActivity extends FragmentActivity {
 
                 // save the bundle to db
                 DatabaseHelper.saveContributionBundle(bundle);
-
                 Toast.makeText(TextPreviewActivity.this, "Contribution successfully sent.", Toast.LENGTH_SHORT).show();
-
-                /*Intent i = new Intent(TextPreviewActivity.this, SendActivity.class);
-                i.putExtra("content", content);
-                startActivity(i);*/
             }
         });
 

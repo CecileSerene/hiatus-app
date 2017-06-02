@@ -47,14 +47,6 @@ import hiatus.hiatusapp.Menu.MenuActivity;
 public class LoginActivity extends Activity {
 
     private static final String TAG = "Login";
-    private static final int REGISTER_REQUEST = 1;
-
-    /**
-     * Dummy credentials
-     * TODO remove when in production
-     */
-    private static final String dummyEmail = "dummy.user@foo.bar";
-    private static final String dummyPassword = "imdummy";
 
     /**
      * Firebase references.
@@ -82,30 +74,29 @@ public class LoginActivity extends Activity {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
-                    if (user.isEmailVerified()) {
-                        Log.d(TAG, "onAuthStateChanged:sign_in:" + user.getUid());
-                        // if user is admin, go to admin activity, else go to menu activity
-                        DatabaseReference userRef = DatabaseHelper.getAdminsReference().child(user.getUid());
-                        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                boolean isAdmin = dataSnapshot.exists();
-                                Log.d(TAG, "onAuthStateChanged:sign_in_role:" + (isAdmin ? "admin" : "user"));
-                                if (isAdmin) {
-                                    afterLoginAsAdmin();
-                                } else {
-                                    afterLoginAsUser();
-                                }
+                if (user != null && user.isEmailVerified()) {
+                    Log.d(TAG, "onAuthStateChanged:sign_in:" + user.getUid());
+                    // if user is admin, go to admin activity, else go to menu activity
+                    DatabaseReference userRef = DatabaseHelper.getAdminsReference().child(user.getUid());
+                    userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            boolean isAdmin = dataSnapshot.exists();
+                            Log.d(TAG, "onAuthStateChanged:sign_in_role:" + (isAdmin ? "admin" : "user"));
+                            if (isAdmin) {
+                                afterLoginAsAdmin();
+                            } else {
+                                afterLoginAsUser();
                             }
+                        }
 
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
 
-                            }
-                        });
-                    }
+                        }
+                    });
                 } else {
+                    showProgress(false);
                     Log.d(TAG, "onAuthStateChanged:signed_out");
                 }
             }
@@ -157,7 +148,6 @@ public class LoginActivity extends Activity {
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(i);
         finish();
-
     }
 
     private void afterLoginAsAdmin() {
@@ -185,7 +175,6 @@ public class LoginActivity extends Activity {
 
     private void goToRegister() {
         startActivity(new Intent(this, RegisterActivity.class));
-        finish();
     }
 
     @Override
@@ -220,9 +209,8 @@ public class LoginActivity extends Activity {
                     } else {
                         Log.w(TAG, "signInWithEmail:failure", task.getException());
                         Toast.makeText(LoginActivity.this, R.string.bad_credentials_message, Toast.LENGTH_SHORT).show();
+                        showProgress(false);
                     }
-
-                    showProgress(false);
                 }
             });
     }

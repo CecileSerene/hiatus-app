@@ -9,12 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.google.firebase.database.DatabaseReference;
+
 import java.util.ArrayList;
 
 import hiatus.hiatusapp.ContributionContext.ContributionContext;
 import hiatus.hiatusapp.ContributionContext.PhotoContext;
 import hiatus.hiatusapp.ContributionContext.TextContext;
 import hiatus.hiatusapp.ContributionHistoryDetail;
+import hiatus.hiatusapp.DatabaseHelper;
 import hiatus.hiatusapp.R;
 
 /**
@@ -31,6 +34,8 @@ public class MenuHistoryFragment extends ListFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_menu_history, container, false);
+
+        // DatabaseReference ref = DatabaseHelper.getContributionContextReference();
 
         // v TODO replace with a call to the database to the user's history contributions
         contexts = new ArrayList<>();
