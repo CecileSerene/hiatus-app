@@ -3,12 +3,14 @@ package hiatus.hiatusapp;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.app.Activity;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -24,8 +26,14 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 import hiatus.hiatusapp.Admin.AdminActivity;
 import hiatus.hiatusapp.Admin.UserContributionActivity;
@@ -66,7 +74,7 @@ public class LoginActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        startActivity(new Intent(LoginActivity.this, AdminActivity.class));
+        //startActivity(new Intent(LoginActivity.this, AdminActivity.class)); // toggle to skip login and go to admin
 
         // Setup firebase authentication
         mAuth = FirebaseAuth.getInstance();
@@ -77,11 +85,25 @@ public class LoginActivity extends Activity {
                 if (user != null) {
                     if (user.isEmailVerified()) {
                         Log.d(TAG, "onAuthStateChanged:sign_in:" + user.getUid());
-                        // authentication just happened and suceeded, go to menu activity
-                        Intent i = new Intent(LoginActivity.this, MenuActivity.class);
-                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(i);
-                        finish();
+                        // if user is admin, go to admin activity, else go to menu activity
+                        DatabaseReference userRef = DatabaseHelper.getAdminsReference().child(user.getUid());
+                        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                boolean isAdmin = dataSnapshot.exists();
+                                Log.d(TAG, "onAuthStateChanged:sign_in_role:" + (isAdmin ? "admin" : "user"));
+                                if (isAdmin) {
+                                    afterLoginAsAdmin();
+                                } else {
+                                    afterLoginAsUser();
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
                     }
                 } else {
                     Log.d(TAG, "onAuthStateChanged:signed_out");
@@ -130,6 +152,37 @@ public class LoginActivity extends Activity {
         });
     }
 
+    private void afterLoginAsUser() {
+        Intent i = new Intent(LoginActivity.this, MenuActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(i);
+        finish();
+
+    }
+
+    private void afterLoginAsAdmin() {
+        // ask if admin wants to login as admin or simple user
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.prompt_which_role_title)
+                .setMessage(R.string.prompt_which_role_message)
+                .setPositiveButton(R.string.prompt_which_role_admin, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent i = new Intent(LoginActivity.this, AdminActivity.class);
+                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(i);
+                        finish();
+                    }
+                })
+                .setNegativeButton(R.string.prompt_which_role_user, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        afterLoginAsUser();
+                    }
+                })
+                .show();
+    }
+
     private void goToRegister() {
         startActivity(new Intent(this, RegisterActivity.class));
         finish();
@@ -164,10 +217,9 @@ public class LoginActivity extends Activity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
                         Log.d(TAG, "signInWithEmail:success");
-                        FirebaseUser user = mAuth.getCurrentUser();
                     } else {
                         Log.w(TAG, "signInWithEmail:failure", task.getException());
-                        Toast.makeText(LoginActivity.this, "Authentication failed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, R.string.bad_credentials_message, Toast.LENGTH_SHORT).show();
                     }
 
                     showProgress(false);

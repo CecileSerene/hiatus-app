@@ -21,6 +21,13 @@
     <string name="action_sign_in">Se connecter</string>
     <string name="action_sign_in_short">Connexion</string>
     <string name="register_link">Créer un compte</string>
+    <string name="bad_credentials_message">L\'adresse e-mail ou le mot de passe est incorrect. Veuillez réessayer.</string>
+
+    <!-- Strings related to admin login -->
+    <string name="prompt_which_role_title">Choix de votre rôle</string>
+    <string name="prompt_which_role_message">Souhaitez-vous vous connecter en tant qu\'administrateur ou en tant que simple utilisateur ?</string>
+    <string name="prompt_which_role_admin">Administrateur</string>
+    <string name="prompt_which_role_user">Utilisateur</string>
 
     <!-- Strings related to register -->
     <string name="title_activity_register">Créer un compte</string>

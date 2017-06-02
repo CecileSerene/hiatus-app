@@ -62,11 +62,14 @@ public class RegisterActivity extends Activity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
+                    // authentication just happened and suceeded
                     Log.d(TAG, "onAuthStateChanged:sign_in:" + user.getUid());
-                    // authentication just happened and suceeded, go to menu activity
+                    // save the user's display name
                     UserProfileChangeRequest request = new UserProfileChangeRequest.Builder()
                             .setDisplayName(mNameView.getText().toString()).build();
                     user.updateProfile(request);
+                    // save the User public info to the database
+                    DatabaseHelper.saveUser(user);
                 } else {
                     Log.d(TAG, "onAuthStateChanged:signed_out");
                 }
