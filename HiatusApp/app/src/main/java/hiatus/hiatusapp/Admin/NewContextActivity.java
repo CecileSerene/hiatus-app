@@ -4,15 +4,19 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 import hiatus.hiatusapp.ContributionContext.ContributionContext;
 import hiatus.hiatusapp.ContributionContext.PhotoContext;
 import hiatus.hiatusapp.ContributionContext.TextContext;
+import hiatus.hiatusapp.DatabaseHelper;
 import hiatus.hiatusapp.Menu.MenuActivity;
 import hiatus.hiatusapp.R;
 
@@ -25,7 +29,6 @@ public class NewContextActivity extends Activity {
     RadioButton rd_text;
     RadioButton rd_photo;
     Button b_send;
-    ContributionContext context;
     String instructions;
     String theme;
     String title;
@@ -62,33 +65,69 @@ public class NewContextActivity extends Activity {
         }
     }
 
-    public void create_context(View view){
+    private boolean validateForm() {
         title = et_title.getText().toString();
         theme = et_theme.getText().toString();
         instructions = et_instructions.getText().toString();
-        Intent i = new Intent(this, MenuActivity.class);
-        if (title.length()==0 | theme.length() == 0 | instructions.length() == 0){
-            Toast.makeText(this, "Tu n'as pas rempli tous les champs", Toast.LENGTH_SHORT).show();
-            //ici certains champs sont encore vides
-        }
-        if (rd_text.isChecked()){
-            try {
-                nb_of_character = Integer.parseInt(et_number.getText().toString());
-                context = new TextContext("0", instructions, title, theme, nb_of_character);
-                //TODO here we need to send the new context to the database
-                startActivity(i);
-            } catch ( Exception e){
-                Toast.makeText(this, "Tu n'as pas mis de limite de caractères", Toast.LENGTH_SHORT).show();
-            }
 
+        boolean valid = true;
+        // reset errors
+        et_number.setError(null);
+        et_title.setError(null);
+        et_theme.setError(null);
+        et_instructions.setError(null);
+
+        if (TextUtils.isEmpty(title)) {
+            et_title.setError(getString(R.string.error_field_required));
+            valid = false;
+        }
+        if (TextUtils.isEmpty(theme)) {
+            et_theme.setError(getString(R.string.error_field_required));
+            valid = false;
+        }
+        if(TextUtils.isEmpty(instructions)) {
+            et_instructions.setError(getString(R.string.error_field_required));
+            valid = false;
+        }
+        if (rd_text.isChecked()) {
+            if (TextUtils.isEmpty(et_number.getText().toString())) {
+                et_number.setError(getString(R.string.error_field_required));
+                valid = false;
+            }
+        }
+        return valid;
+    }
+
+    public void create_context(View view){
+        if (!validateForm()) {
+            return;
+        }
+        ContributionContext context = null;
+        title = et_title.getText().toString();
+        theme = et_theme.getText().toString();
+        instructions = et_instructions.getText().toString();
+
+        // build the context corresponding to which type is chosen
+
+        if (rd_text.isChecked()) {
+            // TODO change Infinity default value for limited time (not JSON-serializable)
+            int nb_of_characters = Integer.parseInt(et_number.getText().toString());
+            String id = DatabaseHelper.newContributionContextId();
+            context = new TextContext(id, title, theme, instructions, nb_of_characters);
         }
         else if (rd_photo.isChecked()){
-            context = new PhotoContext("0", instructions, title, theme);
-            //TODO here we need to send the new context to the database
-            startActivity(i);
+            // TODO save image to DB and get link into the contribution context
+            String id = DatabaseHelper.newContributionContextId();
+            context = new PhotoContext(id, instructions, title, theme);
         }
-        else {
-            Toast.makeText(this, "Tu n'as pas choisi le type", Toast.LENGTH_SHORT).show();
+
+        // save the context to the database
+
+        if (context != null) {
+            DatabaseHelper.saveContributionContext(context);
+            Toast.makeText(this, "Contribution context successfully saved.", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, AdminActivity.class));
+            finish();
         }
 
 

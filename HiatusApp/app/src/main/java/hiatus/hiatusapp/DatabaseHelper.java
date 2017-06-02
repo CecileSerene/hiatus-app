@@ -10,6 +10,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import hiatus.hiatusapp.ContributionBundle.ContributionBundle;
+import hiatus.hiatusapp.ContributionContext.ContributionContext;
 
 /**
  * Database helper class that provides static methods to manipulate the DB or get references to its primary nodes.
@@ -57,6 +58,11 @@ public class DatabaseHelper {
                 .setValue(new User(user.getUid(), user.getDisplayName(), user.getEmail()));
     }
 
+    /*
+    Contribution context database interface
+     */
+
+
     /**
      * @return a reference to the node of contribution contexts
      */
@@ -66,6 +72,16 @@ public class DatabaseHelper {
 
     public static String newContributionContextId() {
         return db.child(CONTEXT_REF_NAME).push().getKey();
+    }
+
+    /**
+     * Saves a new contribution context to the database
+     * @param context ContributionContext
+     */
+    public static void saveContributionContext(ContributionContext context) {
+        getContributionContextReference()
+                .child(context.getId())
+                .setValue(context);
     }
 
     /*
@@ -90,7 +106,7 @@ public class DatabaseHelper {
 
     /**
      * Saves a contribution bundle to the database.
-     * @param bundle contribution bundle to save to the database.
+     * @param bundle ContributionBundle
      */
     public static void saveContributionBundle(ContributionBundle bundle) {
         getContributionBundleReference()
