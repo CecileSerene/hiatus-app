@@ -7,12 +7,27 @@
     tools:context="hiatus.hiatusapp.Admin.AdminActivity"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/new_context"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+    <Button
+        android:id="@+id/new_context"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Ajouter une contribution"
-        android:background="@color/colorAccent" />
+        android:background="@drawable/accent_button" />
+
+    <Button
+        android:id="@+id/admin_logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Log out"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/basic_button" />
+
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/section_description"
@@ -37,5 +52,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/fragment_menu_list_item" />
+
+
 
 </LinearLayout>

@@ -19,6 +19,8 @@ public class ContributionHistoryDetail extends Activity {
 
         // Receive the intent
 
+        //TODO change accordingly when it is the bundle that is sent
+
         Intent i = getIntent();
         context = i.getParcelableExtra("context");
 

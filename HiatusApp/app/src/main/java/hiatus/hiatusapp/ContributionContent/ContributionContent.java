@@ -38,7 +38,10 @@ public abstract class ContributionContent implements Parcelable {
         this.title = title;
     }
 
-    // TODO @Cecile add a doc? what should this function do in subclasses?
+    /*
+    to display dynamically the content into two view : the title_view, which schould be a TextView
+    and the contentView (either EditText or ImageView)
+     */
     public abstract void display(View titleView, View contentView);
 
     /*

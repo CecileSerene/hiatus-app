@@ -12,6 +12,6 @@ public class SendActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send);
 
-        //TODO it must be sent to the database
+        //TODO to remove
     }
 }
