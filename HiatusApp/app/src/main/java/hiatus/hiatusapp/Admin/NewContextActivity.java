@@ -110,7 +110,6 @@ public class NewContextActivity extends Activity {
         // build the context corresponding to which type is chosen
 
         if (rd_text.isChecked()) {
-            // TODO change Infinity default value for limited time (not JSON-serializable)
             int nb_of_characters = Integer.parseInt(et_number.getText().toString());
             String id = DatabaseHelper.newContributionContextId();
             context = new TextContext(id, title, theme, instructions, nb_of_characters);

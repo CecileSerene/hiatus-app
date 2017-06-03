@@ -30,6 +30,7 @@ public abstract class ContributionContext implements Parcelable {
         this.title = title;
         this.theme = theme;
         this.instructions = instructions;
+        this.limitedTime = -1;  // negative value means no limited time
     }
 
     /**

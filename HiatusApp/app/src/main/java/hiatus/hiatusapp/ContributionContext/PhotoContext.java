@@ -13,7 +13,6 @@ public class PhotoContext extends ContributionContext{
         super(id, title, theme, instructions);
         setType(ContributionContext.TYPE_PHOTO);
         setModificationsAllowed(true);
-        setLimitedTime(Double.POSITIVE_INFINITY);
     }
 
     @Override
@@ -26,7 +25,7 @@ public class PhotoContext extends ContributionContext{
 
     private PhotoContext(Parcel in){
         super(in);
-        modificationsAllowed = (in.readInt() == 0) ? false : true;
+        modificationsAllowed = (in.readInt() != 0);
         limitedTime = in.readDouble();
     }
 

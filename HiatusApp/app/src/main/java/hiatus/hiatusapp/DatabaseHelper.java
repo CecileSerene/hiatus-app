@@ -1,7 +1,9 @@
 package hiatus.hiatusapp;
 
 import android.provider.ContactsContract;
+import android.util.Log;
 
+import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,17 +33,12 @@ public class DatabaseHelper {
 
     private static DatabaseReference db = FirebaseDatabase.getInstance().getReference();
 
-
     /*
     Admin users database interface
      */
 
     public static DatabaseReference getAdminsReference() {
         return db.child(ADMIN_REF_NAME);
-    }
-
-    public static boolean isAdmin(String userId) {
-        return db.child(ADMIN_REF_NAME).child(userId).getRoot() == null;
     }
 
     /*
@@ -56,12 +53,12 @@ public class DatabaseHelper {
         getUsersReference()
                 .child(user.getUid())
                 .setValue(new User(user.getUid(), user.getDisplayName(), user.getEmail()));
+        Log.d(TAG, "save_user:" + user.getUid());
     }
 
     /*
     Contribution context database interface
      */
-
 
     /**
      * @return a reference to the node of contribution contexts
@@ -71,7 +68,9 @@ public class DatabaseHelper {
     }
 
     public static String newContributionContextId() {
-        return db.child(CONTEXT_REF_NAME).push().getKey();
+        String id = db.child(CONTEXT_REF_NAME).push().getKey();
+        Log.d(TAG, "new_context_id:" + id);
+        return id;
     }
 
     /**
@@ -82,6 +81,8 @@ public class DatabaseHelper {
         getContributionContextReference()
                 .child(context.getId())
                 .setValue(context);
+        Log.d(TAG, "save_context:" + context.getId());
+
     }
 
     /*
@@ -101,7 +102,9 @@ public class DatabaseHelper {
      * @return the node id. Use it to instantiate a new ContributionBundle.
      */
     public static String newContributionBundleId(String contextId) {
-        return db.child(BUNDLE_REF_NAME).child(contextId).push().getKey();
+        String id = db.child(BUNDLE_REF_NAME).child(contextId).push().getKey();
+        Log.d(TAG, "new_bundle_id:" + id);
+        return id;
     }
 
     /**
@@ -113,5 +116,6 @@ public class DatabaseHelper {
                 .child(bundle.getContextId())
                 .child(bundle.getId())
                 .setValue(bundle);
+        Log.d(TAG, "save_bundle:" + bundle.getId());
     }
 }

@@ -17,7 +17,6 @@ public class TextContext extends ContributionContext {
         super(id, title, theme, instructions);
         setType(ContributionContext.TYPE_TEXT);
         setModificationsAllowed(true);
-        setLimitedTime(Double.POSITIVE_INFINITY);
         this.numberOfCharacters = numberOfCharacters;
     }
 
