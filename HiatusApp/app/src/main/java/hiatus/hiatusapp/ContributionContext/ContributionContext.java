@@ -9,7 +9,7 @@ import android.os.Parcelable;
  * It is described by the administrator
  */
 
-public class ContributionContext implements Parcelable {
+public abstract class ContributionContext implements Parcelable {
 
     public static int TYPE_TEXT = 0;
     public static int TYPE_PHOTO = 1;

@@ -7,6 +7,8 @@ import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -27,7 +29,8 @@ import hiatus.hiatusapp.R;
  */
 public class MenuHomeFragment extends ListFragment {
 
-    private FirebaseListAdapter<ContributionContext> mAdapter;
+    private ContributionContextArrayAdapter mAdapter;
+    /*private FirebaseListAdapter<ContributionContext> mAdapter;*/
 
     public static Fragment newInstance() {
         return new MenuHomeFragment();
@@ -37,7 +40,12 @@ public class MenuHomeFragment extends ListFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_menu_home, container, false);
 
+        ArrayList<ContributionContext> contexts = new ArrayList<>();
+        contexts.add(new TextContext("0", "Title", "Theme", "Instructions", 50));
+        mAdapter = new ContributionContextArrayAdapter(getActivity(), contexts);
+        setListAdapter(mAdapter);
 
+        /*
         // create adapter linked to the contribution contexts stored in database
 
         DatabaseReference mRef = DatabaseHelper.getContributionContextReference();
@@ -51,7 +59,7 @@ public class MenuHomeFragment extends ListFragment {
                 theme.setText(model.getTheme());
             }
         };
-        setListAdapter(mAdapter);
+        setListAdapter(mAdapter);*/
 
         return view;
     }

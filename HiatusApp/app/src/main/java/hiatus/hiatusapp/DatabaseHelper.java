@@ -1,15 +1,10 @@
 package hiatus.hiatusapp;
 
-import android.provider.ContactsContract;
 import android.util.Log;
 
-import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import hiatus.hiatusapp.ContributionBundle.ContributionBundle;
 import hiatus.hiatusapp.ContributionContext.ContributionContext;
@@ -33,12 +28,17 @@ public class DatabaseHelper {
 
     private static DatabaseReference db = FirebaseDatabase.getInstance().getReference();
 
+
     /*
     Admin users database interface
      */
 
     public static DatabaseReference getAdminsReference() {
         return db.child(ADMIN_REF_NAME);
+    }
+
+    public static boolean isAdmin(String userId) {
+        return db.child(ADMIN_REF_NAME).child(userId).getRoot() == null;
     }
 
     /*
@@ -113,7 +113,6 @@ public class DatabaseHelper {
      */
     public static void saveContributionBundle(ContributionBundle bundle) {
         getContributionBundleReference()
-                .child(bundle.getContextId())
                 .child(bundle.getId())
                 .setValue(bundle);
         Log.d(TAG, "save_bundle:" + bundle.getId());

@@ -15,7 +15,7 @@ public class ContributionBundle {
     public static int ACCEPTED = 2;
 
     private String id;
-    private String userId;
+    private String userUid;
     private String username;
     private String date;
     private ContributionContent content;
@@ -24,15 +24,15 @@ public class ContributionBundle {
 
     /**
      * @param id the id of this bundle (obtained by DatabaseHelper)
-     * @param userId the id of the user that created the content.
+     * @param userUid the uid of the user that created the content.
      * @param username the name of the user that created the content.
      * @param contextId the id of the contribution context associated to this bundle
      * @param content the content of the contribution
      * @param date the date of the bundle creation
      */
-    private ContributionBundle(String id, String userId, String username, String contextId, ContributionContent content, String date) {
+    private ContributionBundle(String id, String userUid, String username, String contextId, ContributionContent content, String date) {
         this.id = id;
-        this.userId = userId;
+        this.userUid = userUid;
         this.username = username;
         this.contextId = contextId;
         this.content = content;
@@ -40,8 +40,8 @@ public class ContributionBundle {
         this.state = WAITING;
     }
 
-    public ContributionBundle(String id, String userId, String username, String contextId, ContributionContent content) {
-        this(id, userId, username, contextId, content, (new Date()).toString());
+    public ContributionBundle(String id, String userUid, String username, String contextId, ContributionContent content) {
+        this(id, userUid, username, contextId, content, (new Date()).toString());
     }
 
     // Empty constructor
@@ -55,7 +55,7 @@ public class ContributionBundle {
         return id;
     }
 
-    public String getUserId() {return userId;}
+    public String getUserUid() {return userUid;}
 
     public String getUsername() {return username;}
 
