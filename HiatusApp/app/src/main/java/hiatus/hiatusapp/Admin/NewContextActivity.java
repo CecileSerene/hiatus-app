@@ -117,7 +117,7 @@ public class NewContextActivity extends Activity {
         else if (rd_photo.isChecked()){
             // TODO save image to DB and get link into the contribution context
             String id = DatabaseHelper.newContributionContextId();
-            context = new PhotoContext(id, instructions, title, theme);
+            context = new PhotoContext(id, title, theme, instructions);
         }
 
         // save the context to the database
