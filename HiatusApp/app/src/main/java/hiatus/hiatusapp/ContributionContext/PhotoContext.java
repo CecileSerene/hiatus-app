@@ -3,6 +3,8 @@ package hiatus.hiatusapp.ContributionContext;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import hiatus.hiatusapp.ContributionContent.PhotoContent;
+
 /**
  * Created by Cecile on 24/05/2017.
  */
@@ -13,21 +15,12 @@ public class PhotoContext extends ContributionContext{
         super(id, title, theme, instructions);
         setType(ContributionContext.TYPE_PHOTO);
         setModificationsAllowed(true);
-        setLimitedTime(-1);
     }
 
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        super.writeToParcel(parcel, i);
-        parcel.writeString(getInstructions());
-        parcel.writeInt(modificationsAllowed ? 1:0); //Because there is no writeBoolean method
-        parcel.writeDouble(limitedTime);
-    }
+    public PhotoContext() {}
 
     private PhotoContext(Parcel in){
         super(in);
-        modificationsAllowed = (in.readInt() == 0) ? false : true;
-        limitedTime = in.readDouble();
     }
 
     public static final Parcelable.Creator<PhotoContext> CREATOR

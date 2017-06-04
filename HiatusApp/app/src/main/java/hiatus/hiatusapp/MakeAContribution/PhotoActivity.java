@@ -29,7 +29,7 @@ public class PhotoActivity extends FragmentActivity {
         setContentView(R.layout.activity_photo);
 
         Intent i = getIntent();
-        context = (PhotoContext) i.getParcelableExtra("context");
+        context = i.getParcelableExtra("context");
 
         content = new PhotoContent(context.getId());
 

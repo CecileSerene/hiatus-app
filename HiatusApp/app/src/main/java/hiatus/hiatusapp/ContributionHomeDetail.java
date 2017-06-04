@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import hiatus.hiatusapp.ContributionContext.ContributionContext;
 
+import hiatus.hiatusapp.ContributionContext.PhotoContext;
+import hiatus.hiatusapp.ContributionContext.TextContext;
 import hiatus.hiatusapp.MakeAContribution.PhotoActivity;
 import hiatus.hiatusapp.MakeAContribution.TextActivity;
 
@@ -44,7 +46,7 @@ public class ContributionHomeDetail extends Activity {
             startActivity(i);
         } else if (context.getType() == ContributionContext.TYPE_PHOTO) {
             Intent i = new Intent(this, PhotoActivity.class);
-            i.putExtra("context",context);
+            i.putExtra("context", context);
             startActivity(i);
         }
         else {

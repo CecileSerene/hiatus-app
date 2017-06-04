@@ -6,65 +6,94 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
+
+import com.firebase.ui.database.FirebaseListAdapter;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
+
 
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
 import hiatus.hiatusapp.ContributionContext.ContributionContext;
-import hiatus.hiatusapp.ContributionContext.PhotoContext;
-import hiatus.hiatusapp.ContributionContext.TextContext;
 import hiatus.hiatusapp.LoginActivity;
+import hiatus.hiatusapp.DatabaseHelper;
 import hiatus.hiatusapp.Menu.ContributionContextArrayAdapter;
 import hiatus.hiatusapp.R;
 
 public class AdminActivity extends Activity {
 
+    private static final String TAG = "AdminActivity";
+
     /*
     The main Activity af the admin. He can add a new context and see all the current contexts
      */
 
-    private ArrayList<ContributionContext> contexts;
-
-    private ListView lvAdmin;
-    private Button newContextButton;
+    private DatabaseReference mRef;
+    private ContributionContextArrayAdapter mAdapter;
+    private ArrayList<ContributionContext> mContexts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
 
-        lvAdmin = (ListView) findViewById(R.id.admin_context);
-        newContextButton = (Button) findViewById((R.id.new_context));
+        Button newContextButton = (Button) findViewById((R.id.new_context));
         Button logoutButton = (Button) findViewById(R.id.admin_logout);
+        ListView lvAdmin = (ListView) findViewById(R.id.admin_context);
+        mContexts = new ArrayList<>();
 
 
-        // v TODO replace with a call to the database to all current contexts
-        contexts = new ArrayList<>();
+        // setup list view adapter
 
-        contexts.add(new TextContext("0", "L'Amour en cage", "Passion","instructions", 50));
-        contexts.add(new PhotoContext("0", "Concours de dessin","voici les instructiions","Jeu"));
+        mAdapter = new ContributionContextArrayAdapter(this, mContexts);
 
-        // ^
+        mRef = DatabaseHelper.getContributionContextReference();
+        mRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot contextSnapshot : dataSnapshot.getChildren()) {
+                    ContributionContext context = DatabaseHelper.retrieveContext(contextSnapshot);
+                    mContexts.add(context);
+                    Log.d(TAG, "load_context:" + context.getId() + ":" + context.getTitle());
+                }
+                mAdapter.notifyDataSetChanged();
+            }
 
-        lvAdmin.setAdapter(new ContributionContextArrayAdapter(this, contexts));
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w(TAG, "loadContexts:onCancelled", databaseError.toException());
+            }
+        });
+
+        lvAdmin.setAdapter(mAdapter);
+
+
+        // setup listview click behavior
 
         lvAdmin.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-
-                ContributionContext context = contexts.get(position);
-
+                ContributionContext context = mAdapter.getItem(position);
                 // populate an intent with the contribution context
                 Intent i = new Intent(view.getContext(), UserContributionActivity.class);
                 i.putExtra("context",context);
                 startActivity(i);
             }
         });
+
+
+        // set new context button behavior
 
         newContextButton.setOnClickListener(new View.OnClickListener() {
             @Override
