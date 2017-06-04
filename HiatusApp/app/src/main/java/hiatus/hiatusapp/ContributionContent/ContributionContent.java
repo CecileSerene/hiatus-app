@@ -5,6 +5,11 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.view.View;
 
+import com.google.firebase.database.DatabaseReference;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import hiatus.hiatusapp.ContributionContext.ContributionContext;
 
 
@@ -27,8 +32,58 @@ public abstract class ContributionContent implements Parcelable {
     public ContributionContent() {}
 
     /*
+    Database model
+     */
+
+    /**
+     * This class allows us to decouple the Java content of a ContributionContent and the way
+     * we represent it in the cloud database (only through strings, e.g. referencing other database
+     * nodes).
+     * Each subclass of ContributionContent must define toModel() method and Content(Model model) constructor.
+     */
+    public static class Model {
+        public static final int TYPE_TEXT = 0;
+        public static final int TYPE_PHOTO = 1;
+
+        private String contextId;
+        private int type;
+        private String title;
+        private Map<String, String> data;
+
+        public Model() {}
+
+        public Model(String contextId, String title) {
+            this.contextId = contextId;
+            this.title = title;
+            data = new HashMap<>();
+        }
+
+        protected void putExtra(String key, String value) {
+            data.put(key, value);
+        }
+        protected String getExtra(String key) {return data.get(key);}
+
+        public String getContextId() {return contextId;}
+        public int getType() {return type;}
+        public void setType(int type) {
+            this.type = type;
+        }
+        public String getTitle() {return title;}
+
+        public Map<String, String> getData() {
+            return data;
+        }
+    }
+
+    public abstract Model toModel();
+
+    /*
     Getters and setters
      */
+
+    public String getContextId() {
+        return contextId;
+    }
 
     public String getTitle() {
         return title;
@@ -38,11 +93,6 @@ public abstract class ContributionContent implements Parcelable {
         this.title = title;
     }
 
-    /*
-    to display dynamically the content into two view : the title_view, which schould be a TextView
-    and the contentView (either EditText or ImageView)
-     */
-    public abstract void display(View titleView, View contentView);
 
     /*
     Functions needed for a parcelable

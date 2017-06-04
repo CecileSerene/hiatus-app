@@ -67,8 +67,8 @@ public class ContributionBundleArrayAdapter extends ArrayAdapter<ContributionBun
         TextView tvTitle = (TextView) view.findViewById(R.id.content_title);
         TextView tvAuthor = (TextView) view.findViewById(R.id.contribution_author);
         // Populate the data into the template view using the data object
-        if (bundle.getContent().getTitle().length() > 0){
-            tvTitle.setText(bundle.getContent().getTitle());
+        if (bundle.getContentModel().getTitle().length() > 0){
+            tvTitle.setText(bundle.getContentModel().getTitle());
         }
         else {
             tvTitle.setText("(Sans titre)");

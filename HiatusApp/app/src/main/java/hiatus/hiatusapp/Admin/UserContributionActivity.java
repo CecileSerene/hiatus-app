@@ -20,6 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 import hiatus.hiatusapp.ContributionBundle.ContributionBundle;
+import hiatus.hiatusapp.ContributionContent.ContributionContent;
 import hiatus.hiatusapp.ContributionContent.PhotoContent;
 import hiatus.hiatusapp.ContributionContent.TextContent;
 import hiatus.hiatusapp.ContributionContext.ContributionContext;
@@ -34,8 +35,10 @@ public class UserContributionActivity extends Activity {
      */
 
     private ArrayList<ContributionBundle> bundles;
+    private ArrayList<ContributionContent> contents;
     ListView lvBundle;
     ContributionContext context;
+    private ContributionBundleArrayAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +49,7 @@ public class UserContributionActivity extends Activity {
         context = intent.getParcelableExtra("context");
 
         bundles = new ArrayList<>();
+        contents = new ArrayList<>();
 
         // find all bundles that have this context by filtering the list of bundles in the database
         DatabaseReference mRef = DatabaseHelper.getContributionBundleReference();
@@ -59,9 +63,11 @@ public class UserContributionActivity extends Activity {
                         if (bundleSnapshot.child("contextId").getValue(String.class).equals(context.getId())) {
                             ContributionBundle bundle = bundleSnapshot.getValue(ContributionBundle.class);
                             bundles.add(bundle);
-                            Log.d(TAG, "loadBundle:" + bundle.getId());
+                            contents.add(DatabaseHelper.retrieveContent(bundle));
+                            Log.d(TAG, "loadBundle:" + bundle.getId() + bundle.getContentModel().getTitle());
                         }
                     }
+                    adapter.notifyDataSetChanged();
                 }
             }
             @Override
@@ -69,33 +75,11 @@ public class UserContributionActivity extends Activity {
                 Log.w(TAG, "loadBundles:onCancelled", databaseError.toException());
             }
         });
-        /*
-        //TODO ici il faut faire la query de récupérer tous les bundle ayant ce context
-        
-        //exemple
-        ArrayList<ContributionBundle> textBundles = new ArrayList<>();
-        textBundles.add(new ContributionBundle("0", "johndoeid", "John Doe", "1", new TextContent("1")));
-        textBundles.add(new ContributionBundle("1", "johndoeid", "John Doe", "2", new TextContent("2")));
-        //
-
-        //exemple
-        ArrayList<ContributionBundle> photoBundles = new ArrayList<>();
-        photoBundles.add(new ContributionBundle("0", "johndoeid", "John Doe", "1", new PhotoContent("1")));
-        photoBundles.add(new ContributionBundle("1", "johndoeid", "John Doe", "2", new PhotoContent("2")));
-        //
-
-        //TODO remove after proper query made !
-        if (context.getType() == ContributionContext.TYPE_TEXT) {
-            bundles = textBundles;
-        }
-        else {
-            bundles = photoBundles;
-        }
-        */
 
         lvBundle = (ListView) findViewById(R.id.bundle_list);
 
-        lvBundle.setAdapter(new ContributionBundleArrayAdapter(this, bundles));
+        adapter = new ContributionBundleArrayAdapter(this, bundles);
+        lvBundle.setAdapter(adapter);
 
         lvBundle.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
@@ -106,14 +90,14 @@ public class UserContributionActivity extends Activity {
                 if(context.getType() == ContributionContext.TYPE_TEXT){
                     // populate an intent with the contribution context
                     Intent i = new Intent(view.getContext(), TextContributionPreviewActivity.class);
-                    i.putExtra("content",bundle.getContent());
+                    i.putExtra("content", contents.get(position));
                     startActivity(i);
 
                 }
                 else if(context.getType() == ContributionContext.TYPE_PHOTO){
                     // populate an intent with the contribution context
                     Intent i = new Intent(view.getContext(), PhotoContributionPreviewActivity.class);
-                    i.putExtra("content",bundle.getContent());
+                    i.putExtra("content", contents.get(position));
                     startActivity(i);
 
                 }

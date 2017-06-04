@@ -18,8 +18,8 @@ public class ContributionBundle {
     private String userUid;
     private String username;
     private String date;
-    private ContributionContent content;
     private String contextId;
+    private ContributionContent.Model contentModel;
     private int state;
 
     /**
@@ -27,21 +27,20 @@ public class ContributionBundle {
      * @param userUid the uid of the user that created the content.
      * @param username the name of the user that created the content.
      * @param contextId the id of the contribution context associated to this bundle
-     * @param content the content of the contribution
      * @param date the date of the bundle creation
      */
-    private ContributionBundle(String id, String userUid, String username, String contextId, ContributionContent content, String date) {
+    private ContributionBundle(String id, String userUid, String username, String contextId, ContributionContent.Model contentModel, String date) {
         this.id = id;
         this.userUid = userUid;
         this.username = username;
         this.contextId = contextId;
-        this.content = content;
+        this.contentModel = contentModel;
         this.date = date;
         this.state = WAITING;
     }
 
-    public ContributionBundle(String id, String userUid, String username, String contextId, ContributionContent content) {
-        this(id, userUid, username, contextId, content, (new Date()).toString());
+    public ContributionBundle(String id, String userUid, String username, String contextId, ContributionContent.Model model) {
+        this(id, userUid, username, contextId, model, (new Date()).toString());
     }
 
     // Empty constructor
@@ -59,12 +58,12 @@ public class ContributionBundle {
 
     public String getUsername() {return username;}
 
-    public String getDate() {
-        return date;
+    public ContributionContent.Model getContentModel() {
+        return contentModel;
     }
 
-    public ContributionContent getContent() {
-        return content;
+    public String getDate() {
+        return date;
     }
 
     public String getContextId() {

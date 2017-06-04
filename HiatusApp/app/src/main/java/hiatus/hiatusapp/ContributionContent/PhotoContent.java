@@ -8,6 +8,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+
+import java.net.URL;
+
 import hiatus.hiatusapp.ContributionContext.ContributionContext;
 import hiatus.hiatusapp.ContributionContext.PhotoContext;
 
@@ -25,11 +29,34 @@ public class PhotoContent extends ContributionContent {
         this.photo = photo;
     }
 
+    /*
+    Constructors
+     */
+
     public PhotoContent(String contextId) {
         super(contextId);
     }
 
-    public PhotoContent() {}
+    /*
+    Database model
+     */
+
+    @Override
+    public ContributionContent.Model toModel() {
+        // TODO add url creation (send photo to database)
+        ContributionContent.Model model = new Model(getContextId(), getTitle());
+        model.putExtra("url", "http://www.example.com");
+        return model;
+    }
+
+    public PhotoContent(PhotoContent.Model model) {
+        super(model.getContextId());
+        // TODO load photo from URL via Firebase Storage and set it
+    }
+
+    /*
+    Getters
+     */
 
     public Bitmap getPhoto() {
         return photo;
@@ -37,12 +64,6 @@ public class PhotoContent extends ContributionContent {
 
     public void setPhoto(Bitmap photo) {
         this.photo = photo;
-    }
-
-    @Override
-    public void display(View titleView, View photoView) {
-        ((ImageView) photoView).setImageBitmap(this.photo);
-        ((TextView) titleView).setText(getTitle());
     }
 
     /*

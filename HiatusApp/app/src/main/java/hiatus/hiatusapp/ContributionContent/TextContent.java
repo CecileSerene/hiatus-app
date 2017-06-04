@@ -6,8 +6,6 @@ import android.os.Parcelable;
 import android.view.View;
 import android.widget.TextView;
 
-import hiatus.hiatusapp.ContributionContext.ContributionContext;
-
 /**
  * Content for text contributions
  * Created by Cecile on 24/05/2017.
@@ -22,17 +20,33 @@ public class TextContent extends ContributionContent {
         this.text = "";
     }
 
+    /*
+   Database model
+    */
+
+    @Override
+    public Model toModel() {
+        Model model = new Model(getContextId(), getTitle());
+        model.setType(Model.TYPE_TEXT);
+        model.putExtra("text", getText());
+        return model;
+    }
+
+    public TextContent(ContributionContent.Model model) {
+        this(model.getContextId());
+        setText(model.getExtra("text"));
+    }
+
+    /*
+    Getters
+     */
+
     public String getText() {
         return text;
     }
 
     public void setText(String text) {
         this.text = text;
-    }
-
-    public void display(View titleView, View textView){
-        ((TextView) textView).setText(this.text);
-        ((TextView) titleView).setText(getTitle());
     }
 
     @Override

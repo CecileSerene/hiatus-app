@@ -11,6 +11,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import hiatus.hiatusapp.ContributionBundle.ContributionBundle;
+import hiatus.hiatusapp.ContributionContent.ContributionContent;
 import hiatus.hiatusapp.ContributionContent.TextContent;
 import hiatus.hiatusapp.ContributionContext.TextContext;
 import hiatus.hiatusapp.DatabaseHelper;
@@ -59,13 +60,16 @@ public class TextPreviewActivity extends FragmentActivity {
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // create a bundle
+                // get a new bundle id
                 String id = DatabaseHelper.newContributionBundleId(context.getId());
+
+                // create the database-adapted content model
+                ContributionContent.Model model = content.toModel();
+
+                // build the bundle
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 ContributionBundle bundle = new ContributionBundle(
-                        id, user.getUid(), user.getDisplayName(), context.getId(), content
-                );
+                        id, user.getUid(), user.getDisplayName(), context.getId(), model);
 
                 // save the bundle to db
                 DatabaseHelper.saveContributionBundle(bundle);

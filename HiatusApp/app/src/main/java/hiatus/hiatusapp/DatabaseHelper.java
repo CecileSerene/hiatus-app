@@ -9,6 +9,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import hiatus.hiatusapp.ContributionBundle.ContributionBundle;
+import hiatus.hiatusapp.ContributionContent.ContributionContent;
+import hiatus.hiatusapp.ContributionContent.PhotoContent;
+import hiatus.hiatusapp.ContributionContent.TextContent;
 import hiatus.hiatusapp.ContributionContext.ContributionContext;
 import hiatus.hiatusapp.ContributionContext.PhotoContext;
 import hiatus.hiatusapp.ContributionContext.TextContext;
@@ -27,6 +30,7 @@ public class DatabaseHelper {
     private static String USER_REF = "users";
     private static String CONTEXT_REF = "contribution_contexts";
     private static String BUNDLE_REF = "contribution_bundles";
+    private static String BUNDLE_CONTENT_REF = "bundle_contents";
     // ^
 
     private static DatabaseReference db = FirebaseDatabase.getInstance().getReference();
@@ -123,5 +127,20 @@ public class DatabaseHelper {
                 .child(bundle.getId())
                 .setValue(bundle);
         Log.d(TAG, "save_bundle:" + bundle.getId());
+    }
+
+    /*
+    Contribution content database interface
+     */
+
+    public static ContributionContent retrieveContent(ContributionBundle bundle) {
+        ContributionContent content = null;
+        ContributionContent.Model model = bundle.getContentModel();
+        if (model.getType() == ContributionContent.Model.TYPE_TEXT) {
+            content = new TextContent(model);
+        } else if (model.getType() == ContributionContent.Model.TYPE_PHOTO) {
+            content = new PhotoContent(model);
+        }
+        return content;
     }
 }
