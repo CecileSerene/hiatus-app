@@ -14,6 +14,7 @@ import hiatus.hiatusapp.ContributionBundle.ContributionBundle;
 import hiatus.hiatusapp.ContributionContent.TextContent;
 import hiatus.hiatusapp.ContributionContext.TextContext;
 import hiatus.hiatusapp.DatabaseHelper;
+import hiatus.hiatusapp.Menu.MenuActivity;
 import hiatus.hiatusapp.PreviewFragments.PreviewTextFragment;
 import hiatus.hiatusapp.R;
 
@@ -69,6 +70,9 @@ public class TextPreviewActivity extends FragmentActivity {
                 // save the bundle to db
                 DatabaseHelper.saveContributionBundle(bundle);
                 Toast.makeText(TextPreviewActivity.this, "Contribution successfully sent.", Toast.LENGTH_SHORT).show();
+
+                //go back to menu
+                startActivity(new Intent(v.getContext(), MenuActivity.class));
             }
         });
 

@@ -1,18 +1,24 @@
 package hiatus.hiatusapp.Admin;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
 import hiatus.hiatusapp.ContributionContext.ContributionContext;
 import hiatus.hiatusapp.ContributionContext.PhotoContext;
 import hiatus.hiatusapp.ContributionContext.TextContext;
+import hiatus.hiatusapp.LoginActivity;
 import hiatus.hiatusapp.Menu.ContributionContextArrayAdapter;
 import hiatus.hiatusapp.R;
 
@@ -34,6 +40,7 @@ public class AdminActivity extends Activity {
 
         lvAdmin = (ListView) findViewById(R.id.admin_context);
         newContextButton = (Button) findViewById((R.id.new_context));
+        Button logoutButton = (Button) findViewById(R.id.admin_logout);
 
 
         // v TODO replace with a call to the database to all current contexts
@@ -64,6 +71,31 @@ public class AdminActivity extends Activity {
             public void onClick(View view) {
                 Intent i = new Intent(view.getContext(), NewContextActivity.class);
                 startActivity(i);
+            }
+        });
+
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                final Context currentContext = view.getContext();
+
+
+                // confirm sign off through alert dialog
+                new AlertDialog.Builder(currentContext)
+                        .setTitle(R.string.confirm_signout_title)
+                        .setMessage(R.string.confirm_signout_message)
+                        .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                                mAuth.signOut();
+                                startActivity(new Intent(currentContext, LoginActivity.class));
+                                //AdminActivity.class.finish();
+                            }
+                        })
+                        .setNegativeButton(R.string.no, null)
+                        .show();
             }
         });
 

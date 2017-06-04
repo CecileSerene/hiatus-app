@@ -94,6 +94,7 @@ public class PhotoActivity extends FragmentActivity {
     }
 
     public  void send(View view){
+        //TODO here we need to save the image to the DB
         Intent i = new Intent(this, SendActivity.class);
         i.putExtra("content",content);
         startActivity(i);
