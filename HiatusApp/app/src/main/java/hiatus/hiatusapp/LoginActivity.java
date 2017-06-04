@@ -77,11 +77,11 @@ public class LoginActivity extends Activity {
                 if (user != null && user.isEmailVerified()) {
                     Log.d(TAG, "onAuthStateChanged:sign_in:" + user.getUid());
                     // if user is admin, go to admin activity, else go to menu activity
-                    DatabaseReference userRef = DatabaseHelper.getAdminsReference().child(user.getUid());
+                    DatabaseReference userRef = DatabaseHelper.getUsersReference().child(user.getUid());
                     userRef.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            boolean isAdmin = dataSnapshot.exists();
+                            boolean isAdmin = dataSnapshot.child("isAdmin").exists();
                             Log.d(TAG, "onAuthStateChanged:sign_in_role:" + (isAdmin ? "admin" : "user"));
                             if (isAdmin) {
                                 afterLoginAsAdmin();

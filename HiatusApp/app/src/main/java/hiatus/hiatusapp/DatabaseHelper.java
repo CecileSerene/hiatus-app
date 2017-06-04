@@ -24,7 +24,6 @@ public class DatabaseHelper {
 
     // v CAUTION: do not change unless you know what you're doing !
     // (reason: these ref names must follow the Firebase database structure.)
-    private static String ADMIN_REF = "admins";
     private static String USER_REF = "users";
     private static String CONTEXT_REF = "contribution_contexts";
     private static String BUNDLE_REF = "contribution_bundles";
@@ -32,18 +31,6 @@ public class DatabaseHelper {
 
     private static DatabaseReference db = FirebaseDatabase.getInstance().getReference();
 
-
-    /*
-    Admin users database interface
-     */
-
-    public static DatabaseReference getAdminsReference() {
-        return db.child(ADMIN_REF);
-    }
-
-    public static boolean isAdmin(String userId) {
-        return db.child(ADMIN_REF).child(userId).getRoot() == null;
-    }
 
     /*
     User database interface
