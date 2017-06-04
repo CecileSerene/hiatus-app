@@ -6,6 +6,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import hiatus.hiatusapp.ContributionBase.ContributionBundle;
 import hiatus.hiatusapp.ContributionBase.ContributionContent;
@@ -33,6 +35,7 @@ public class DatabaseHelper {
     // ^
 
     private static DatabaseReference db = FirebaseDatabase.getInstance().getReference();
+    private static StorageReference sto = FirebaseStorage.getInstance().getReference();
 
 
     /*
@@ -141,5 +144,13 @@ public class DatabaseHelper {
             content = new PhotoContent(model);
         }
         return content;
+    }
+
+    /*
+    Contribution photo content storage interface
+     */
+
+    public static StorageReference getPhotoContentStorageReference() {
+        return sto.child("images").child("photo_contributions");
     }
 }

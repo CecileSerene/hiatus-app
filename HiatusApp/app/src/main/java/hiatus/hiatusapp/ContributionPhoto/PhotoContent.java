@@ -2,6 +2,7 @@ package hiatus.hiatusapp.ContributionPhoto;
 
 
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -15,6 +16,7 @@ import hiatus.hiatusapp.ContributionBase.ContributionContent;
 public class PhotoContent extends ContributionContent {
 
     private Bitmap photo;
+    private Uri url;
 
     public PhotoContent(String contextId, Bitmap photo) {
         super(contextId);
@@ -37,7 +39,7 @@ public class PhotoContent extends ContributionContent {
     public ContributionContent.Model toModel() {
         // TODO add url creation (send photo to database)
         ContributionContent.Model model = new Model(getContextId(), getTitle());
-        model.putExtra("url", "http://www.example.com");
+        model.putExtra("url", url.toString());
         return model;
     }
 
@@ -56,6 +58,14 @@ public class PhotoContent extends ContributionContent {
 
     public void setPhoto(Bitmap photo) {
         this.photo = photo;
+    }
+
+    public Uri getUrl() {
+        return url;
+    }
+
+    public void setUrl(Uri url) {
+        this.url = url;
     }
 
     /*
