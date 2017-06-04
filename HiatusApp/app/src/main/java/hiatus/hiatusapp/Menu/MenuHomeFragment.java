@@ -2,8 +2,10 @@ package hiatus.hiatusapp.Menu;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +15,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseListAdapter;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -29,8 +36,11 @@ import hiatus.hiatusapp.R;
  */
 public class MenuHomeFragment extends ListFragment {
 
+    private static final String TAG = "MenuHome";
+
+    private DatabaseReference mRef;
     private ContributionContextArrayAdapter mAdapter;
-    /*private FirebaseListAdapter<ContributionContext> mAdapter;*/
+    private ArrayList<ContributionContext> mContexts;
 
     public static Fragment newInstance() {
         return new MenuHomeFragment();
@@ -40,26 +50,27 @@ public class MenuHomeFragment extends ListFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_menu_home, container, false);
 
-        ArrayList<ContributionContext> contexts = new ArrayList<>();
-        contexts.add(new TextContext("0", "Title", "Theme", "Instructions", 50));
-        mAdapter = new ContributionContextArrayAdapter(getActivity(), contexts);
+        mContexts = new ArrayList<>();
+        mAdapter = new ContributionContextArrayAdapter(getActivity(), mContexts);
         setListAdapter(mAdapter);
 
-        /*
-        // create adapter linked to the contribution contexts stored in database
-
-        DatabaseReference mRef = DatabaseHelper.getContributionContextReference();
-
-        mAdapter = new FirebaseListAdapter<ContributionContext>(getActivity(), ContributionContext.class, R.layout.fragment_menu_list_item, mRef) {
+        mRef = DatabaseHelper.getContributionContextReference();
+        mRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            protected void populateView(View v, ContributionContext model, int position) {
-                TextView title = (TextView) v.findViewById(R.id.contribution_title);
-                TextView theme = (TextView) v.findViewById(R.id.contribution_theme);
-                title.setText(model.getTitle());
-                theme.setText(model.getTheme());
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot contextSnapshot : dataSnapshot.getChildren()) {
+                    ContributionContext context = DatabaseHelper.retrieveContext(contextSnapshot);
+                    mContexts.add(context);
+                    Log.d(TAG, "load_context:" + context.getId() + ":" + context.getTitle());
+                }
+                mAdapter.notifyDataSetChanged();
             }
-        };
-        setListAdapter(mAdapter);*/
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w(TAG, "loadContexts:onCancelled", databaseError.toException());
+            }
+        });
 
         return view;
     }
@@ -72,7 +83,7 @@ public class MenuHomeFragment extends ListFragment {
 
         // populate an intent with the contribution context
         Intent i = new Intent(getActivity(), ContributionHomeDetail.class);
-        i.putExtra("context",context);
+        i.putExtra("context", context);
         startActivity(i);
 
     }

@@ -3,6 +3,7 @@ package hiatus.hiatusapp.ContributionContext;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.widget.TextView;
 
 /**
  * Created by Cecile on 24/05/2017.
@@ -20,6 +21,8 @@ public class TextContext extends ContributionContext {
         this.numberOfCharacters = numberOfCharacters;
     }
 
+    public TextContext() {}
+
     public int getNumberOfCharacters() {
         return numberOfCharacters;
     }
@@ -31,15 +34,11 @@ public class TextContext extends ContributionContext {
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         super.writeToParcel(parcel, i);
-        parcel.writeInt(modificationsAllowed ? 1:0); //Because there is no writeBoolean method
-        parcel.writeDouble(limitedTime);
         parcel.writeInt(numberOfCharacters);
     }
 
     private TextContext(Parcel in){
         super(in);
-        modificationsAllowed = (in.readInt() != 0);
-        limitedTime = in.readDouble();
         numberOfCharacters = in.readInt();
     }
 

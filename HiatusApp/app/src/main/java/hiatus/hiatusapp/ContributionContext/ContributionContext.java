@@ -115,7 +115,7 @@ public abstract class ContributionContext implements Parcelable {
         parcel.writeDouble(limitedTime);
     }
 
-    protected ContributionContext(Parcel in){
+    public ContributionContext(Parcel in){
         id = in.readString();
         title = in.readString();
         theme = in.readString();
