@@ -26,29 +26,28 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ContributionText.TextActivity" />
-        <activity android:name=".ContributionText.TextPreviewActivity" />
+        <activity android:name=".contribution.text.TextActivity" />
+        <activity android:name=".contribution.text.TextPreviewActivity" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".account_management.LoginActivity"
             android:label="@string/title_activity_login" />
         <activity
-            android:name=".RegisterActivity"
+            android:name=".account_management.RegisterActivity"
             android:label="@string/title_activity_register" />
         <activity
-            android:name=".Menu.MenuActivity"
+            android:name=".menu.MenuActivity"
             android:label="@string/title_activity_bottom_navigation" />
-        <activity android:name=".ContributionPhoto.SendActivity" />
-        <activity android:name=".ContributionPhoto.PhotoActivity" />
-        <activity android:name=".ContributionHomeDetail" />
-        <activity android:name=".ContributionHistoryDetail" />
-        <activity android:name=".Admin.NewContextActivity" />
+        <activity android:name=".contribution.photo.PhotoActivity" />
+        <activity android:name=".menu.ContributionHomeDetail" />
+        <activity android:name=".menu.ContributionHistoryDetail" />
+        <activity android:name=".admin.NewContextActivity" />
         <activity
             android:name=".DbSaveTest.DbContributionContextTest"
             android:label="@string/title_activity_db_contribution_context_test" />
-        <activity android:name=".Admin.AdminActivity" />
-        <activity android:name=".Admin.UserContributionActivity" />
-        <activity android:name=".Admin.TextContributionPreviewActivity" />
-        <activity android:name=".Admin.PhotoContributionPreviewActivity"></activity>
+        <activity android:name=".admin.AdminActivity" />
+        <activity android:name=".admin.UserContributionActivity" />
+        <activity android:name=".admin.TextContributionPreviewActivity" />
+        <activity android:name=".admin.PhotoContributionPreviewActivity"></activity>
     </application>
 
 </manifest>

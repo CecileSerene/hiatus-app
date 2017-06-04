@@ -9,13 +9,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import hiatus.hiatusapp.ContributionBase.ContributionBundle;
-import hiatus.hiatusapp.ContributionBase.ContributionContent;
-import hiatus.hiatusapp.ContributionPhoto.PhotoContent;
-import hiatus.hiatusapp.ContributionText.TextContent;
-import hiatus.hiatusapp.ContributionBase.ContributionContext;
-import hiatus.hiatusapp.ContributionPhoto.PhotoContext;
-import hiatus.hiatusapp.ContributionText.TextContext;
+import hiatus.hiatusapp.account_management.User;
+import hiatus.hiatusapp.contribution.base.ContributionBundle;
+import hiatus.hiatusapp.contribution.base.ContributionContent;
+import hiatus.hiatusapp.contribution.photo.PhotoContent;
+import hiatus.hiatusapp.contribution.text.TextContent;
+import hiatus.hiatusapp.contribution.base.ContributionContext;
+import hiatus.hiatusapp.contribution.photo.PhotoContext;
+import hiatus.hiatusapp.contribution.text.TextContext;
 
 /**
  * Database helper class that provides static methods to manipulate the DB or get references to its primary nodes.

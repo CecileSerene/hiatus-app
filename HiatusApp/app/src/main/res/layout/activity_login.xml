@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="hiatus.hiatusapp.LoginActivity"
+    tools:context="hiatus.hiatusapp.account_management.LoginActivity"
     android:fillViewport="true">
 
     <LinearLayout

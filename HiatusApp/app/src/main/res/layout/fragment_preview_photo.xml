@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     android:orientation="vertical"
-    tools:context="hiatus.hiatusapp.PreviewFragments.PreviewPhotoFragment">
+    tools:context="hiatus.hiatusapp.previews.PreviewPhotoFragment">
 
     <ImageView
         android:id="@+id/photo"

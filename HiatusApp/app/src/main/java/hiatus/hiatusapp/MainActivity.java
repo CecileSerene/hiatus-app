@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import hiatus.hiatusapp.account_management.LoginActivity;
+
 public class MainActivity extends Activity {
 
     @Override
