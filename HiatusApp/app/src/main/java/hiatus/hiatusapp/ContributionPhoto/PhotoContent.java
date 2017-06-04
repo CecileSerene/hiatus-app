@@ -16,10 +16,10 @@ import hiatus.hiatusapp.ContributionBase.ContributionContent;
 public class PhotoContent extends ContributionContent {
 
     private Bitmap photo;
-    private Uri url;
+    private String url;
 
-    public PhotoContent(String contextId, Bitmap photo) {
-        super(contextId);
+    public PhotoContent(String contextId, String title, Bitmap photo) {
+        super(contextId, title);
         this.photo = photo;
     }
 
@@ -37,15 +37,14 @@ public class PhotoContent extends ContributionContent {
 
     @Override
     public ContributionContent.Model toModel() {
-        // TODO add url creation (send photo to database)
         ContributionContent.Model model = new Model(getContextId(), getTitle());
-        model.putExtra("url", url.toString());
+        model.setType(Model.TYPE_PHOTO);
+        model.putExtra("url", url);
         return model;
     }
 
-    public PhotoContent(PhotoContent.Model model) {
-        super(model.getContextId());
-        // TODO load photo from URL via Firebase Storage and set it
+    public PhotoContent(Model model) {
+        super(model.getContextId(), model.getTitle());
     }
 
     /*
@@ -60,11 +59,11 @@ public class PhotoContent extends ContributionContent {
         this.photo = photo;
     }
 
-    public Uri getUrl() {
+    public String getUrl() {
         return url;
     }
 
-    public void setUrl(Uri url) {
+    public void setUrl(String url) {
         this.url = url;
     }
 

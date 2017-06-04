@@ -16,8 +16,16 @@ public class TextContent extends ContributionContent {
     private String text;
 
     public TextContent(String contextId) {
-        super(contextId);
-        this.text = "";
+        this(contextId, "", "");
+    }
+
+    public TextContent(String contextId, String title) {
+        this(contextId, title, "");
+    }
+
+    public TextContent(String contextId, String title, String text) {
+        super(contextId, title);
+        this.text = text;
     }
 
     /*
@@ -32,9 +40,8 @@ public class TextContent extends ContributionContent {
         return model;
     }
 
-    public TextContent(ContributionContent.Model model) {
-        this(model.getContextId());
-        setText(model.getExtra("text"));
+    public TextContent(Model model) {
+        this(model.getContextId(), model.getTitle(), model.getExtra("text"));
     }
 
     /*

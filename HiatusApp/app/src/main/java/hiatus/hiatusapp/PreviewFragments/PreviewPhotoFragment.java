@@ -11,14 +11,6 @@ import android.widget.ImageView;
 import hiatus.hiatusapp.ContributionPhoto.PhotoContent;
 import hiatus.hiatusapp.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link PreviewPhotoFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link PreviewPhotoFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class PreviewPhotoFragment extends Fragment {
 
     private Bitmap mPhoto;

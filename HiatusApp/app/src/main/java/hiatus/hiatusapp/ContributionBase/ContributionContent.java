@@ -19,8 +19,12 @@ public abstract class ContributionContent implements Parcelable {
     private String title;
 
     public ContributionContent(String contextId) {
+        this(contextId, "");  // empty title by default
+    }
+
+    public ContributionContent(String contextId, String title) {
         this.contextId = contextId;
-        this.title = ""; // empty title by default
+        this.title = title;
     }
 
     // necessary empty constructor

@@ -9,6 +9,7 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -17,7 +18,6 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -26,20 +26,18 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayInputStream;
-import java.io.FileInputStream;
-import java.io.InputStream;
+import java.io.ByteArrayOutputStream;
 import java.nio.ByteBuffer;
 
 import hiatus.hiatusapp.ContributionBase.ContributionBundle;
-import hiatus.hiatusapp.ContributionBase.ContributionContent;
-import hiatus.hiatusapp.ContributionBase.ContributionContext;
-import hiatus.hiatusapp.ContributionText.TextPreviewActivity;
 import hiatus.hiatusapp.DatabaseHelper;
 import hiatus.hiatusapp.Menu.MenuActivity;
 import hiatus.hiatusapp.PreviewFragments.PreviewPhotoFragment;
 import hiatus.hiatusapp.R;
 
 public class PhotoActivity extends FragmentActivity {
+
+    private static final String TAG = "PhotoActivity";
 
     PreviewPhotoFragment mImageFrag;
     PhotoContext context;
@@ -126,48 +124,47 @@ public class PhotoActivity extends FragmentActivity {
     }
 
     private void uploadPhoto(){
-        StorageReference imagesRef = DatabaseHelper.getPhotoContentStorageReference();
+        // allocate a new contribution bundle node to user
+        final String userUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        final String id = DatabaseHelper.newContributionBundleId(userUid);
 
-        // transform image bitmap to input stream
-        int byteSize = content.getPhoto().getRowBytes() * content.getPhoto().getHeight();
-        ByteBuffer buffer = ByteBuffer.allocate(byteSize);
-        content.getPhoto().copyPixelsToBuffer(buffer);
-        ByteArrayInputStream bs = new ByteArrayInputStream(buffer.array());
+        // get the storage path
+        final String path = DatabaseHelper.getNewPhotoStoragePath(id);
 
+        // get a reference to the Firebase storage file
+        StorageReference imagesRef = FirebaseStorage.getInstance().getReference().child(path);
+
+        // convert image bitmap to bytes array with JPEG compression
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        content.getPhoto().compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] data = baos.toByteArray();
 
         // upload file to Firebase Storage using an async task
-        UploadTask uploadTask = imagesRef.putStream(bs);
+        UploadTask uploadTask = imagesRef.putBytes(data);
 
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                // TODO handle unsuccessful uploads
+                DatabaseHelper.removeContributionBundle(userUid, id);
+                Log.d(TAG, "send_photo:FAIL:" + path);
             }
         }).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                Log.d(TAG, "send_photo:SUCCESS:" + path);
 
                 // gets the URL of the newly uploaded file
-                @SuppressWarnings("VisibleForTests")
-                Uri downloadUrl = task.getResult().getDownloadUrl();
-                content.setUrl(downloadUrl);
+                content.setUrl(path);
 
-                saveBundleToDb();
+                // build the bundle
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                ContributionBundle bundle = new ContributionBundle(
+                        id, userUid, user.getDisplayName(), context.getId(), content.toModel());
+
+                // save bundle to db
+                DatabaseHelper.saveContributionBundle(bundle);
+                Toast.makeText(PhotoActivity.this, "Contribution successfully sent.", Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    private void saveBundleToDb() {
-        // get a new bundle id
-        String id = DatabaseHelper.newContributionBundleId(context.getId());
-
-        // build the bundle
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        ContributionBundle bundle = new ContributionBundle(
-                id, user.getUid(), user.getDisplayName(), context.getId(), content.toModel());
-
-        // save bundle to db
-        DatabaseHelper.saveContributionBundle(bundle);
-        Toast.makeText(PhotoActivity.this, "Contribution successfully sent.", Toast.LENGTH_SHORT).show();
     }
 }

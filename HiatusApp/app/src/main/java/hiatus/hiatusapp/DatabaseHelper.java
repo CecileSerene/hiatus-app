@@ -131,6 +131,15 @@ public class DatabaseHelper {
         Log.d(TAG, "save_bundle:" + bundle.getId());
     }
 
+    public static void removeContributionBundle(String userUid, String bundleId) {
+        getContributionBundleReference()
+                .child(userUid)
+                .child(bundleId)
+                .setValue(null);
+        Log.d(TAG, "remove_bundle:" + bundleId);
+
+    }
+
     /*
     Contribution content database interface
      */
@@ -142,6 +151,7 @@ public class DatabaseHelper {
             content = new TextContent(model);
         } else if (model.getType() == ContributionContent.Model.TYPE_PHOTO) {
             content = new PhotoContent(model);
+            // TODO download the photo from database
         }
         return content;
     }
@@ -150,6 +160,9 @@ public class DatabaseHelper {
     Contribution photo content storage interface
      */
 
+    public static String getNewPhotoStoragePath(String bundleId) {
+        return "images/photo_contributions/" + bundleId;
+    }
     public static StorageReference getPhotoContentStorageReference() {
         return sto.child("images").child("photo_contributions");
     }
