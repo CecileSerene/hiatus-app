@@ -2,7 +2,6 @@ package hiatus.hiatusapp.Admin;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -11,13 +10,10 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
-import hiatus.hiatusapp.ContributionContext.ContributionContext;
-import hiatus.hiatusapp.ContributionContext.PhotoContext;
-import hiatus.hiatusapp.ContributionContext.TextContext;
+import hiatus.hiatusapp.ContributionBase.ContributionContext;
+import hiatus.hiatusapp.ContributionPhoto.PhotoContext;
+import hiatus.hiatusapp.ContributionText.TextContext;
 import hiatus.hiatusapp.DatabaseHelper;
-import hiatus.hiatusapp.Menu.MenuActivity;
 import hiatus.hiatusapp.R;
 
 public class NewContextActivity extends Activity {

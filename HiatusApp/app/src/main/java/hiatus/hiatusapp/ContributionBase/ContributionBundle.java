@@ -1,9 +1,7 @@
-package hiatus.hiatusapp.ContributionBundle;
+package hiatus.hiatusapp.ContributionBase;
 
 
 import java.util.Date;
-
-import hiatus.hiatusapp.ContributionContent.ContributionContent;
 
 /**
  * A contribution bundle packs together the contribution context, content and user information.

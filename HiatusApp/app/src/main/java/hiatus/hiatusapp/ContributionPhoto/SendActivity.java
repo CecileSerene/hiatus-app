@@ -1,4 +1,4 @@
-package hiatus.hiatusapp.MakeAContribution;
+package hiatus.hiatusapp.ContributionPhoto;
 
 import android.app.Activity;
 import android.os.Bundle;

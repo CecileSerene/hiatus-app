@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import hiatus.hiatusapp.ContributionContext.ContributionContext;
+import hiatus.hiatusapp.ContributionBase.ContributionContext;
 
 public class ContributionHistoryDetail extends Activity {
 

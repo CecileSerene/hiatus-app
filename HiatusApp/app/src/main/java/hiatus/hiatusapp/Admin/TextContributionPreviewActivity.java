@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import hiatus.hiatusapp.ContributionContent.TextContent;
+import hiatus.hiatusapp.ContributionText.TextContent;
 import hiatus.hiatusapp.PreviewFragments.PreviewTextFragment;
 import hiatus.hiatusapp.R;
 

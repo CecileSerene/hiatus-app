@@ -26,8 +26,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MakeAContribution.TextActivity" />
-        <activity android:name=".MakeAContribution.TextPreviewActivity" />
+        <activity android:name=".ContributionText.TextActivity" />
+        <activity android:name=".ContributionText.TextPreviewActivity" />
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login" />
@@ -37,8 +37,8 @@
         <activity
             android:name=".Menu.MenuActivity"
             android:label="@string/title_activity_bottom_navigation" />
-        <activity android:name=".MakeAContribution.SendActivity" />
-        <activity android:name=".MakeAContribution.PhotoActivity" />
+        <activity android:name=".ContributionPhoto.SendActivity" />
+        <activity android:name=".ContributionPhoto.PhotoActivity" />
         <activity android:name=".ContributionHomeDetail" />
         <activity android:name=".ContributionHistoryDetail" />
         <activity android:name=".Admin.NewContextActivity" />

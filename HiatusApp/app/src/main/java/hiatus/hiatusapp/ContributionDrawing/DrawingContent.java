@@ -5,7 +5,7 @@ package hiatus.hiatusapp.ContributionContent;
 import android.graphics.Canvas;
 import android.view.View;
 
-import hiatus.hiatusapp.ContributionContext.ContributionContext;
+import hiatus.hiatusapp.ContributionCore.ContributionContext;
 import hiatus.hiatusapp.ContributionContext.ContributionDrawing;
 
 */

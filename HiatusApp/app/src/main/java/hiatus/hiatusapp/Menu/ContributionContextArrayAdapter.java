@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import hiatus.hiatusapp.ContributionContext.ContributionContext;
+import hiatus.hiatusapp.ContributionBase.ContributionContext;
 import hiatus.hiatusapp.R;
 
 /**

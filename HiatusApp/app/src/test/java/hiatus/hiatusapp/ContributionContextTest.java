@@ -2,7 +2,7 @@ package hiatus.hiatusapp;
 
 import org.junit.Test;
 
-import hiatus.hiatusapp.ContributionContext.TextContext;
+import hiatus.hiatusapp.ContributionText.TextContext;
 
 import static org.junit.Assert.*;
 

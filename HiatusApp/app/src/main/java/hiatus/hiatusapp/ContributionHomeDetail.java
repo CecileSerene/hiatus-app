@@ -7,12 +7,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import hiatus.hiatusapp.ContributionContext.ContributionContext;
+import hiatus.hiatusapp.ContributionBase.ContributionContext;
 
-import hiatus.hiatusapp.ContributionContext.PhotoContext;
-import hiatus.hiatusapp.ContributionContext.TextContext;
-import hiatus.hiatusapp.MakeAContribution.PhotoActivity;
-import hiatus.hiatusapp.MakeAContribution.TextActivity;
+import hiatus.hiatusapp.ContributionPhoto.PhotoActivity;
+import hiatus.hiatusapp.ContributionText.TextActivity;
 
 public class ContributionHomeDetail extends Activity {
 

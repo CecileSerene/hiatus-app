@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import hiatus.hiatusapp.ContributionContent.TextContent;
+import hiatus.hiatusapp.ContributionText.TextContent;
 import hiatus.hiatusapp.R;
 
 /**

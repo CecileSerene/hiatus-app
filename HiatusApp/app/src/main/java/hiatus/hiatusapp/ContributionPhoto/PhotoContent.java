@@ -1,19 +1,11 @@
-package hiatus.hiatusapp.ContributionContent;
+package hiatus.hiatusapp.ContributionPhoto;
 
 
 import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.google.firebase.database.DatabaseReference;
-
-import java.net.URL;
-
-import hiatus.hiatusapp.ContributionContext.ContributionContext;
-import hiatus.hiatusapp.ContributionContext.PhotoContext;
+import hiatus.hiatusapp.ContributionBase.ContributionContent;
 
 /**
  * Content for photo contributions.

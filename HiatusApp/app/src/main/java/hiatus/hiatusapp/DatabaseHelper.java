@@ -1,6 +1,5 @@
 package hiatus.hiatusapp;
 
-import android.support.constraint.solver.widgets.Snapshot;
 import android.util.Log;
 
 import com.google.firebase.auth.FirebaseUser;
@@ -8,13 +7,13 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import hiatus.hiatusapp.ContributionBundle.ContributionBundle;
-import hiatus.hiatusapp.ContributionContent.ContributionContent;
-import hiatus.hiatusapp.ContributionContent.PhotoContent;
-import hiatus.hiatusapp.ContributionContent.TextContent;
-import hiatus.hiatusapp.ContributionContext.ContributionContext;
-import hiatus.hiatusapp.ContributionContext.PhotoContext;
-import hiatus.hiatusapp.ContributionContext.TextContext;
+import hiatus.hiatusapp.ContributionBase.ContributionBundle;
+import hiatus.hiatusapp.ContributionBase.ContributionContent;
+import hiatus.hiatusapp.ContributionPhoto.PhotoContent;
+import hiatus.hiatusapp.ContributionText.TextContent;
+import hiatus.hiatusapp.ContributionBase.ContributionContext;
+import hiatus.hiatusapp.ContributionPhoto.PhotoContext;
+import hiatus.hiatusapp.ContributionText.TextContext;
 
 /**
  * Database helper class that provides static methods to manipulate the DB or get references to its primary nodes.

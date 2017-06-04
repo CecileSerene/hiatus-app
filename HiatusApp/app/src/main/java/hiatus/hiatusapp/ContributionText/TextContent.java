@@ -1,10 +1,10 @@
-package hiatus.hiatusapp.ContributionContent;
+package hiatus.hiatusapp.ContributionText;
 
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.view.View;
-import android.widget.TextView;
+
+import hiatus.hiatusapp.ContributionBase.ContributionContent;
 
 /**
  * Content for text contributions

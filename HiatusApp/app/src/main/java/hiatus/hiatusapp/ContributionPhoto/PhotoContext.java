@@ -1,9 +1,9 @@
-package hiatus.hiatusapp.ContributionContext;
+package hiatus.hiatusapp.ContributionPhoto;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import hiatus.hiatusapp.ContributionContent.PhotoContent;
+import hiatus.hiatusapp.ContributionBase.ContributionContext;
 
 /**
  * Created by Cecile on 24/05/2017.

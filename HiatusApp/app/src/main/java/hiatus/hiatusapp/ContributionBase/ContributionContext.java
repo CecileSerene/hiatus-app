@@ -1,4 +1,4 @@
-package hiatus.hiatusapp.ContributionContext;
+package hiatus.hiatusapp.ContributionBase;
 
 import android.os.Parcel;
 import android.os.Parcelable;

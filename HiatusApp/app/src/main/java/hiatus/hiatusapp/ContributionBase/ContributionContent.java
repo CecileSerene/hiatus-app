@@ -1,16 +1,11 @@
-package hiatus.hiatusapp.ContributionContent;
+package hiatus.hiatusapp.ContributionBase;
 
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.view.View;
-
-import com.google.firebase.database.DatabaseReference;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import hiatus.hiatusapp.ContributionContext.ContributionContext;
 
 
 /**
@@ -58,10 +53,10 @@ public abstract class ContributionContent implements Parcelable {
             data = new HashMap<>();
         }
 
-        protected void putExtra(String key, String value) {
+        public void putExtra(String key, String value) {
             data.put(key, value);
         }
-        protected String getExtra(String key) {return data.get(key);}
+        public String getExtra(String key) {return data.get(key);}
 
         public String getContextId() {return contextId;}
         public int getType() {return type;}

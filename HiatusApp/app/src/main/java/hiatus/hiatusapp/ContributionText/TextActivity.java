@@ -1,4 +1,4 @@
-package hiatus.hiatusapp.MakeAContribution;
+package hiatus.hiatusapp.ContributionText;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -12,8 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import hiatus.hiatusapp.ContributionContent.TextContent;
-import hiatus.hiatusapp.ContributionContext.TextContext;
 import hiatus.hiatusapp.R;
 
 

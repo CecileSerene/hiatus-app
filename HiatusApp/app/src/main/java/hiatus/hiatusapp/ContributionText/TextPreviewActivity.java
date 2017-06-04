@@ -1,4 +1,4 @@
-package hiatus.hiatusapp.MakeAContribution;
+package hiatus.hiatusapp.ContributionText;
 
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
@@ -10,10 +10,8 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import hiatus.hiatusapp.ContributionBundle.ContributionBundle;
-import hiatus.hiatusapp.ContributionContent.ContributionContent;
-import hiatus.hiatusapp.ContributionContent.TextContent;
-import hiatus.hiatusapp.ContributionContext.TextContext;
+import hiatus.hiatusapp.ContributionBase.ContributionBundle;
+import hiatus.hiatusapp.ContributionBase.ContributionContent;
 import hiatus.hiatusapp.DatabaseHelper;
 import hiatus.hiatusapp.Menu.MenuActivity;
 import hiatus.hiatusapp.PreviewFragments.PreviewTextFragment;

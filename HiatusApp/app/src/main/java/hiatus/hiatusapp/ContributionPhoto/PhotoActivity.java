@@ -1,4 +1,4 @@
-package hiatus.hiatusapp.MakeAContribution;
+package hiatus.hiatusapp.ContributionPhoto;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -12,8 +12,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import hiatus.hiatusapp.ContributionContent.PhotoContent;
-import hiatus.hiatusapp.ContributionContext.PhotoContext;
 import hiatus.hiatusapp.PreviewFragments.PreviewPhotoFragment;
 import hiatus.hiatusapp.R;
 
