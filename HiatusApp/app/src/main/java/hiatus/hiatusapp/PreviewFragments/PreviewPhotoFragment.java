@@ -23,7 +23,6 @@ import hiatus.hiatusapp.R;
  */
 public class PreviewPhotoFragment extends Fragment {
 
-    // TODO: Rename and change types of parameters
     private Bitmap mPhoto;
 
     public PreviewPhotoFragment() {
