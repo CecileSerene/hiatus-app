@@ -1,7 +1,12 @@
 package hiatus.hiatusapp;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
@@ -142,26 +147,33 @@ public class DatabaseHelper {
     }
 
     /*
+    Storage interface
+     */
+
+    public static StorageReference getStorageReference() {
+        return sto;
+    }
+
+    /*
     Contribution content database interface
      */
 
     public static ContributionContent retrieveContent(ContributionBundle bundle) {
-        ContributionContent content = null;
         ContributionContent.Model model = bundle.getContentModel();
+
         if (model.getType() == ContributionContent.Model.TYPE_TEXT) {
-            content = new TextContent(model);
+            return new TextContent(model);
         } else if (model.getType() == ContributionContent.Model.TYPE_PHOTO) {
-            content = new PhotoContent(model);
-            // TODO download the photo from database
+            return new PhotoContent(model);
         }
-        return content;
+        return null;
     }
 
     /*
     Contribution photo content storage interface
      */
 
-    public static String getNewPhotoStoragePath(String bundleId) {
+    public static String newPhotoStoragePath(String bundleId) {
         return "images/photo_contributions/" + bundleId;
     }
     public static StorageReference getPhotoContentStorageReference() {

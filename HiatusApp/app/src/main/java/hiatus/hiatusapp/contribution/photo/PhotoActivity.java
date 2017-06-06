@@ -126,7 +126,7 @@ public class PhotoActivity extends FragmentActivity {
         final String id = DatabaseHelper.newContributionBundleId(userUid);
 
         // get the storage path
-        final String path = DatabaseHelper.getNewPhotoStoragePath(id);
+        final String path = DatabaseHelper.newPhotoStoragePath(id);
 
         // get a reference to the Firebase storage file
         StorageReference imagesRef = FirebaseStorage.getInstance().getReference().child(path);

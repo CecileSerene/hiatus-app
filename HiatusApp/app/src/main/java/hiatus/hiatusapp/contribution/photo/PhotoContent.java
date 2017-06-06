@@ -44,6 +44,7 @@ public class PhotoContent extends ContributionContent {
 
     public PhotoContent(Model model) {
         super(model.getContextId(), model.getTitle());
+        setUrl(model.getExtra("url"));
     }
 
     /*
@@ -73,11 +74,13 @@ public class PhotoContent extends ContributionContent {
     @Override
     public void writeToParcel(Parcel out, int flags) {
         super.writeToParcel(out, flags);
+        out.writeString(url);
         out.writeParcelable(photo,flags);
     }
 
     private PhotoContent(Parcel in) {
         super(in);
+        url = in.readString();
         photo = in.readParcelable(Bitmap.class.getClassLoader());
     }
 
