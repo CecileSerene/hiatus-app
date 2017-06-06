@@ -72,27 +72,37 @@ public class LoginActivity extends Activity {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null && user.isEmailVerified()) {
-                    Log.d(TAG, "onAuthStateChanged:sign_in:" + user.getUid());
-                    // if user is admin, go to admin activity, else go to menu activity
-                    DatabaseReference userRef = DatabaseHelper.getUsersReference().child(user.getUid());
-                    userRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            boolean isAdmin = dataSnapshot.child("isAdmin").exists();
-                            Log.d(TAG, "onAuthStateChanged:sign_in_role:" + (isAdmin ? "admin" : "user"));
-                            if (isAdmin) {
-                                afterLoginAsAdmin();
-                            } else {
-                                afterLoginAsUser();
+                if (user != null) {
+                    if (user.isEmailVerified()) {
+                        Log.d(TAG, "onAuthStateChanged:sign_in:" + user.getUid());
+                        // if user is admin, go to admin activity, else go to menu activity
+                        DatabaseReference userRef = DatabaseHelper.getUsersReference().child(user.getUid());
+                        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                boolean isAdmin = dataSnapshot.child("isAdmin").exists();
+                                Log.d(TAG, "onAuthStateChanged:sign_in_role:" + (isAdmin ? "admin" : "user"));
+                                if (isAdmin) {
+                                    afterLoginAsAdmin();
+                                } else {
+                                    afterLoginAsUser();
+                                }
                             }
-                        }
 
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
 
-                        }
-                    });
+                            }
+                        });
+                    } else {
+                        Toast.makeText(
+                                LoginActivity.this,
+                                "Please check your emails at " +
+                                        user.getEmail() +
+                                        " and verify your email address.",
+                                Toast.LENGTH_LONG).show();
+                        Log.d(TAG, "onAuthStateChanged:email_not_verified:" + user.getEmail());
+                    }
                 } else {
                     showProgress(false);
                     Log.d(TAG, "onAuthStateChanged:signed_out");

@@ -67,7 +67,7 @@
                         android:layout_height="wrap_content"
                         android:inputType="textEmailAddress"
                         android:imeActionId="@+id/modify_email"
-                        android:imeActionLabel="Enregistrer"
+                        android:imeActionLabel="Enreg."
                         android:imeOptions="actionUnspecified"
                         android:text="john.doe@email.foo.baz"/>
                 </LinearLayout>

@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,9 +17,13 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
+import hiatus.hiatusapp.DatabaseHelper;
 import hiatus.hiatusapp.account_management.LoginActivity;
 import hiatus.hiatusapp.R;
 
@@ -26,6 +32,7 @@ import hiatus.hiatusapp.R;
  */
 public class MenuProfileFragment extends Fragment {
 
+    private static final String TAG = "MenuProfile";
     public static final String KEY_PREF_FULLNAME = "pref_fullname";
     public static final String KEY_PREF_EMAIL = "pref_email";
 
@@ -45,7 +52,7 @@ public class MenuProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_menu_profile, container, false);
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         // get ui references
         mDisplayName = (EditText) view.findViewById(R.id.profile_name_field);
@@ -81,12 +88,28 @@ public class MenuProfileFragment extends Fragment {
             }
         });
 
+        // update user data on saving name or email
+
         mDisplayName.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == R.id.modify_name || actionId == EditorInfo.IME_NULL) {
-                    // TODO save display name changes to Firebase
-                    return false;
+                    final String name = mDisplayName.getText().toString();
+                    // update the auth profile
+                    UserProfileChangeRequest request = new UserProfileChangeRequest.Builder()
+                            .setDisplayName(name).build();
+                    user.updateProfile(request).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            // update the profile in DB
+                            DatabaseHelper.getUsersReference()
+                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .child("name")
+                                    .setValue(name);
+                            Log.d(TAG, "update_display_name:SUCCESS");
+                        }
+                    });
+                    return true;
                 }
                 return false;
             }
@@ -94,9 +117,24 @@ public class MenuProfileFragment extends Fragment {
         mEmail.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == R.id.modify_name || actionId == EditorInfo.IME_NULL) {
-                    // TODO save email changes to Firebase
-                    return false;
+                if (actionId == R.id.modify_email || actionId == EditorInfo.IME_NULL) {
+                    final String email = mEmail.getText().toString();
+                    // update the auth profile
+                    user.updateEmail(email)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Log.d(TAG, "update_email_adress:SUCCESS");
+                                        // update the profile in DB
+                                        DatabaseHelper.getUsersReference()
+                                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                .child("email")
+                                                .setValue(email);
+                                    }
+                                }
+                            });
+                    return true;
                 }
                 return false;
             }
