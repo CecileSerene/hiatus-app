@@ -53,16 +53,18 @@ public class MenuHistoryFragment extends ListFragment {
 
         mAdapter = new ContributionBundleArrayAdapter(getActivity(), mBundles);
 
+        final String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
         Query myContextsQuery = DatabaseHelper
                 // take bundles whose userId is current logged-in user's id
                 .getContributionBundleReference()
                 .orderByKey()
-                .equalTo(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                .equalTo(userId);
 
         myContextsQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                DataSnapshot userSnapshot = dataSnapshot.child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                DataSnapshot userSnapshot = dataSnapshot.child(userId);
                 for (DataSnapshot bundleSnapshot : userSnapshot.getChildren()) {
                     ContributionBundle bundle = bundleSnapshot.getValue(ContributionBundle.class);
                     mBundles.add(bundle);
