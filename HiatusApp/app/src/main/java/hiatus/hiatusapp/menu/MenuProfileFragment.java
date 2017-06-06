@@ -7,9 +7,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,6 +29,12 @@ public class MenuProfileFragment extends Fragment {
     public static final String KEY_PREF_FULLNAME = "pref_fullname";
     public static final String KEY_PREF_EMAIL = "pref_email";
 
+    // ui references
+    private EditText mDisplayName;
+    private EditText mEmail;
+    private TextView mPassword;
+    private TextView mLogout;
+
 
     public static Fragment newInstance() {
         return new MenuProfileFragment();
@@ -38,11 +47,18 @@ public class MenuProfileFragment extends Fragment {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        ((TextView) view.findViewById(R.id.profile_name_field)).setText(user.getDisplayName());
-        ((TextView) view.findViewById(R.id.profile_email_field)).setText(user.getEmail());
+        // get ui references
+        mDisplayName = (EditText) view.findViewById(R.id.profile_name_field);
+        mEmail = (EditText) view.findViewById(R.id.profile_email_field);
+        mPassword = (TextView) view.findViewById(R.id.profile_password_link);
+        mLogout = (TextView) view.findViewById(R.id.profile_logout_link);
+
+        // set ui values
+        mDisplayName.setText(user.getDisplayName());
+        mEmail.setText(user.getEmail());
 
         // Attach signOut action to logout link
-        view.findViewById(R.id.logout_link).setOnClickListener(new View.OnClickListener() {
+        mLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final Activity currentActivity = getActivity();
@@ -62,6 +78,27 @@ public class MenuProfileFragment extends Fragment {
                         })
                         .setNegativeButton(R.string.no, null)
                         .show();
+            }
+        });
+
+        mDisplayName.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == R.id.modify_name || actionId == EditorInfo.IME_NULL) {
+                    // TODO save display name changes to Firebase
+                    return false;
+                }
+                return false;
+            }
+        });
+        mEmail.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == R.id.modify_name || actionId == EditorInfo.IME_NULL) {
+                    // TODO save email changes to Firebase
+                    return false;
+                }
+                return false;
             }
         });
 

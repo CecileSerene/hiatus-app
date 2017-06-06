@@ -57,12 +57,18 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textPersonName"
+                        android:imeActionId="@+id/modify_name"
+                        android:imeActionLabel="Enregistrer"
+                        android:imeOptions="actionUnspecified"
                         android:text="John Doe"/>
                     <EditText
                         android:id="@+id/profile_email_field"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textEmailAddress"
+                        android:imeActionId="@+id/modify_email"
+                        android:imeActionLabel="Enregistrer"
+                        android:imeOptions="actionUnspecified"
                         android:text="john.doe@email.foo.baz"/>
                 </LinearLayout>
 
@@ -107,7 +113,7 @@
                     android:text="Modifier le mot de passe"/>
 
                 <TextView
-                    android:id="@+id/logout_link"
+                    android:id="@+id/profile_logout_link"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorPrimary"
