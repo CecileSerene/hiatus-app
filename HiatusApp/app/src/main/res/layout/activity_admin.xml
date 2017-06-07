@@ -46,13 +46,30 @@
             android:textSize="18sp" />
     </LinearLayout>
 
-    <!-- The list of contributions -->
+    <!-- The list of open contributions -->
     <ListView
         android:id="@+id/admin_open_context"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:listitem="@layout/fragment_menu_list_item" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="10dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/admin_closed_contributions"
+            android:textStyle="italic"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <!-- The list of closed contributions -->
     <ListView
         android:id="@+id/admin_closed_context"
         android:layout_width="match_parent"

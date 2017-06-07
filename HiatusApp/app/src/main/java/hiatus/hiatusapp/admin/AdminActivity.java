@@ -66,15 +66,11 @@ public class AdminActivity extends Activity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot contextSnapshot : dataSnapshot.getChildren()) {
                     ContributionContext context = DatabaseHelper.retrieveContext(contextSnapshot);
-                    if (context.getCurrent()) {
-                        mOpenContexts.add(context);
-                    } else {
-                        mClosedContexts.add(context);
-                    }
-                    Log.d(TAG, "load_context:" + context.getId() + ":open:" + context.getCurrent());
+                    mOpenContexts.add(context);
+                    Log.d(TAG, "load_context:" + context.getId() + ":open");
                 }
                 mOpenAdapter.notifyDataSetChanged();
-                mClosedAdapter.notifyDataSetChanged();
+                //mClosedAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -83,9 +79,25 @@ public class AdminActivity extends Activity {
             }
         });
 
+        DatabaseHelper.getClosedContributionContextReference()
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot contextSnapshot : dataSnapshot.getChildren()) {
+                            ContributionContext context = DatabaseHelper.retrieveContext(contextSnapshot);
+                            mClosedContexts.add(context);
+                            Log.d(TAG, "load_context:" + context.getId() + ":closed");
+                        }
+                        mClosedAdapter.notifyDataSetChanged();
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.w(TAG, "loadContexts:onCancelled", databaseError.toException());
+                    }
+                });
+
         lvOpen.setAdapter(mOpenAdapter);
         lvClosed.setAdapter(mClosedAdapter);
-
 
         // setup listview click behavior
 

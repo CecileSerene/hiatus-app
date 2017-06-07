@@ -71,6 +71,10 @@ public class DatabaseHelper {
         return db.child(CONTEXT_REF).child("open");
     }
 
+    public static DatabaseReference getClosedContributionContextReference() {
+        return db.child(CONTEXT_REF).child("closed");
+    }
+
     public static DatabaseReference getContributionContextReference() {
         return db.child(CONTEXT_REF);
     }
@@ -90,12 +94,11 @@ public class DatabaseHelper {
         getOpenContributionContextReference()
                 .child(context.getId())
                 .setValue(context);
-        Log.d(TAG, "save_text_context:" + context.getId());
+        Log.d(TAG, "save_context:" + context.getId());
     }
 
     public static void setClosed(ContributionContext context){
-        getContributionContextReference()
-                .child("closed")
+        getClosedContributionContextReference()
                 .child(context.getId())
                 .setValue(context);
         getOpenContributionContextReference()

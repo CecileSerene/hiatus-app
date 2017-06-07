@@ -101,10 +101,7 @@ public class UserContributionActivity extends Activity {
                     i.putExtra("bundleId", bundle.getId());
                     i.putExtra("userId", bundle.getUserUid());
                     startActivity(i);
-
                 }
-
-
             }
         });
 

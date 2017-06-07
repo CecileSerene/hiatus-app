@@ -64,6 +64,7 @@
     <string name="admin_add_contribution">Ajouter une contribution</string>
     <string name="admin_quit">Quitter</string>
     <string name="admin_all_contributions">Les contributions en cours</string>
+    <string name="admin_closed_contributions">Les contributions fermées</string>
     <string name="admin_add_title">Titre</string>
     <string name="admin_add_type">Type</string>
     <string name="admin_add_number">Nombre de caractères \t</string>
