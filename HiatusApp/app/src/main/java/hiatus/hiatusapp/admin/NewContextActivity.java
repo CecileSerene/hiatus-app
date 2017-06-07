@@ -90,12 +90,6 @@ public class NewContextActivity extends Activity{
             mInstructions.setError(getString(R.string.error_field_required));
             valid = false;
         }
-        if (typeSpinner.getSelectedItemPosition() == 0) {
-            if (TextUtils.isEmpty(mNumber.getText().toString())) {
-                mNumber.setError(getString(R.string.error_field_required));
-                valid = false;
-            }
-        }
         return valid;
     }
 
@@ -112,10 +106,12 @@ public class NewContextActivity extends Activity{
 
         switch (typeSpinner.getSelectedItemPosition()) {
             case 0:
+                String nbCharacters = mNumber.getText().toString();
+                int charLimit = TextUtils.isEmpty(nbCharacters) ? -1 : Integer.parseInt(nbCharacters);
                 context = new TextContext(
                         DatabaseHelper.newContributionContextId(),
                         title, theme, instructions,
-                        Integer.parseInt(mNumber.getText().toString()));
+                        charLimit);
                 break;
             case 1:
                 context = new PhotoContext(
