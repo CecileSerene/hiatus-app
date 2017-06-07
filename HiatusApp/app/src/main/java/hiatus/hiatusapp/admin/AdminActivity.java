@@ -98,6 +98,7 @@ public class AdminActivity extends Activity {
             public void onClick(View view) {
                 Intent i = new Intent(view.getContext(), NewContextActivity.class);
                 startActivity(i);
+                finish();
             }
         });
 
