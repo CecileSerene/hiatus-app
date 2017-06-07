@@ -22,10 +22,15 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 import hiatus.hiatusapp.DatabaseHelper;
 import hiatus.hiatusapp.account_management.LoginActivity;
 import hiatus.hiatusapp.R;
+import hiatus.hiatusapp.admin.AdminActivity;
 
 /**
  * Fragment for profile settings.
@@ -39,6 +44,7 @@ public class MenuProfileFragment extends Fragment {
     // ui references
     private EditText mDisplayName;
     private EditText mEmail;
+    private TextView mGoToAdmin;
     private TextView mPassword;
     private TextView mLogout;
 
@@ -58,6 +64,7 @@ public class MenuProfileFragment extends Fragment {
         mDisplayName = (EditText) view.findViewById(R.id.profile_name_field);
         mEmail = (EditText) view.findViewById(R.id.profile_email_field);
         mPassword = (TextView) view.findViewById(R.id.profile_password_link);
+        mGoToAdmin = (TextView) view.findViewById(R.id.go_to_admin_link);
         mLogout = (TextView) view.findViewById(R.id.profile_logout_link);
 
         // set ui values
@@ -137,6 +144,30 @@ public class MenuProfileFragment extends Fragment {
                     return true;
                 }
                 return false;
+            }
+        });
+
+        // set admin link visible if user is admin
+
+        mGoToAdmin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), AdminActivity.class));
+            }
+        });
+
+        DatabaseHelper.getUsersReference()
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                mGoToAdmin.setVisibility(dataSnapshot.child("isAdmin").getValue(Boolean.class) ? View.VISIBLE : View.GONE);
+                Log.d(TAG, "admin_link:visible");
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.d(TAG, "admin_link:onCancelled", databaseError.toException());
             }
         });
 

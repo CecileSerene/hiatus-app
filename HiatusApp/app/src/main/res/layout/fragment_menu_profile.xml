@@ -113,6 +113,15 @@
                     android:text="Modifier le mot de passe"/>
 
                 <TextView
+                    android:id="@+id/go_to_admin_link"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Administration"
+                    android:layout_marginBottom="20dp"
+                    android:textColor="@color/colorPrimary"
+                    android:visibility="gone" />
+
+                <TextView
                     android:id="@+id/profile_logout_link"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

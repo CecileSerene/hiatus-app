@@ -64,7 +64,7 @@ public class LoginActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        startActivity(new Intent(LoginActivity.this, MenuActivity.class)); // toggle to skip login and go to admin
+        //startActivity(new Intent(LoginActivity.this, MenuActivity.class)); // toggle to skip login and go to admin
 
         // Setup firebase authentication
         mAuth = FirebaseAuth.getInstance();
@@ -75,32 +75,11 @@ public class LoginActivity extends Activity {
                 if (user != null) {
                     if (user.isEmailVerified()) {
                         Log.d(TAG, "onAuthStateChanged:sign_in:" + user.getUid());
-                        // if user is admin, go to admin activity, else go to menu activity
-                        DatabaseReference userRef = DatabaseHelper.getUsersReference().child(user.getUid());
-                        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                boolean isAdmin = dataSnapshot.child("isAdmin").exists();
-                                Log.d(TAG, "onAuthStateChanged:sign_in_role:" + (isAdmin ? "admin" : "user"));
-                                if (isAdmin) {
-                                    afterLoginAsAdmin();
-                                } else {
-                                    afterLoginAsUser();
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-
-                            }
-                        });
+                        Intent i = new Intent(LoginActivity.this, MenuActivity.class);
+                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(i);
+                        finish();
                     } else {
-                        Toast.makeText(
-                                LoginActivity.this,
-                                "Please check your emails at " +
-                                        user.getEmail() +
-                                        " and verify your email address.",
-                                Toast.LENGTH_LONG).show();
                         Log.d(TAG, "onAuthStateChanged:email_not_verified:" + user.getEmail());
                     }
                 } else {
@@ -149,36 +128,6 @@ public class LoginActivity extends Activity {
                 goToRegister();
             }
         });
-    }
-
-    private void afterLoginAsUser() {
-        Intent i = new Intent(LoginActivity.this, MenuActivity.class);
-        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(i);
-        finish();
-    }
-
-    private void afterLoginAsAdmin() {
-        // ask if admin wants to login as admin or simple user
-        new AlertDialog.Builder(this)
-                .setTitle(R.string.prompt_which_role_title)
-                .setMessage(R.string.prompt_which_role_message)
-                .setPositiveButton(R.string.prompt_which_role_admin, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Intent i = new Intent(LoginActivity.this, AdminActivity.class);
-                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(i);
-                        finish();
-                    }
-                })
-                .setNegativeButton(R.string.prompt_which_role_user, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        afterLoginAsUser();
-                    }
-                })
-                .show();
     }
 
     private void goToRegister() {
