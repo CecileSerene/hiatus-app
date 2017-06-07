@@ -60,7 +60,7 @@ public class PhotoContributionPreviewActivity extends FragmentActivity {
         });
 
         Button buttonDeny = (Button) findViewById(R.id.deny);
-        buttonAccept.setOnClickListener(new View.OnClickListener() {
+        buttonDeny.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DatabaseHelper.changeStateContibutionBundle(userId, bundleId, ContributionBundle.DENIED);
