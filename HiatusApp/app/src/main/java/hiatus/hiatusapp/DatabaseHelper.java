@@ -37,11 +37,8 @@ public class DatabaseHelper {
     private static String USER_REF = "users";
     private static String CONTEXT_REF = "contribution_contexts";
     private static String BUNDLE_REF = "contribution_bundles";
-<<<<<<< HEAD
     private static String CURRENT_CONTEXT_REF = "current_contexts";
     private static String BUNDLE_CONTENT_REF = "bundle_contents";
-=======
->>>>>>> f8328a4d2dc9a4845d6480b0d2dda831c3cdf9bc
     // ^
 
     private static DatabaseReference db = FirebaseDatabase.getInstance().getReference();

@@ -12,13 +12,11 @@ import hiatus.hiatusapp.contribution.text.TextContent;
 import hiatus.hiatusapp.previews.PreviewTextFragment;
 import hiatus.hiatusapp.R;
 
-import static hiatus.hiatusapp.DatabaseHelper;
-
 public class TextContributionPreviewActivity extends FragmentActivity {
 
     TextContent content;
-    int bundleId;
-    int userId;
+    String bundleId;
+    String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,10 +25,8 @@ public class TextContributionPreviewActivity extends FragmentActivity {
 
         Intent i = getIntent();
         content = i.getParcelableExtra("content");
-        bundleId = i.getIntExtra("bundleId",0);
-        userId = i.getIntExtra("userId",0);
-
-
+        bundleId = i.getStringExtra("bundleId");
+        userId = i.getStringExtra("userId");
 
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragment_container, PreviewTextFragment.newInstance(content))
