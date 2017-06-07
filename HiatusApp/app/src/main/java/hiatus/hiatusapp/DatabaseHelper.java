@@ -37,6 +37,7 @@ public class DatabaseHelper {
     private static String USER_REF = "users";
     private static String CONTEXT_REF = "contribution_contexts";
     private static String BUNDLE_REF = "contribution_bundles";
+    private static String CURRENT_CONTEXT_REF = "current_contexts";
     private static String BUNDLE_CONTENT_REF = "bundle_contents";
     // ^
 
@@ -66,25 +67,44 @@ public class DatabaseHelper {
     /**
      * @return a reference to the node of contribution contexts
      */
+    public static DatabaseReference getOpenContributionContextReference() {
+        return db.child(CONTEXT_REF).child("open");
+    }
+
     public static DatabaseReference getContributionContextReference() {
         return db.child(CONTEXT_REF);
     }
 
     public static String newContributionContextId() {
-        String id = db.child(CONTEXT_REF).push().getKey();
+        String id = db.child(CONTEXT_REF).child("open").push().getKey();
         Log.d(TAG, "new_context_id:" + id);
         return id;
     }
+
+
+
+
 
     /**
      * Saves a new contribution context to the database
      * @param context ContributionContext
      */
     public static void saveContributionContext(ContributionContext context) {
-        getContributionContextReference()
+        getOpenContributionContextReference()
                 .child(context.getId())
                 .setValue(context);
         Log.d(TAG, "save_text_context:" + context.getId());
+    }
+
+    public static void setClosed(ContributionContext context){
+        getOpenContributionContextReference()
+                .child(context.getId())
+                .setValue(null);
+        getContributionContextReference()
+                .child("closed")
+                .child(context.getId())
+                .setValue(context);;
+        Log.d(TAG, "close_text_context:" + context.getId());
     }
 
     /**
@@ -145,6 +165,15 @@ public class DatabaseHelper {
         Log.d(TAG, "remove_bundle:" + bundleId);
 
     }
+
+    public static void changeStateContibutionBundle(String userUid, String bundleId, int state){
+        getContributionBundleReference()
+                .child(userUid)
+                .child(bundleId)
+                .child("state")
+                .setValue(state);
+        Log.d(TAG, "change_state_bundle:" + bundleId);
+        }
 
     /*
     Storage interface

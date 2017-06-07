@@ -44,7 +44,8 @@ public class MenuHomeFragment extends ListFragment {
         mAdapter = new ContributionContextArrayAdapter(getActivity(), mContexts);
         setListAdapter(mAdapter);
 
-        mRef = DatabaseHelper.getContributionContextReference();
+        //TODO only get the current context
+        mRef = DatabaseHelper.getOpenContributionContextReference();
         mRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

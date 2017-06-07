@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -21,6 +22,8 @@ import hiatus.hiatusapp.contribution.base.ContributionContent;
 import hiatus.hiatusapp.contribution.base.ContributionContext;
 import hiatus.hiatusapp.DatabaseHelper;
 import hiatus.hiatusapp.R;
+
+import static hiatus.hiatusapp.DatabaseHelper.setClosed;
 
 public class UserContributionActivity extends Activity {
 
@@ -86,6 +89,8 @@ public class UserContributionActivity extends Activity {
                     // populate an intent with the contribution context
                     Intent i = new Intent(view.getContext(), TextContributionPreviewActivity.class);
                     i.putExtra("content", contents.get(position));
+                    i.putExtra("bundleId", bundle.getId());
+                    i.putExtra("userId", bundle.getUserUid());
                     startActivity(i);
 
                 }
@@ -105,7 +110,11 @@ public class UserContributionActivity extends Activity {
         buttonStop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO here we want to remove the context, to stop the contributions
+                context.setCurrent(ContributionContext.CLOSED);
+                setClosed(context);
+                Toast.makeText(view.getContext(),"Context sucessfully closed",Toast.LENGTH_SHORT);
+                Intent i = new Intent(view.getContext(), AdminActivity.class);
+                startActivity(i);
             }
         });
 

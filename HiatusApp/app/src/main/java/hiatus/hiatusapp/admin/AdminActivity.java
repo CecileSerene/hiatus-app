@@ -56,7 +56,7 @@ public class AdminActivity extends Activity {
 
         mAdapter = new ContributionContextArrayAdapter(this, mContexts);
 
-        mRef = DatabaseHelper.getContributionContextReference();
+        mRef = DatabaseHelper.getOpenContributionContextReference();
         mRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

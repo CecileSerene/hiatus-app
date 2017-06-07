@@ -14,6 +14,9 @@ public abstract class ContributionContext implements Parcelable {
     public static int TYPE_TEXT = 0;
     public static int TYPE_PHOTO = 1;
 
+    public static boolean OPEN=true;
+    public static boolean CLOSED=false;
+
     private String id;
     private String title;
     private String theme;
@@ -21,6 +24,7 @@ public abstract class ContributionContext implements Parcelable {
     private int type;
     protected boolean modificationsAllowed;
     protected double limitedTime;
+    private boolean current;
 
     // Empty constructor
     public ContributionContext() {}
@@ -31,6 +35,7 @@ public abstract class ContributionContext implements Parcelable {
         this.theme = theme;
         this.instructions = instructions;
         this.limitedTime = -1;  // negative value means no limited time
+        this.current = OPEN;
     }
 
     /**
@@ -74,6 +79,14 @@ public abstract class ContributionContext implements Parcelable {
         this.type = type;
     }
 
+    // Current
+    public boolean isCurrent() {
+        return current;
+    }
+
+    public void setCurrent(boolean current) {
+        this.current = current;
+    }
 
     // misc
 
@@ -113,6 +126,7 @@ public abstract class ContributionContext implements Parcelable {
         parcel.writeInt(type);
         parcel.writeInt(modificationsAllowed ? 1:0); //Because there is no writeBoolean method
         parcel.writeDouble(limitedTime);
+        parcel.writeInt(current ? 1:0); //Because there is no writeBoolean method
     }
 
     public ContributionContext(Parcel in){
@@ -123,6 +137,9 @@ public abstract class ContributionContext implements Parcelable {
         type = in.readInt();
         modificationsAllowed = (in.readInt() != 0);
         limitedTime = in.readDouble();
+        current = (in.readInt() != 0);
+
+
     }
 
     public static final Parcelable.Creator<ContributionContext> CREATOR
