@@ -37,8 +37,9 @@ public class TextActivity extends Activity {
         if (content == null) {
             content = new TextContent(context.getId());
         }
-
-        mEdittext.setFilters(new InputFilter[] {new InputFilter.LengthFilter(context.getNumberOfCharacters())});
+        if (context.getNumberOfCharacters() > 0) {
+            mEdittext.setFilters(new InputFilter[]{new InputFilter.LengthFilter(context.getNumberOfCharacters())});
+        }
     }
 
     public void preview(View view){

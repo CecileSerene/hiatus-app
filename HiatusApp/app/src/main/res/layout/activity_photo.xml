@@ -47,7 +47,7 @@
         android:onClick="takePicture"
         android:layout_gravity="center"
         android:text="Prendre une photo"
-        android:background="@color/colorAccent"
+        android:background="@drawable/accent_button"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
