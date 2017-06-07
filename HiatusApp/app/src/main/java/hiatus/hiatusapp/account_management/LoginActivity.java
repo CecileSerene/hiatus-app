@@ -64,7 +64,7 @@ public class LoginActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        startActivity(new Intent(LoginActivity.this, MenuActivity.class)); // toggle to skip login and go to admin
+        startActivity(new Intent(LoginActivity.this, AdminActivity.class)); // toggle to skip login and go to admin
 
         // Setup firebase authentication
         mAuth = FirebaseAuth.getInstance();

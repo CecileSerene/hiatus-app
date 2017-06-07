@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import hiatus.hiatusapp.DatabaseHelper;
 import hiatus.hiatusapp.contribution.base.ContributionBundle;
@@ -37,15 +38,19 @@ public class TextContributionPreviewActivity extends FragmentActivity {
         buttonAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatabaseHelper.changeStateContibutionBundle(bundleId, userId, ContributionBundle.ACCEPTED);
+                DatabaseHelper.changeStateContibutionBundle(userId, bundleId, ContributionBundle.ACCEPTED);
+                Toast.makeText(TextContributionPreviewActivity.this, "The contribution has been accepted", Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
 
         Button buttonDeny = (Button) findViewById(R.id.deny);
-        buttonAccept.setOnClickListener(new View.OnClickListener() {
+        buttonDeny.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO here the state must change
+                DatabaseHelper.changeStateContibutionBundle(userId, bundleId, ContributionBundle.DENIED);
+                Toast.makeText(TextContributionPreviewActivity.this, "The contribution has been denied", Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
     }

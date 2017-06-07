@@ -8,12 +8,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.StorageReference;
 
 import hiatus.hiatusapp.DatabaseHelper;
+import hiatus.hiatusapp.contribution.base.ContributionBundle;
 import hiatus.hiatusapp.contribution.photo.PhotoContent;
 import hiatus.hiatusapp.previews.PreviewPhotoFragment;
 import hiatus.hiatusapp.R;
@@ -24,6 +26,9 @@ public class PhotoContributionPreviewActivity extends FragmentActivity {
 
     PreviewPhotoFragment mImageFrag;
     PhotoContent content;
+    String bundleId;
+    String userId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +37,8 @@ public class PhotoContributionPreviewActivity extends FragmentActivity {
 
         Intent i = getIntent();
         content = i.getParcelableExtra("content");
+        bundleId = i.getStringExtra("bundleId");
+        userId = i.getStringExtra("userId");
         Log.d(TAG, content.getUrl());
 
         downloadPhoto();
@@ -46,15 +53,19 @@ public class PhotoContributionPreviewActivity extends FragmentActivity {
         buttonAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO here the state must change
+                DatabaseHelper.changeStateContibutionBundle(userId, bundleId, ContributionBundle.ACCEPTED);
+                Toast.makeText(PhotoContributionPreviewActivity.this, "The contribution has been accepted", Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
 
         Button buttonDeny = (Button) findViewById(R.id.deny);
-        buttonDeny.setOnClickListener(new View.OnClickListener() {
+        buttonAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO here the state must change
+                DatabaseHelper.changeStateContibutionBundle(userId, bundleId, ContributionBundle.DENIED);
+                Toast.makeText(PhotoContributionPreviewActivity.this, "The contribution has been denied", Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
     }

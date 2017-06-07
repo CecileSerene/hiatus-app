@@ -98,6 +98,8 @@ public class UserContributionActivity extends Activity {
                     // populate an intent with the contribution context
                     Intent i = new Intent(view.getContext(), PhotoContributionPreviewActivity.class);
                     i.putExtra("content", contents.get(position));
+                    i.putExtra("bundleId", bundle.getId());
+                    i.putExtra("userId", bundle.getUserUid());
                     startActivity(i);
 
                 }
@@ -112,7 +114,7 @@ public class UserContributionActivity extends Activity {
             public void onClick(View view) {
                 context.setCurrent(ContributionContext.CLOSED);
                 setClosed(context);
-                Toast.makeText(view.getContext(),"Context sucessfully closed",Toast.LENGTH_SHORT);
+                Toast.makeText(view.getContext(),"Context sucessfully closed",Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(view.getContext(), AdminActivity.class);
                 startActivity(i);
             }

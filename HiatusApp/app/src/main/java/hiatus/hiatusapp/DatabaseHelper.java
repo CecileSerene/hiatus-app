@@ -145,6 +145,10 @@ public class DatabaseHelper {
         return id;
     }
 
+    private static DatabaseReference getBundlesForUser(String userId) {
+        return getContributionBundleReference().child(userId);
+    }
+
     /**
      * Saves a contribution bundle to the database.
      * @param bundle ContributionBundle
@@ -158,8 +162,7 @@ public class DatabaseHelper {
     }
 
     public static void removeContributionBundle(String userUid, String bundleId) {
-        getContributionBundleReference()
-                .child(userUid)
+        getBundlesForUser(userUid)
                 .child(bundleId)
                 .setValue(null);
         Log.d(TAG, "remove_bundle:" + bundleId);
@@ -167,8 +170,7 @@ public class DatabaseHelper {
     }
 
     public static void changeStateContibutionBundle(String userUid, String bundleId, int state){
-        getContributionBundleReference()
-                .child(userUid)
+        getBundlesForUser(userUid)
                 .child(bundleId)
                 .child("state")
                 .setValue(state);
