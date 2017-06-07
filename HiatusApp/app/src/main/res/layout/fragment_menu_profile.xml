@@ -108,8 +108,8 @@
                     android:id="@+id/profile_password_link"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
                     android:textColor="@color/colorPrimary"
+                    style="@style/form_margin_top"
                     android:text="Modifier le mot de passe"/>
 
                 <TextView
@@ -117,7 +117,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorPrimary"
+                    style="@style/form_margin_top"
                     android:text="Se déconnecter"/>
+
+                <TextView
+                    android:id="@+id/go_to_admin_link"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Administration"
+                    style="@style/form_margin_top"
+                    android:textColor="@color/colorPrimary"
+                    android:visibility="gone" />
 
             </LinearLayout>
 

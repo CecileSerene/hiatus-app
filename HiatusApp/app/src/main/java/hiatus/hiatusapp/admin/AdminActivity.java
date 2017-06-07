@@ -47,7 +47,7 @@ public class AdminActivity extends Activity {
         setContentView(R.layout.activity_admin);
 
         Button newContextButton = (Button) findViewById((R.id.new_context));
-        Button logoutButton = (Button) findViewById(R.id.admin_logout);
+        Button exitButton = (Button) findViewById(R.id.admin_exit);
         ListView lvAdmin = (ListView) findViewById(R.id.admin_context);
         mContexts = new ArrayList<>();
 
@@ -101,28 +101,10 @@ public class AdminActivity extends Activity {
             }
         });
 
-        logoutButton.setOnClickListener(new View.OnClickListener() {
+        exitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                final Context currentContext = view.getContext();
-
-
-                // confirm sign off through alert dialog
-                new AlertDialog.Builder(currentContext)
-                        .setTitle(R.string.confirm_signout_title)
-                        .setMessage(R.string.confirm_signout_message)
-                        .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                FirebaseAuth mAuth = FirebaseAuth.getInstance();
-                                mAuth.signOut();
-                                startActivity(new Intent(currentContext, LoginActivity.class));
-                                //AdminActivity.class.finish();
-                            }
-                        })
-                        .setNegativeButton(R.string.no, null)
-                        .show();
+                finish();
             }
         });
 
