@@ -82,9 +82,6 @@ public class DatabaseHelper {
     }
 
 
-
-
-
     /**
      * Saves a new contribution context to the database
      * @param context ContributionContext
@@ -97,13 +94,13 @@ public class DatabaseHelper {
     }
 
     public static void setClosed(ContributionContext context){
-        getOpenContributionContextReference()
-                .child(context.getId())
-                .setValue(null);
         getContributionContextReference()
                 .child("closed")
                 .child(context.getId())
-                .setValue(context);;
+                .setValue(context);
+        getOpenContributionContextReference()
+                .child(context.getId())
+                .setValue(null);
         Log.d(TAG, "close_text_context:" + context.getId());
     }
 

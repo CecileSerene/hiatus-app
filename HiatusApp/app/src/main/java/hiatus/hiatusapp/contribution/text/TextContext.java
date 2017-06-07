@@ -22,6 +22,10 @@ public class TextContext extends ContributionContext {
         this.numberOfCharacters = numberOfCharacters;
     }
 
+    public TextContext(String id, String title, String theme, String instructions) {
+        this(id, title, theme, instructions, -1);
+    }
+
     public TextContext() {}
 
     public int getNumberOfCharacters() {

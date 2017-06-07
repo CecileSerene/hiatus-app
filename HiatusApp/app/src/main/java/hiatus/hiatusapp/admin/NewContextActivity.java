@@ -6,6 +6,7 @@ import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -23,6 +24,8 @@ import hiatus.hiatusapp.DatabaseHelper;
 import hiatus.hiatusapp.R;
 
 public class NewContextActivity extends Activity{
+
+    private static final String TAG = "NewContext";
 
     EditText mTitle;
     EditText mNumber;
@@ -127,6 +130,7 @@ public class NewContextActivity extends Activity{
         if (context != null) {
             DatabaseHelper.saveContributionContext(context);
             Toast.makeText(this, "Contribution context successfully saved.", Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "create_context:SUCCESS");
             startActivity(new Intent(this, AdminActivity.class));
             finish();
         }

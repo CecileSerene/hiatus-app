@@ -48,10 +48,18 @@
 
     <!-- The list of contributions -->
     <ListView
-        android:id="@+id/admin_context"
+        android:id="@+id/admin_open_context"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         tools:listitem="@layout/fragment_menu_list_item" />
+
+    <ListView
+        android:id="@+id/admin_closed_context"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/fragment_menu_list_item" />
+
+
 
 
 

@@ -113,10 +113,11 @@ public class UserContributionActivity extends Activity {
             @Override
             public void onClick(View view) {
                 context.setCurrent(ContributionContext.CLOSED);
-                setClosed(context);
+                DatabaseHelper.setClosed(context);
                 Toast.makeText(view.getContext(),"Context sucessfully closed",Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(view.getContext(), AdminActivity.class);
                 startActivity(i);
+                finish();
             }
         });
 

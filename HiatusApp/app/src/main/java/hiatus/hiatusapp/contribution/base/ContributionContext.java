@@ -79,10 +79,7 @@ public abstract class ContributionContext implements Parcelable {
         this.type = type;
     }
 
-    // Current
-    public boolean isCurrent() {
-        return current;
-    }
+    public boolean getCurrent() {return current;}
 
     public void setCurrent(boolean current) {
         this.current = current;
@@ -105,7 +102,6 @@ public abstract class ContributionContext implements Parcelable {
     public void setLimitedTime(double limitedTime) {
         this.limitedTime = limitedTime;
     }
-
 
 
     /*

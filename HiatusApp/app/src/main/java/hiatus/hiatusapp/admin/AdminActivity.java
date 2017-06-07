@@ -37,8 +37,10 @@ public class AdminActivity extends Activity {
      */
 
     private DatabaseReference mRef;
-    private ContributionContextArrayAdapter mAdapter;
-    private ArrayList<ContributionContext> mContexts;
+    private ContributionContextArrayAdapter mOpenAdapter;
+    private ContributionContextArrayAdapter mClosedAdapter;
+    private ArrayList<ContributionContext> mOpenContexts;
+    private ArrayList<ContributionContext> mClosedContexts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,13 +50,15 @@ public class AdminActivity extends Activity {
 
         Button newContextButton = (Button) findViewById((R.id.new_context));
         Button exitButton = (Button) findViewById(R.id.admin_exit);
-        ListView lvAdmin = (ListView) findViewById(R.id.admin_context);
-        mContexts = new ArrayList<>();
-
+        ListView lvOpen = (ListView) findViewById(R.id.admin_open_context);
+        ListView lvClosed = (ListView) findViewById(R.id.admin_closed_context);
+        mOpenContexts = new ArrayList<>();
+        mClosedContexts = new ArrayList<>();
 
         // setup list view adapter
 
-        mAdapter = new ContributionContextArrayAdapter(this, mContexts);
+        mOpenAdapter = new ContributionContextArrayAdapter(this, mOpenContexts);
+        mClosedAdapter = new ContributionContextArrayAdapter(this, mClosedContexts);
 
         mRef = DatabaseHelper.getOpenContributionContextReference();
         mRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -62,10 +66,15 @@ public class AdminActivity extends Activity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot contextSnapshot : dataSnapshot.getChildren()) {
                     ContributionContext context = DatabaseHelper.retrieveContext(contextSnapshot);
-                    mContexts.add(context);
-                    Log.d(TAG, "load_context:" + context.getId() + ":" + context.getTitle());
+                    if (context.getCurrent()) {
+                        mOpenContexts.add(context);
+                    } else {
+                        mClosedContexts.add(context);
+                    }
+                    Log.d(TAG, "load_context:" + context.getId() + ":open:" + context.getCurrent());
                 }
-                mAdapter.notifyDataSetChanged();
+                mOpenAdapter.notifyDataSetChanged();
+                mClosedAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -74,15 +83,16 @@ public class AdminActivity extends Activity {
             }
         });
 
-        lvAdmin.setAdapter(mAdapter);
+        lvOpen.setAdapter(mOpenAdapter);
+        lvClosed.setAdapter(mClosedAdapter);
 
 
         // setup listview click behavior
 
-        lvAdmin.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        lvOpen.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                ContributionContext context = mAdapter.getItem(position);
+                ContributionContext context = mOpenAdapter.getItem(position);
                 // populate an intent with the contribution context
                 Intent i = new Intent(view.getContext(), UserContributionActivity.class);
                 i.putExtra("context",context);
@@ -90,9 +100,7 @@ public class AdminActivity extends Activity {
             }
         });
 
-
         // set new context button behavior
-
         newContextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
