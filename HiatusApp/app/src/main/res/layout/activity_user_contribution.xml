@@ -15,7 +15,7 @@
         android:id="@+id/stop_context"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Arrêter ce contexte"
+        android:text="@string/admin_stop_context"
         android:background="@drawable/accent_button"/>
 
 

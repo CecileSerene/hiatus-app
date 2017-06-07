@@ -14,7 +14,7 @@
             android:id="@+id/ajouter_titre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Mettre un titre"
+            android:text="@string/add_title"
             android:onClick="setTitle"
             android:layout_alignParentLeft="true"
             android:background="@color/colorAccent"
@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="preview"
-            android:text="Preview"
+            android:text="@string/preview"
             android:layout_alignParentRight="true"
             android:background="@color/colorAccent"/>
 

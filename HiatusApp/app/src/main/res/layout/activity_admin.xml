@@ -16,14 +16,14 @@
         android:id="@+id/new_context"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ajouter une contribution"
+        android:text="@string/admin_add_contribution"
         android:background="@drawable/accent_button" />
 
     <Button
         android:id="@+id/admin_exit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Quitter"
+        android:text="@string/admin_quit"
         android:layout_alignParentRight="true"
         android:background="@drawable/basic_button" />
 
@@ -41,7 +41,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Les contributions en cours"
+            android:text="@string/admin_all_contributions"
             android:textStyle="italic"
             android:textSize="18sp" />
     </LinearLayout>

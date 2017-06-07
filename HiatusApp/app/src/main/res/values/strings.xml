@@ -61,8 +61,28 @@
         <item>Texte</item>
         <item>Photo</item>
     </string-array>
+    <string name="admin_add_contribution">Ajouter une contribution</string>
+    <string name="admin_quit">Quitter</string>
+    <string name="admin_all_contributions">Les contributions en cours</string>
+    <string name="admin_add_title">Titre</string>
+    <string name="admin_add_type">Type</string>
+    <string name="admin_add_number">Nombre de caractères \t</string>
+    <string name="admin_add_theme">Thème</string>
+    <string name="admin_add_instructions">Instructions</string>
+    <string name="admin_send">Envoyer</string>
+    <string name="admin_stop_context">Arrêter ce contexte</string>
+    <string name="admin_deny">Refuser</string>
+    <string name="admin_accept">Accepter</string>
+
+    <!-- Photo and text Activity section strings -->
+    <string name="add_title">Ajouter un titre</string>
+    <string name="send">Envoyer</string>
+    <string name="take_photo">Prendre une photo</string>
+    <string name="preview">Preview</string>
+    <string name="modify">Modifier</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 </resources>
