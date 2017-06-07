@@ -2,139 +2,137 @@
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-<LinearLayout
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="hiatus.hiatusapp.admin.NewContextActivity"
-    android:orientation="vertical"
-    android:weightSum="1"
-    android:layout_marginRight="5pt"
-    android:layout_marginLeft="5pt"
-    android:layout_marginTop="5pt"
-    android:layout_marginBottom="10pt"
-    >
-
-
-
-    <TextView
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="10pt"
-        android:text="Titre" />
-
-    <EditText
-        android:id="@+id/add_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="10pt"
-        android:textColor="@color/colorPrimaryDark"
-        android:background="@color/colorPrimary"/>
-
-    <TextView
-        android:paddingTop="10pt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="10pt"
-        android:text="Type"/>
-
-
-        <RadioGroup
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-        <RadioButton
-            android:id="@+id/radio_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="Texte"
-            android:textSize="8pt"
-            android:onClick="onRadioButtonClicked"
-            android:layout_marginRight="15pt"/>
-
-        <RadioButton
-            android:id="@+id/radio_photo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Photographie"
-            android:textSize="8pt"
-            android:onClick="onRadioButtonClicked"/>
-        </RadioGroup>
-
+    android:background="@color/colorPrimaryDarker">
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-    <TextView
-        android:paddingTop="10pt"
-        android:paddingRight="10pt"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="8pt"
-        android:text="Nombre de caractères"/>
+        tools:context="hiatus.hiatusapp.admin.NewContextActivity"
+        android:orientation="vertical"
+        android:layout_margin="20dp" >
 
-    <EditText
-        android:id="@+id/add_number"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="10pt"
-        android:textColor="@color/colorPrimaryDark"
-        android:background="@color/colorPrimary"
-        android:enabled="false"
-        android:inputType="number"
-        android:ems="10"/>
+        <!-- Title field -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/form_margin_top"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Titre" />
+
+            <EditText
+                android:id="@+id/add_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:textColor="@color/colorPrimaryDark"
+                android:background="@color/colorPrimary"/>
+        </LinearLayout>
+
+        <!-- Type spinner -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/form_margin_top"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Type"/>
+            <Spinner
+                android:id="@+id/type_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+
+        <!-- Text-specific contribution form -->
+        <LinearLayout
+            android:id="@+id/form_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/form_margin_top"
+            android:visibility="visible"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nombre de caractères \t"/>
+
+            <EditText
+                android:id="@+id/add_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryDark"
+                android:background="@color/colorPrimary"
+                android:ems="2"
+                android:inputType="number"/>
+        </LinearLayout>
+
+        <!-- Photo-specific contribution form -->
+        <LinearLayout
+            android:id="@+id/form_photo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+        </LinearLayout>
+
+        <!-- Theme field -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/form_margin_top"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Thème"/>
+
+            <EditText
+                android:id="@+id/add_theme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:textColor="@color/colorPrimaryDark"
+                android:background="@color/colorPrimary"/>
+        </LinearLayout>
+
+        <!-- Instructions field -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/form_margin_top"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Instructions"/>
+            <EditText
+                android:id="@+id/add_instructions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minLines="6"
+                android:scrollbars="vertical"
+                android:textColor="@color/colorPrimaryDark"
+                android:background="@color/colorPrimary"
+                />
+        </LinearLayout>
+
+        <!-- Send button -->
+        <Button
+            android:id="@+id/button_send"
+            android:layout_marginTop="10pt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/accent_button"
+            android:text="Envoyer"
+            android:layout_gravity="center_horizontal"
+            android:onClick="create_context"/>
+
     </LinearLayout>
-
-
-
-    <TextView
-        android:paddingTop="10pt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="10pt"
-        android:text="Thème"/>
-
-    <EditText
-        android:id="@+id/add_theme"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="10pt"
-        android:textColor="@color/colorPrimaryDark"
-        android:background="@color/colorPrimary"/>
-
-    <TextView
-        android:paddingTop="10pt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="10pt"
-        android:text="Instructions"/>
-
-    <EditText
-        android:id="@+id/add_instructions"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="10pt"
-        android:textColor="@color/colorPrimaryDark"
-        android:background="@color/colorPrimary"
-        android:layout_weight="0.46" />
-
-    <Button
-        android:id="@+id/button_send"
-        android:layout_marginTop="10pt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/accent_button"
-        android:text="Envoyer"
-        android:layout_gravity="center_horizontal"
-        android:onClick="create_context"/>
-
-</LinearLayout>
-    </ScrollView>
+</ScrollView>

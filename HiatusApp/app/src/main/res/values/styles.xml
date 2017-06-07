@@ -21,4 +21,8 @@
         <item name="android:maxLines">1</item>
     </style>
 
+    <style name="form_margin_top">
+        <item name="android:layout_marginTop">10dp</item>
+    </style>
+
 </resources>
