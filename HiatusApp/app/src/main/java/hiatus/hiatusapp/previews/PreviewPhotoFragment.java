@@ -44,7 +44,10 @@ public class PreviewPhotoFragment extends Fragment {
     }
 
     public void updateImage(Bitmap image) {
-        ((ImageView) getView().findViewById(R.id.photo)).setImageBitmap(image);
+        View v = getView();
+        if (v != null) {
+            ((ImageView) v.findViewById(R.id.photo)).setImageBitmap(image);
+        }
     }
 
 

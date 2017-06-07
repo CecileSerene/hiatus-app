@@ -95,7 +95,7 @@ public class MenuHistoryFragment extends ListFragment {
         Intent i = new Intent(
                 getActivity(),
                 bundle.getContentModel().getType() == ContributionContent.Model.TYPE_TEXT ?
-                        TextContributionPreviewActivity.class : PhotoContributionPreviewActivity.class
+                        UserTextPreviewActivity.class : UserPhotoPreviewActivity.class
         );
         i.putExtra("content", content);
         i.putExtra("date", bundle.getDate());
